@@ -1,0 +1,45 @@
+  <div class="container">
+    <div class="slim-pageheader">
+      <ol class="breadcrumb slim-breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">List of Token</li>
+      </ol>
+      <h6 class="slim-pagetitle">List Of Token</h6>
+    </div><!-- slim-pageheader -->
+
+    
+
+    <div class="row row-sm mg-t-20">
+      <div class="col-xl-12 mg-t-20 mg-xl-t-0">
+        <div class="card card-table">
+          <div class="table-responsive p-3">
+            <table  id="datatable" class="table mg-b-0 tx-13">
+              <thead>
+                <tr class="tx-10">
+                  <th class="pd-y-5">Token Id</th>
+                  <th class="pd-y-5">Amount</th>
+               
+                  <th class="pd-y-5">Owner Address</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of coinList">
+                  <td>
+                    {{ item.tokenId }}
+                  </td>
+                  <td>
+                      {{ item.numberOfToken }}
+                  </td>
+                 
+                  <td class="tx-12">
+                      {{ item.address }}
+                  </td>
+                  
+                </tr>
+              </tbody>
+            </table>
+          </div><!-- table-responsive -->
+        </div><!-- card -->
+      </div><!-- col-6 -->
+    </div><!-- row -->
+  </div><!-- container -->

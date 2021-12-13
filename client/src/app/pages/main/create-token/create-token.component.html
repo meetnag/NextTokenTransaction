@@ -1,0 +1,49 @@
+<div class="container">
+    <div class="slim-pageheader">
+    <ol class="breadcrumb slim-breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Issue Token</li>
+    </ol>
+    <h6 class="slim-pagetitle">Issue Token</h6>
+    </div><!-- slim-pageheader -->
+
+    
+
+    <div class="section-wrapper">
+    <form [formGroup]="form">
+        <div class="form-layout">
+            <div class="row mg-b-25">
+                <div class="col-lg-6">
+                <div class="form-group">
+                    <label class="form-control-label">Amount: <span class="tx-danger">*</span></label>
+                    <input class="form-control" type="number" formControlName="amount" name="amount" placeholder="Enter Amount">
+                    <app-error-field [errorMsg]="getForm.amount"></app-error-field>
+                </div>
+                </div><!-- col-4 -->
+                <div class="col-lg-6">
+                <div class="form-group">
+                    <label class="form-control-label">URI: <span class="tx-danger">*</span></label>
+                    <input class="form-control" formControlName="uri" type="file" name="uri" placeholder="Enter URI" id="document">
+                    <app-error-field [errorMsg]="getForm.uri"></app-error-field>
+                </div>
+                </div><!-- col-4 -->
+                 <div class="col-lg-12">
+                <div class="form-group">
+                    <label class="form-control-label">Data: <span class="tx-danger">*</span></label>
+                    <input class="form-control" formControlName="data" type="text" name="data" placeholder="Enter Data">
+                    <app-error-field [errorMsg]="getForm.data"></app-error-field>
+                </div>
+                </div><!-- col-4 -->
+                
+               
+            
+            </div><!-- row -->
+
+            <div class="form-layout-footer">
+                <button [disabled]="!form.valid" (click)="upload()" class="btn btn-primary bd-0">Submit</button>
+            </div><!-- form-layout-footer -->
+        </div><!-- form-layout -->
+    </form>
+    </div><!-- section-wrapper -->
+
+</div><!-- container -->

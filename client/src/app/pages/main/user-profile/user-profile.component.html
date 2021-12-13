@@ -1,0 +1,76 @@
+<div class="container">
+    <div class="slim-pageheader">
+    <ol class="breadcrumb slim-breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">User Profile</li>
+    </ol>
+    <h6 class="slim-pagetitle">User Profile</h6>
+    </div><!-- slim-pageheader -->
+
+    
+
+    <div class="section-wrapper">
+    <form [formGroup]="form">
+        <div class="form-layout">
+            <div class="row mg-b-25">
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label class="form-control-label">Name: <span class="tx-danger">*</span></label>
+                        <input class="form-control" formControlName="name" type="text" placeholder="Enter Your Name">
+                        <app-error-field [errorMsg]="getForm.name"></app-error-field>
+                    </div>
+                </div><!-- col-4 -->
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label class="form-control-label">Email: <span class="tx-danger">*</span></label>
+                        <input class="form-control" formControlName="email" type="email" placeholder="Enter Email Address">
+                        <app-error-field [errorMsg]="getForm.email"></app-error-field>
+                    </div>
+                </div><!-- col-4 -->
+            
+            </div><!-- row -->
+
+            <div class="form-layout-footer">
+                <button [disabled]="!form.valid" class="btn btn-primary bd-0" (click)="updateProfileAction()">Submit</button>
+            </div><!-- form-layout-footer -->
+        </div><!-- form-layout -->
+    </form>
+    </div><!-- section-wrapper -->
+    <h6 class="slim-pagetitle mt-3 mb-3">Change Password</h6>
+     <div class="section-wrapper">
+    <form [formGroup]="updatePasswordForm">
+        <div class="form-layout">
+            <div class="row mg-b-25">
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label class="form-control-label">Old Password: <span class="tx-danger">*</span></label>
+                        <input class="form-control" formControlName="old_password" type="password" placeholder="Enter Old Password">
+                        <app-error-field [errorMsg]="getupdatePasswordForm.old_password"></app-error-field>
+                    </div>
+                </div><!-- col-4 -->
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label class="form-control-label">New Password: <span class="tx-danger">*</span></label>
+                        <input class="form-control" formControlName="password" type="password" placeholder="Enter New Password">
+                        <app-error-field [errorMsg]="getupdatePasswordForm.password"></app-error-field>
+                    </div>
+                </div><!-- col-4 -->
+
+                 <div class="col-lg-12">
+                    <div class="form-group">
+                        <label class="form-control-label">Confirm Password: <span class="tx-danger">*</span></label>
+                        <input class="form-control" formControlName="confirm_password" type="password" placeholder="Confirm Password">
+                        <app-error-field [errorMsg]="getupdatePasswordForm.confirm_password"></app-error-field>
+                    </div>
+                </div><!-- col-4 -->
+            
+            </div><!-- row -->
+
+            <div class="form-layout-footer">
+                <button [disabled]="!updatePasswordForm.valid" class="btn btn-primary bd-0" (click)="updatePasswordAction()">Update</button>
+            </div><!-- form-layout-footer -->
+        </div><!-- form-layout -->
+    </form>
+    </div><!-- section-wrapper -->
+
+</div><!-- container -->

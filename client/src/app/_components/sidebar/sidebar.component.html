@@ -1,0 +1,30 @@
+
+    <label class="sidebar-label">Navigation</label>
+
+    <ul class="nav nav-sidebar">
+      
+        <!-- <li class="sidebar-nav-item">
+          <a [routerLink]="['/app/users']" routerLinkActive="router-link-active"  class="sidebar-nav-link"><i class="icon ion-ios-people-outline"></i> Manage Users</a>
+        </li> -->
+        
+        <li class="sidebar-nav-item">
+          <a [routerLink]="['/app/issue-token']"  class="sidebar-nav-link"><i class="icon ion-arrow-swap"></i> Issue Token</a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a [routerLink]="['/app/list-token']" routerLinkActive="router-link-active"  class="sidebar-nav-link"><i class="icon ion-arrow-swap"></i> List of Token</a>
+        </li>
+         <li class="sidebar-nav-item">
+          <a [routerLink]="['/app/check-balance']" routerLinkActive="router-link-active"  class="sidebar-nav-link"><i class="icon ion-arrow-swap"></i> Check Balance</a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a [routerLink]="['/app/transfer-request']" routerLinkActive="router-link-active"  class="sidebar-nav-link"><i class="icon ion-arrow-swap"></i> Transfer Requests</a>
+        </li>
+        <li *ngIf="user && user['role'] !== 'admin'" class="sidebar-nav-item">
+          <a [routerLink]="['/app/burn-token']"   class="sidebar-nav-link"><i class="icon ion-arrow-swap"></i> Burn Token</a>
+        </li>
+        
+        <li *ngIf="user && user['role'] === 'admin'" class="sidebar-nav-item">
+          <a [routerLink]="['/app/set-role']"  class="sidebar-nav-link"><i class="icon ion-arrow-swap"></i> Set Roles</a>
+        </li>
+        
+    </ul>

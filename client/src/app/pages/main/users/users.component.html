@@ -1,0 +1,55 @@
+  <div class="container">
+    <div class="slim-pageheader">
+      <ol class="breadcrumb slim-breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">User & Roles</li>
+      </ol>
+      <h6 class="slim-pagetitle">Manage Users</h6>
+    </div><!-- slim-pageheader -->
+
+    
+
+    <div class="row row-sm mg-t-20">
+      <div class="col-xl-12 mg-t-20 mg-xl-t-0">
+        <div class="card card-table">
+          <div class="card-header">
+            <button [routerLink]="['/app/users/create']"  class="btn btn-primary mg-b-10"><i class="fa fa-plus mg-r-5"></i> Create User</button>
+          </div>
+          <div class="table-responsive p-3">
+            <table  id="datatable" class="table mg-b-0 tx-13">
+              <thead>
+                <tr class="tx-10">
+                  <th class="wd-10p pd-y-5">&nbsp;</th>
+                  <th class="pd-y-5">User</th>
+                  <th class="pd-y-5">Role</th>
+                  <th class="pd-y-5">Status</th>
+                    <th class="pd-y-5">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of userList">
+                  <td class="pd-l-20">
+                    <ngx-avatar name="{{ item.name }}"></ngx-avatar>
+                  </td>
+                  <td>
+                    <a href="#" class="tx-inverse tx-14 tx-medium d-block">{{ item.name }}</a>
+                    <span class="tx-11 d-block">{{ item.email }}</span>
+                  </td>
+                  <td class="tx-12">
+                      {{ item.role.toUpperCase() }}
+                  </td>
+                  <td class="pd-l-20"><span class="square-8 {{ item.status === 'ACTIVE' ? 'bg-success' : 'bg-danger' }} mg-r-5 rounded-circle"></span> {{ item.status }}</td>
+                  <td class="pd-l-20">
+                      <div class="demo-btn-list">
+                          <a [routerLink]="['/app/users/update', item.id ]" routerLinkActive="router-link-active"  class="btn btn-primary btn-icon rounded-circle"><div><i class="fa fa-edit"></i></div></a>
+                          <!-- <a [routerLink]="" routerLinkActive="router-link-active" class="btn btn-danger btn-icon rounded-circle"><div><i class="fa fa-trash"></i></div></a> -->
+                      </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div><!-- table-responsive -->
+        </div><!-- card -->
+      </div><!-- col-6 -->
+    </div><!-- row -->
+  </div><!-- container -->

@@ -1,0 +1,21 @@
+::ng-deep .table th,
+.table td {
+    vertical-align: middle !important;
+}
+
+.btn-icon>div {
+    width: 28px;
+    height: 28px;
+}
+
+.mr-1 {
+    margin-left: 5px !important;
+}
+
+.theme-btn {
+    font-size: 14px;
+}
+
+::ng-deep .dataTables_wrapper {
+    overflow: scroll;
+}

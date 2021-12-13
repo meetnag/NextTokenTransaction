@@ -1,0 +1,41 @@
+<div class="container">
+    <div class="slim-pageheader">
+    <ol class="breadcrumb slim-breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Check Balance</li>
+    </ol>
+    <h6 class="slim-pagetitle">Check Balance</h6>
+    </div><!-- slim-pageheader -->
+
+    
+
+    <div class="section-wrapper">
+    <form [formGroup]="form">
+        <div class="form-layout">
+            <div class="row mg-b-25">
+                <div class="col-lg-6">
+                <div class="form-group">
+                    <label class="form-control-label">Account Address: <span class="tx-danger">*</span></label>
+                    <input class="form-control" type="text" formControlName="address" name="address" placeholder="Enter Account Address">
+                    <app-error-field [errorMsg]="getForm.address"></app-error-field>
+                </div>
+                </div><!-- col-4 -->
+                <div class="col-lg-6">
+                <div class="form-group">
+                    <label class="form-control-label">Token Id: <span class="tx-danger">*</span></label>
+                    <input class="form-control" formControlName="tokenId" type="number" name="tokenId" placeholder="Enter Token Id">
+                    <app-error-field [errorMsg]="getForm.tokenId"></app-error-field>
+                </div>
+                </div><!-- col-4 -->
+            
+            
+            </div><!-- row -->
+
+            <div class="form-layout-footer">
+                <button [disabled]="!form.valid" (click)="checkBalance()" class="btn btn-primary bd-0">Check</button>
+            </div><!-- form-layout-footer -->
+        </div><!-- form-layout -->
+    </form>
+    </div><!-- section-wrapper -->
+
+</div><!-- container -->

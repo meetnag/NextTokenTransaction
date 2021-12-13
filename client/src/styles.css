@@ -1,0 +1,17 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~ngx-toastr/toastr';
+
+.dataTables_wrapper .dataTables_filter input{
+    width: auto !important;
+    display: inline-block;
+}
+
+.card-table .table thead tr th,
+.card-table .table thead tr td{
+    background-color: #dee2e6;
+    border-bottom: 1px solid #dee2e6 !important;
+}
+table.dataTable thead th,
+table.dataTable thead td{
+        padding: 10px 0.75rem !important;
+}

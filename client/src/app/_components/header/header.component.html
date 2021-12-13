@@ -1,0 +1,26 @@
+ <div class="slim-header with-sidebar">
+    <div class="container-fluid">
+    <div class="slim-header-left">
+        <h2 class="slim-logo"><a [routerLink]="['']"  >MVP2 Demo<span>.</span></a></h2>
+        <a [routerLink]="" (click)="toggleSidebar()"  id="slimSidebarMenu" class="slim-sidebar-menu"><span></span></a>
+        <p class="mt-0">{{ userRole | titlecase  }} Wallet Address : {{ walletAddress }}</p>
+    </div>
+
+    <div class="slim-header-right">
+       
+        <div class="dropdown dropdown-c">
+        <a href="#" class="logged-user" data-toggle="dropdown">
+            <ngx-avatar name="{{ userName }}"></ngx-avatar>
+            <span>{{ userName }}</span>
+            <i class="fa fa-angle-down"></i>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right">
+            <nav class="nav">
+            <a [routerLink]="['/app/user-profile']"  class="nav-link"><i class="icon ion-person"></i> View Profile</a>
+            <a [routerLink]="" (click)="logoutAction()" class="nav-link"><i class="icon ion-forward"></i> Sign Out</a>
+            </nav>
+        </div><!-- dropdown-menu -->
+        </div><!-- dropdown -->
+    </div><!-- header-right -->
+    </div><!-- container-fluid -->
+</div><!-- slim-header -->

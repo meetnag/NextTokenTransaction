@@ -1,0 +1,53 @@
+<div class="container">
+    <div class="slim-pageheader">
+    <ol class="breadcrumb slim-breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Transfer Token</li>
+    </ol>
+    <h6 class="slim-pagetitle">Transfer Token Message</h6>
+    </div><!-- slim-pageheader -->
+
+    
+
+    <div class="section-wrapper">
+    <form [formGroup]="form">
+        <div class="form-layout">
+            <div class="row mg-b-25">
+                <div class="col-lg-6">
+                <div class="form-group">
+                    <label class="form-control-label">Token Id: <span class="tx-danger">*</span></label>
+                    <input class="form-control" type="number" formControlName="tokenId" name="tokenId" placeholder="Enter Token Id" min="1"
+                    step="1"
+                    onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                    <app-error-field [errorMsg]="getForm.tokenId"></app-error-field>
+                </div>
+                </div><!-- col-4 -->
+                <div class="col-lg-6">
+                <div class="form-group">
+                    <label class="form-control-label">Token Count: <span class="tx-danger">*</span></label>
+                    <input class="form-control" formControlName="numberOfToken" type="number" name="numberOfToken" placeholder="Enter Token Count" min="1"
+                    step="1"
+                    onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                    <app-error-field [errorMsg]="getForm.numberOfToken"></app-error-field>
+                </div>
+                </div><!-- col-4 -->
+                 <div class="col-lg-12">
+                <div class="form-group">
+                    <label class="form-control-label">Description: <span class="tx-danger">*</span></label>
+                    <textarea class="form-control" formControlName="description" type="text" name="description" placeholder="Enter Description"></textarea>
+                    <app-error-field [errorMsg]="getForm.description"></app-error-field>
+                </div>
+                </div><!-- col-4 -->
+                
+               
+            
+            </div><!-- row -->
+
+            <div class="form-layout-footer">
+                <button [disabled]="!form.valid" (click)="createTransferRequest()" class="btn btn-primary bd-0">Submit</button>
+            </div><!-- form-layout-footer -->
+        </div><!-- form-layout -->
+    </form>
+    </div><!-- section-wrapper -->
+
+</div><!-- container -->

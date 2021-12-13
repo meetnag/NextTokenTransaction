@@ -1,0 +1,47 @@
+<div class="container">
+    <div class="slim-pageheader">
+    <ol class="breadcrumb slim-breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Set Role</li>
+    </ol>
+    <h6 class="slim-pagetitle">Set Role</h6>
+    </div><!-- slim-pageheader -->
+
+    
+
+    <div class="section-wrapper">
+    <form [formGroup]="form">
+        <div class="form-layout">
+            <div class="row mg-b-25">
+                
+                <div class="col-lg-12">
+                <div class="form-group">
+                    <label class="form-control-label">Wallet Address: <span class="tx-danger">*</span></label>
+                    <input class="form-control" formControlName="address" type="text" name="address" placeholder="Enter Wallet Address">
+                    <app-error-field [errorMsg]="getForm.address"></app-error-field>
+                </div>
+                </div><!-- col-4 -->
+                 <div class="col-lg-12">
+                <div class="form-group">
+                    <label class="form-control-label">Role: <span class="tx-danger">*</span></label>
+                    <select class="form-control" formControlName="role">
+                        <option selected disabled>Please Select</option>
+                        <option value="MANAGER">MANAGER</option>
+                        <option value="USER">USER</option>
+                    </select>
+                    <app-error-field [errorMsg]="getForm.role"></app-error-field>
+                </div>
+                </div><!-- col-4 -->
+                
+               
+            
+            </div><!-- row -->
+
+            <div class="form-layout-footer">
+                <button [disabled]="!form.valid" (click)="addRole()" class="btn btn-primary bd-0">Submit</button>
+            </div><!-- form-layout-footer -->
+        </div><!-- form-layout -->
+    </form>
+    </div><!-- section-wrapper -->
+
+</div><!-- container -->

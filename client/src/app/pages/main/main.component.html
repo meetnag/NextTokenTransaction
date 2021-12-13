@@ -1,0 +1,15 @@
+<app-header [walletAddress]="userWalletAddress"></app-header>
+<div class="slim-body">
+  <div class="slim-sidebar">
+    <app-sidebar></app-sidebar>
+  </div><!-- slim-sidebar -->
+  <div class="slim-mainpanel">
+    <router-outlet ></router-outlet>
+    <div class="slim-footer mg-t-0">
+      <div class="container-fluid">
+        <p>Copyright 2021 &copy; All Rights Reserved.</p>
+     
+      </div><!-- container-fluid -->
+    </div><!-- slim-footer -->
+  </div><!-- slim-mainpanel -->
+</div><!-- slim-body -->
