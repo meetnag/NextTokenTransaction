@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
-import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
-import { environment } from '../../environments/environment';
+import { Injectable } from "@angular/core";
+import { DomSanitizer } from "@angular/platform-browser";
+import { HttpClient } from "@angular/common/http";
+import { map } from "rxjs/operators";
+import { environment } from "../../environments/environment";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class CoinService {
   public readonly apiUrl = environment.API_BASE_URL;
@@ -43,13 +43,11 @@ export class CoinService {
 
   // Update Coin
   updateCoin(coinId: String, userBody: Object) {
-    return this.http
-      .patch(`${this.apiUrl}coins/${coinId}`, userBody)
-      .pipe(
-        map((response: Response) => {
-          return response;
-        })
-      );
+    return this.http.patch(`${this.apiUrl}coins/${coinId}`, userBody).pipe(
+      map((response: Response) => {
+        return response;
+      })
+    );
   }
 
   // Delete Coin Request
@@ -59,5 +57,16 @@ export class CoinService {
         return response;
       })
     );
+  }
+
+  // approve Coin
+  approveCoin(coinId: String, userBody: Object) {
+    return this.http
+      .patch(`${this.apiUrl}coins/Approve/${coinId}`, userBody)
+      .pipe(
+        map((response: Response) => {
+          return response;
+        })
+      );
   }
 }

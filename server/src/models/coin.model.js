@@ -24,9 +24,37 @@ const coinSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    uri: {
+    agreement: {
       type: String,
       required: true,
+    },
+    credit_Enhancement: {
+      type: String,
+      required: true,
+    },
+    guarantee: {
+      type: String,
+      required: true,
+    },
+    renewal: {
+      type: Boolean,
+      default: true,
+    },
+    days: {
+      type: Number,
+      required: true,
+    },
+    date_of_Expiration: {
+      type: String,
+      required: true,
+    },
+    internal_approver: {
+      type: Number,
+      default: 2,
+    },
+    external_signer: {
+      type: Number,
+      default: 2,
     },
   },
   {

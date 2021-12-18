@@ -1,0 +1,8 @@
+.text-wrap {
+  width: 50px;
+  white-space: nowrap;
+}
+.word_width {
+  word-break: break-all;
+  width: 50%;
+}

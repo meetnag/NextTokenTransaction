@@ -1,18 +1,24 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UtilityService, ConnectService, CoinService } from '../../../_services';
-import { Router } from '@angular/router';
-import { MainComponent } from '../main.component';
-const IpfsHttpClient = require('ipfs-http-client');
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import {
+  UtilityService,
+  ConnectService,
+  CoinService,
+} from "../../../_services";
+import { Router } from "@angular/router";
+import { MainComponent } from "../main.component";
+import { formatDate } from "@angular/common";
+const IpfsHttpClient = require("ipfs-http-client");
+
 const ipfs = new IpfsHttpClient({
-  host: 'ipfs.infura.io',
+  host: "ipfs.infura.io",
   port: 5001,
-  protocol: 'https',
+  protocol: "https",
 });
 
 @Component({
-  templateUrl: './create-token.component.html',
-  styleUrls: ['./create-token.component.css'],
+  templateUrl: "./create-token.component.html",
+  styleUrls: ["./create-token.component.css"],
 })
 export class CreateTokenComponent implements OnInit {
   constructor(
@@ -23,17 +29,26 @@ export class CreateTokenComponent implements OnInit {
     private coinService: CoinService,
     private mainComponent: MainComponent
   ) {
-    this.utility.updatePageSEO('Issue Token | NFT', 'Issue Token | NFT');
+    this.utility.updatePageSEO("Issue Token | NFT", "Issue Token | NFT");
   }
 
   form: FormGroup;
-  userId = JSON.parse(localStorage.getItem('user'))['id'];
+  userId = JSON.parse(localStorage.getItem("user"))["id"];
+  startDate = new Date(new Date().setDate(new Date().getDate() + 30));
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
       amount: [null, Validators.required],
-      uri: [null, Validators.required],
+      agreement: [null, Validators.required],
       data: [null, Validators.required],
+      days: [60, Validators.required],
+      credit_Enhancement: [null, Validators.required],
+      renewal: [null, Validators.required],
+      guarantee: [null, Validators.required],
+      date_of_Expiration: [
+        formatDate(this.startDate, "yyyy-MM-dd", "en"),
+        Validators.required,
+      ],
     });
   }
 
@@ -42,7 +57,7 @@ export class CreateTokenComponent implements OnInit {
   }
 
   convertDataURIToBinary(dataURI) {
-    var base64Index = dataURI.indexOf(';base64,') + ';base64,'.length;
+    var base64Index = dataURI.indexOf(";base64,") + ";base64,".length;
     var base64 = dataURI.substring(base64Index);
     var raw = window.atob(base64);
     var rawLength = raw.length;
@@ -55,30 +70,54 @@ export class CreateTokenComponent implements OnInit {
   }
 
   upload() {
-    const file = (<HTMLInputElement>document.getElementById('document'))
+    const file = (<HTMLInputElement>document.getElementById("document"))
       .files[0];
+    const file1 = (<HTMLInputElement>document.getElementById("document1"))
+      .files[0];
+    const file2 = (<HTMLInputElement>document.getElementById("document2"))
+      .files[0];
+
     var self = this;
-    const preview = document.getElementById('preview');
+    const preview = document.getElementById("preview");
     const reader = new FileReader();
     let byteArray;
+    let byteArray1;
+    let byteArray2;
 
     reader.addEventListener(
-      'loadend',
+      "loadend",
       async function () {
         // convert image file to base64 string
 
         byteArray = self.convertDataURIToBinary(reader.result);
-        self.utility.startLoader('Uploading document....');
+        self.utility.startLoader("Uploading document....");
         var result = await ipfs.add(byteArray);
         self.utility.startLoader(
-          'Document uploaded sucessfully. Please wait...'
+          "Document uploaded sucessfully. Please wait..."
         );
-        self.utility.startLoader('Data encryption in progress. Please wait...');
+        self.utility.startLoader("Data encryption in progress. Please wait...");
         var fianalJSON = self.form.value;
-        fianalJSON['uri'] = result['path'];
+        fianalJSON["agreement"] = result["path"];
+
+        byteArray1 = self.convertDataURIToBinary(reader.result);
+        self.utility.startLoader("Uploading document....1");
+        var result1 = await ipfs.add(byteArray1);
+        self.utility.startLoader(
+          "Document uploaded sucessfully. Please wait..."
+        );
+        self.utility.startLoader("Data encryption in progress. Please wait...");
+        fianalJSON["credit_Enhancement"] = result1["path"];
+
+        byteArray2 = self.convertDataURIToBinary(reader.result);
+        self.utility.startLoader("Uploading document....2");
+        var result2 = await ipfs.add(byteArray2);
+        self.utility.startLoader(
+          "Document uploaded sucessfully. Please wait..."
+        );
+        self.utility.startLoader("Data encryption in progress. Please wait...");
+        fianalJSON["guarantee"] = result2["path"];
 
         await self.createToken(fianalJSON);
-      
       },
       false
     );
@@ -86,31 +125,49 @@ export class CreateTokenComponent implements OnInit {
     if (file) {
       reader.readAsDataURL(file);
     }
+    if (file1) {
+      reader.readAsDataURL(file1);
+    }
+    if (file2) {
+      reader.readAsDataURL(file2);
+    }
   }
 
   async createToken(data) {
     if (this.mainComponent.userWalletAddress === this.connectService.account) {
+      // comment this line
       this.utility.startLoader();
-      const tokenId = await this.connectService.nextTokenId();
+      const tokenId = await this.connectService.nextTokenId(); // comment this line
+      // const tokenId = "DemoTokenId"; // un-comment this line
 
-      const resp = await this.connectService.createToken(data.amount, data.uri, data.data);
+      const resp = await this.connectService.createToken(
+        data.amount,
+        data.uri,
+        data.data
+      );
       this.utility.stopLoader();
 
       if (resp) {
-        this.utility.startLoader()
+        this.utility.startLoader();
         this.saveToken({
           numberOfToken: data.amount,
-          uri: data.uri,
+          agreement: data.agreement,
+          credit_Enhancement: data.credit_Enhancement,
+          guarantee: data.guarantee,
           address: this.mainComponent.userWalletAddress,
           description: data.data,
           tokenId: tokenId,
           user: this.userId,
+          date_of_Expiration: data.date_of_Expiration,
+          days: data.days,
+          renewal: data.renewal,
         });
       }
+      // comment next 6 line
     } else {
       this.utility.showErrorAlert(
-        'Error',
-        'Please choose authorized metamask account in order to approve this request'
+        "Error",
+        "Please choose authorized metamask account in order to approve this request"
       );
     }
   }
@@ -119,12 +176,12 @@ export class CreateTokenComponent implements OnInit {
     this.coinService.createCoin(data).subscribe(
       (res) => {
         this.utility.stopLoader();
-        this.utility.showSuccessAlert('Success', 'Token Created Successfully');
-        this.router.navigate(['/app/list-token']);
+        this.utility.showSuccessAlert("Success", "Token Created Successfully");
+        this.router.navigate(["/app/list-token"]);
       },
       (error) => {
         this.utility.stopLoader();
-        this.utility.showErrorAlert('Error', error);
+        this.utility.showErrorAlert("Error", error);
       }
     );
   }

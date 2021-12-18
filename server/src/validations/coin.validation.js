@@ -7,8 +7,13 @@ const createCoin = {
     tokenId: Joi.required(),
     numberOfToken: Joi.required(),
     description: Joi.required(),
-    uri: Joi.required(),
+    agreement: Joi.required(),
+    credit_Enhancement: Joi.required(),
+    guarantee: Joi.required(),
     address: Joi.required(),
+    renewal: Joi.required(),
+    days: Joi.required(),
+    date_of_Expiration: Joi.required(),
   }),
 };
 
@@ -53,6 +58,18 @@ const deleteCoin = {
   }),
 };
 
+const approveCoin = {
+  params: Joi.object().keys({
+    coinId: Joi.required().custom(objectId),
+  }),
+  body: Joi.object()
+    .keys({
+      internal_approver: Joi.allow('', null),
+      external_signer: Joi.allow('', null),
+    })
+    .min(1),
+};
+
 module.exports = {
   createCoin,
   getAllCoins,
@@ -60,4 +77,5 @@ module.exports = {
   getCoin,
   updateCoin,
   deleteCoin,
+  approveCoin,
 };

@@ -1,45 +1,133 @@
-  <div class="container">
-    <div class="slim-pageheader">
-      <ol class="breadcrumb slim-breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page">List of Token</li>
-      </ol>
-      <h6 class="slim-pagetitle">List Of Token</h6>
-    </div><!-- slim-pageheader -->
+<div class="container">
+  <div class="slim-pageheader">
+    <ol class="breadcrumb slim-breadcrumb">
+      <li class="breadcrumb-item"><a href="#">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">List of Token</li>
+    </ol>
+    <h6 class="slim-pagetitle">List Of Token</h6>
+  </div>
+  <!-- slim-pageheader -->
 
-    
+  <div class="row row-sm mg-t-20">
+    <div class="col-xl-12 mg-t-20 mg-xl-t-0">
+      <div class="card card-table">
+        <div class="table-responsive p-3">
+          <table id="datatable" class="table mg-b-0 tx-13">
+            <thead>
+              <tr class="tx-10">
+                <th class="pd-y-5">Token Id</th>
+                <th class="pd-y-5">Amount</th>
 
-    <div class="row row-sm mg-t-20">
-      <div class="col-xl-12 mg-t-20 mg-xl-t-0">
-        <div class="card card-table">
-          <div class="table-responsive p-3">
-            <table  id="datatable" class="table mg-b-0 tx-13">
-              <thead>
-                <tr class="tx-10">
-                  <th class="pd-y-5">Token Id</th>
-                  <th class="pd-y-5">Amount</th>
-               
-                  <th class="pd-y-5">Owner Address</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let item of coinList">
-                  <td>
-                    {{ item.tokenId }}
-                  </td>
-                  <td>
-                      {{ item.numberOfToken }}
-                  </td>
-                 
-                  <td class="tx-12">
-                      {{ item.address }}
-                  </td>
-                  
-                </tr>
-              </tbody>
-            </table>
-          </div><!-- table-responsive -->
-        </div><!-- card -->
-      </div><!-- col-6 -->
-    </div><!-- row -->
-  </div><!-- container -->
+                <th class="pd-y-5">Token maturity</th>
+                <th class="pd-y-5">Date of Expiration</th>
+                <th class="pd-y-5">Renewal on Maturity</th>
+                <th class="pd-y-5">Document Name</th>
+                <th *ngIf="user && user['role'] === 'manager'" class="pd-y-5">
+                  Internal Approval Status
+                </th>
+                <th *ngIf="user && user['role'] === 'manager'" class="pd-y-5">
+                  External Signer Approval Status
+                </th>
+                <th class="pd-y-5">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of coinList">
+                <td>
+                  {{ item.tokenId }}
+                </td>
+                <td>
+                  {{ item.numberOfToken }}
+                </td>
+                <td class="tx-12">
+                  {{ item.days }}
+                </td>
+                <td class="tx-12">
+                  {{ item.date_of_Expiration }}
+                </td>
+                <td class="tx-12">
+                  {{ item.renewal }}
+                </td>
+                <td class="tx-12 word_width">
+                  {{ item.agreement }} <br />
+                  {{ item.credit_Enhancement }} <br />
+                  {{ item.guarantee }}
+                </td>
+                <td *ngIf="user && user['role'] === 'manager'" class="tx-12">
+                  <div *ngIf="item.internal_approver === 1; else elseBlock">
+                    Yes
+                  </div>
+                  <ng-template #elseBlock> No </ng-template>
+                </td>
+                <td *ngIf="user && user['role'] === 'manager'" class="tx-12">
+                  <div *ngIf="item.external_signer === 1; else elseBlock">
+                    Yes
+                  </div>
+                  <ng-template #elseBlock> No </ng-template>
+                </td>
+                <td class="tx-12">
+                  <div *ngIf="user && user['role'] === 'manager'">
+                    <button
+                      [disabled]="
+                        item.internal_approver != 1 || item.external_signer != 1
+                      "
+                      (click)="upload()"
+                      class="btn btn-primary bd-0"
+                    >
+                      Issue Tokens
+                    </button>
+                  </div>
+                  <div *ngIf="user && user['role'] === 'internal'">
+                    <a
+                      *ngIf="item.internal_approver != 1"
+                      [routerLink]=""
+                      (click)="approveInternal(item)"
+                      title="Approve"
+                      data-toggle="tooltip"
+                      class="tooltp btn btn-success btn-icon rounded-circle"
+                      ><div><i class="fa fa-check"></i></div
+                    ></a>
+                    <a
+                      *ngIf="item.internal_approver != 0"
+                      [routerLink]=""
+                      (click)="rejectInternal(item)"
+                      title="Reject"
+                      data-toggle="tooltip"
+                      class="mr-1 tooltp btn btn-danger btn-icon rounded-circle"
+                      ><div><i class="fa fa-times"></i></div
+                    ></a>
+                  </div>
+                  <div *ngIf="user && user['role'] === 'external'">
+                    <a
+                      *ngIf="item.external_signer != 1"
+                      [routerLink]=""
+                      (click)="approveExternal(item)"
+                      title="Approve"
+                      data-toggle="tooltip"
+                      class="tooltp btn btn-success btn-icon rounded-circle"
+                      ><div><i class="fa fa-check"></i></div
+                    ></a>
+                    <a
+                      *ngIf="item.external_signer != 0"
+                      [routerLink]=""
+                      (click)="rejectExternal(item)"
+                      title="Reject"
+                      data-toggle="tooltip"
+                      class="mr-1 tooltp btn btn-danger btn-icon rounded-circle"
+                      ><div><i class="fa fa-times"></i></div
+                    ></a>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- table-responsive -->
+      </div>
+      <!-- card -->
+    </div>
+    <!-- col-6 -->
+  </div>
+  <!-- row -->
+</div>
+<!-- container -->

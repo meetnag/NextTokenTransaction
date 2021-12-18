@@ -19,4 +19,8 @@ router
   .patch(auth('manageCoins'), validate(coinValidation.updateCoin), coinController.updateCoin)
   .delete(auth('manageCoins'), validate(coinValidation.deleteCoin), coinController.deleteCoin);
 
+router
+  .route('/Approve/:coinId')
+  .patch(auth('manageCoins'), validate(coinValidation.approveCoin), coinController.ApproveCoin);
+
 module.exports = router;

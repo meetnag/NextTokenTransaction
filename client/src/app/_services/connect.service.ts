@@ -1,13 +1,13 @@
-import { environment } from './../../environments/environment';
-import { Injectable } from '@angular/core';
-const Web3 = require('web3');
-const ethers = require('ethers');
+import { environment } from "./../../environments/environment";
+import { Injectable } from "@angular/core";
+const Web3 = require("web3");
+const ethers = require("ethers");
 declare let require: any;
 declare let window: any;
-const tokenAbi = require('../contract/abis.json');
+const tokenAbi = require("../contract/abis.json");
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class ConnectService {
   public account: any = null;
@@ -17,19 +17,19 @@ export class ConnectService {
 
   constructor() {
     if (window.ethereum === undefined) {
-      alert('Non-Ethereum browser detected. Install MetaMask');
+      alert("Non-Ethereum browser detected. Install MetaMask");
     } else {
-      if (typeof window.web3 !== 'undefined') {
+      if (typeof window.web3 !== "undefined") {
         this.web3 = window.web3.currentProvider;
       } else {
         this.web3 = new Web3.providers.HttpProvider(
-          'https://kovan.infura.io/v3/f99366737d854f5e91ab29dad087fcd5'
+          "https://kovan.infura.io/v3/f99366737d854f5e91ab29dad087fcd5"
         );
       }
 
-      console.log('transfer.service :: constructor :: window.ethereum');
+      console.log("transfer.service :: constructor :: window.ethereum");
       window.web3 = new Web3(window.ethereum);
-      console.log('transfer.service :: constructor :: this.web3');
+      console.log("transfer.service :: constructor :: this.web3");
       console.log(this.web3);
       this.enable = this.enableMetaMaskAccount();
       console.log(this.enable);
@@ -52,7 +52,8 @@ export class ConnectService {
   }
 
   public async convertJSONtoHEX(value) {
-    return window.web3.utils.toHex(value);
+    return window.web3.utils.toHex(value); // comment this line
+    // return value; // un-comment this line
   }
 
   public async connectContract() {
@@ -67,50 +68,50 @@ export class ConnectService {
     var receipt = await this.contract.methods
       .createToken([id], [acres], byteData)
       .send({ from: this.account })
-      .once('receipt', (receipt) => {
-        console.log('receipt==========', receipt);
+      .once("receipt", (receipt) => {
+        console.log("receipt==========", receipt);
       })
       .catch((error) => {
-        console.log('error==========', error);
+        console.log("error==========", error);
       });
 
     return receipt;
   }
 
   private async getAccount(): Promise<any> {
-    console.log('transfer.service :: getAccount :: start');
+    console.log("transfer.service :: getAccount :: start");
     if (this.account == null) {
       this.account = (await new Promise((resolve, reject) => {
-        console.log('transfer.service :: getAccount :: eth');
+        console.log("transfer.service :: getAccount :: eth");
         console.log(window.web3.eth);
         window.web3.eth.getAccounts((err, retAccount) => {
-          console.log('transfer.service :: getAccount: retAccount');
+          console.log("transfer.service :: getAccount: retAccount");
           console.log(retAccount);
           console.log(err);
           if (retAccount.length > 0) {
             this.account = retAccount[0];
             resolve(this.account);
           } else {
-            alert('transfer.service :: getAccount :: no accounts found.');
-            reject('No accounts found.');
+            alert("transfer.service :: getAccount :: no accounts found.");
+            reject("No accounts found.");
           }
           if (err != null) {
-            alert('transfer.service :: getAccount :: error retrieving account');
-            reject('Error retrieving account');
+            alert("transfer.service :: getAccount :: error retrieving account");
+            reject("Error retrieving account");
           }
         });
       })) as Promise<any>;
     }
     return Promise.resolve(this.account);
   }
-  
+
   public async getUserBalance(): Promise<any> {
     const account = await this.getAccount();
-    console.log('transfer.service :: getUserBalance :: account');
+    console.log("transfer.service :: getUserBalance :: account");
     console.log(account);
     return new Promise((resolve, reject) => {
       window.web3.eth.getBalance(account, function (err, balance) {
-        console.log('transfer.service :: getUserBalance :: getBalance');
+        console.log("transfer.service :: getUserBalance :: getBalance");
         console.log(balance);
         if (!err) {
           const retVal = {
@@ -118,12 +119,12 @@ export class ConnectService {
             balance: balance,
           };
           console.log(
-            'transfer.service :: getUserBalance :: getBalance :: retVal'
+            "transfer.service :: getUserBalance :: getBalance :: retVal"
           );
           console.log(retVal);
           resolve(retVal);
         } else {
-          reject({ account: 'error', balance: 0 });
+          reject({ account: "error", balance: 0 });
         }
       });
     }) as Promise<any>;
@@ -134,11 +135,11 @@ export class ConnectService {
     var response = await this.contract.methods
       .setManger(address)
       .send({ from: this.account })
-      .once('receipt', (receipt) => {
-        console.log('receipt==========', receipt);
+      .once("receipt", (receipt) => {
+        console.log("receipt==========", receipt);
       })
       .catch((error) => {
-        console.log('error==========', error);
+        console.log("error==========", error);
       });
 
     return response;
@@ -149,30 +150,32 @@ export class ConnectService {
     var response = await this.contract.methods
       .setOwner(address)
       .send({ from: this.account })
-      .once('receipt', (receipt) => {
-        console.log('receipt==========', receipt);
+      .once("receipt", (receipt) => {
+        console.log("receipt==========", receipt);
       })
       .catch((error) => {
-        console.log('error==========', error);
+        console.log("error==========", error);
       });
 
     return response;
   }
 
+  // comment all line in this function then un-comment list one line
   public async createToken(amount, uri, hex) {
     await this.connectContract();
     var hexData = await this.convertJSONtoHEX(hex);
     var response = await this.contract.methods
       .createToken(amount, uri, hexData)
       .send({ from: this.account })
-      .once('receipt', (receipt) => {
-        console.log('receipt==========', receipt);
+      .once("receipt", (receipt) => {
+        console.log("receipt==========", receipt);
       })
       .catch((error) => {
-        console.log('error==========', error);
+        console.log("error==========", error);
       });
 
     return response;
+    // return true; // un-comment this line
   }
 
   public async setApprovedByManager() {
@@ -180,11 +183,11 @@ export class ConnectService {
     var response = await this.contract.methods
       .setApprovedByManager()
       .send({ from: this.account })
-      .once('receipt', (receipt) => {
-        console.log('receipt==========', receipt);
+      .once("receipt", (receipt) => {
+        console.log("receipt==========", receipt);
       })
       .catch((error) => {
-        console.log('error==========', error);
+        console.log("error==========", error);
       });
 
     return response;
@@ -195,11 +198,11 @@ export class ConnectService {
     var response = await this.contract.methods
       .setApprovedByowner()
       .send({ from: this.account })
-      .once('receipt', (receipt) => {
-        console.log('receipt==========', receipt);
+      .once("receipt", (receipt) => {
+        console.log("receipt==========", receipt);
       })
       .catch((error) => {
-        console.log('error==========', error);
+        console.log("error==========", error);
       });
 
     return response;
@@ -211,11 +214,11 @@ export class ConnectService {
     var response = await this.contract.methods
       .safeTransferFrom(this.account, to, tokenId, tokenAmt, hexData)
       .send({ from: this.account })
-      .once('receipt', (receipt) => {
-        console.log('receipt==========', receipt);
+      .once("receipt", (receipt) => {
+        console.log("receipt==========", receipt);
       })
       .catch((error) => {
-        console.log('error==========', error);
+        console.log("error==========", error);
       });
 
     return response;
@@ -226,11 +229,11 @@ export class ConnectService {
     var response = await this.contract.methods
       .burnToken(address, tokenId, tokenAmt)
       .send({ from: this.account })
-      .once('receipt', (receipt) => {
-        console.log('receipt==========', receipt);
+      .once("receipt", (receipt) => {
+        console.log("receipt==========", receipt);
       })
       .catch((error) => {
-        console.log('error==========', error);
+        console.log("error==========", error);
       });
 
     return response;

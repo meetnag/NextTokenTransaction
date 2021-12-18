@@ -39,6 +39,11 @@ const deleteCoin = catchAsync(async (req, res) => {
   res.status(httpStatus.NO_CONTENT).send();
 });
 
+const ApproveCoin = catchAsync(async (req, res) => {
+  const coin = await coinService.updateCoinById(req.params.coinId, req.body);
+  res.send(coin);
+});
+
 module.exports = {
   createCoin,
   getAllCoins,
@@ -46,4 +51,5 @@ module.exports = {
   getCoin,
   updateCoin,
   deleteCoin,
+  ApproveCoin,
 };
