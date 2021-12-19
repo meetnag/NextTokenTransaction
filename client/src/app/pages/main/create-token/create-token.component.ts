@@ -138,7 +138,7 @@ export class CreateTokenComponent implements OnInit {
       // comment this line
       this.utility.startLoader();
       const tokenId = await this.connectService.nextTokenId(); // comment this line
-      // const tokenId = "DemoTokenId"; // un-comment this line
+      //const tokenId = "DemoTokenId"; // un-comment this line
 
       const resp = await this.connectService.createToken(
         data.amount,
