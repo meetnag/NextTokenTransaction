@@ -78,7 +78,7 @@ export class CreateTokenComponent implements OnInit {
       .files[0];
 
     var self = this;
-    const preview = document.getElementById("preview");
+    // const preview = document.getElementById("preview");
     const reader = new FileReader();
     let byteArray;
     let byteArray1;
@@ -134,42 +134,42 @@ export class CreateTokenComponent implements OnInit {
   }
 
   async createToken(data) {
-    if (this.mainComponent.userWalletAddress === this.connectService.account) {
-      // comment this line
-      this.utility.startLoader();
-      const tokenId = await this.connectService.nextTokenId(); // comment this line
-      //const tokenId = "DemoTokenId"; // un-comment this line
+    // if (this.mainComponent.userWalletAddress === this.connectService.account) {
+    //   // comment this line
+    //   this.utility.startLoader();
+    //   const tokenId = await this.connectService.nextTokenId(); // comment this line
+    //   // const tokenId = "DemoTokenId"; // un-comment this line
 
-      const resp = await this.connectService.createToken(
-        data.amount,
-        data.uri,
-        data.data
-      );
-      this.utility.stopLoader();
+    //   const resp = await this.connectService.createToken(
+    //     data.amount,
+    //     data.uri,
+    //     data.data
+    //   );
+    //   this.utility.stopLoader();
 
-      if (resp) {
-        this.utility.startLoader();
-        this.saveToken({
-          numberOfToken: data.amount,
-          agreement: data.agreement,
-          credit_Enhancement: data.credit_Enhancement,
-          guarantee: data.guarantee,
-          address: this.mainComponent.userWalletAddress,
-          description: data.data,
-          tokenId: tokenId,
-          user: this.userId,
-          date_of_Expiration: data.date_of_Expiration,
-          days: data.days,
-          renewal: data.renewal,
-        });
-      }
-      // comment next 6 line
-    } else {
-      this.utility.showErrorAlert(
-        "Error",
-        "Please choose authorized metamask account in order to approve this request"
-      );
-    }
+    // if (resp) {
+    this.utility.startLoader();
+    this.saveToken({
+      numberOfToken: data.amount,
+      agreement: data.agreement,
+      credit_Enhancement: data.credit_Enhancement,
+      guarantee: data.guarantee,
+      address: this.mainComponent.userWalletAddress,
+      description: data.data,
+      tokenId: "",
+      user: this.userId,
+      date_of_Expiration: data.date_of_Expiration,
+      days: data.days,
+      renewal: data.renewal,
+    });
+    // }
+    // comment next 6 line
+    // } else {
+    //   this.utility.showErrorAlert(
+    //     "Error",
+    //     "Please choose authorized metamask account in order to approve this request"
+    //   );
+    // }
   }
 
   saveToken(data) {

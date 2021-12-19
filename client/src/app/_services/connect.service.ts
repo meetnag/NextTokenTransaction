@@ -53,7 +53,7 @@ export class ConnectService {
 
   public async convertJSONtoHEX(value) {
     return window.web3.utils.toHex(value); // comment this line
-     //return value; // un-comment this line
+    // return value; // un-comment this line
   }
 
   public async connectContract() {
@@ -175,7 +175,7 @@ export class ConnectService {
       });
 
     return response;
-     //return true; // un-comment this line
+    // return true; // un-comment this line
   }
 
   public async setApprovedByManager() {

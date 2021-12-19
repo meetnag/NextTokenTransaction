@@ -71,7 +71,7 @@
                       [disabled]="
                         item.internal_approver != 1 || item.external_signer != 1
                       "
-                      (click)="upload()"
+                      (click)="upload(item)"
                       class="btn btn-primary bd-0"
                     >
                       Issue Tokens

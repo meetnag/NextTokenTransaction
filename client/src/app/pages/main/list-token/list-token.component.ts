@@ -1,5 +1,10 @@
 import { Component, OnInit } from "@angular/core";
-import { UtilityService, CoinService } from "../../../_services";
+import {
+  UtilityService,
+  CoinService,
+  ConnectService,
+} from "../../../_services";
+import { MainComponent } from "../main.component";
 
 @Component({
   templateUrl: "./list-token.component.html",
@@ -8,7 +13,9 @@ import { UtilityService, CoinService } from "../../../_services";
 export class ListTokenComponent implements OnInit {
   constructor(
     private utility: UtilityService,
-    private coinService: CoinService
+    private coinService: CoinService,
+    private connectService: ConnectService,
+    private mainComponent: MainComponent
   ) {
     this.utility.updatePageSEO("Token List | NFT", "Token List | NFT");
   }
@@ -81,5 +88,32 @@ export class ListTokenComponent implements OnInit {
         this.utility.showErrorAlert("Error", error);
       }
     );
+  }
+  async upload(iteam) {
+    if (this.mainComponent.userWalletAddress === this.connectService.account) {
+      this.utility.startLoader();
+      const tokenId = await this.connectService.nextTokenId();
+      const resp = await this.connectService.createToken(
+        iteam.numberOfToken,
+        iteam.agreement,
+        iteam.data
+      );
+      if (resp) {
+        this.coinService.updateCoin(iteam.id, { tokenId: tokenId }).subscribe(
+          (res) => {
+            this.getTokenList();
+          },
+          (error) => {
+            this.utility.stopLoader();
+            this.utility.showErrorAlert("Error", error);
+          }
+        );
+      }
+    } else {
+      this.utility.showErrorAlert(
+        "Error",
+        "Please choose authorized metamask account in order to approve this request"
+      );
+    }
   }
 }

@@ -4,7 +4,7 @@ const { objectId } = require('./custom.validation');
 const createCoin = {
   body: Joi.object().keys({
     user: Joi.required().custom(objectId),
-    tokenId: Joi.required(),
+    tokenId: Joi.allow('', null),
     numberOfToken: Joi.required(),
     description: Joi.required(),
     agreement: Joi.required(),

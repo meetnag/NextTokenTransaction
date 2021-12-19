@@ -10,7 +10,6 @@ const coinSchema = mongoose.Schema(
     },
     tokenId: {
       type: String,
-      required: true,
     },
     numberOfToken: {
       type: Number,
