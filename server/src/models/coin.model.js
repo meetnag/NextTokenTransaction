@@ -36,8 +36,8 @@ const coinSchema = mongoose.Schema(
       required: true,
     },
     renewal: {
-      type: Boolean,
-      default: true,
+      type: String,
+      default: 'Yes',
     },
     days: {
       type: Number,

@@ -52,6 +52,7 @@ export class ConnectService {
   }
 
   public async convertJSONtoHEX(value) {
+    // console.log("convertJSONtoHEX ===value==> ",value)
     return window.web3.utils.toHex(value); // comment this line
     // return value; // un-comment this line
   }
@@ -61,6 +62,8 @@ export class ConnectService {
       tokenAbi,
       environment.CONTRACT_ADDRESS
     );
+
+    // console.log("======> this.contract <====", this.contract);
   }
 
   public async createPropertyNFTs(id, acres, byteData) {
@@ -89,6 +92,7 @@ export class ConnectService {
           console.log(retAccount);
           console.log(err);
           if (retAccount.length > 0) {
+            console.log("=====> account id <=====",retAccount[0]);
             this.account = retAccount[0];
             resolve(this.account);
           } else {
@@ -162,8 +166,14 @@ export class ConnectService {
 
   // comment all line in this function then un-comment list one line
   public async createToken(amount, uri, hex) {
+    console.log("====> call create token  1<====")
     await this.connectContract();
+    console.log("==createToken=====> passs connectContract <======");
+    
     var hexData = await this.convertJSONtoHEX(hex);
+    // var hexData = hex;
+    console.log("==createToken=====> passs convertJSONtoHEX <====hexData==",hexData);
+    console.log("==createToken=====> before this.account <====this.account==",this.account);
     var response = await this.contract.methods
       .createToken(amount, uri, hexData)
       .send({ from: this.account })
@@ -173,7 +183,7 @@ export class ConnectService {
       .catch((error) => {
         console.log("error==========", error);
       });
-
+      console.log("=========createToken========> response <========",response)
     return response;
     // return true; // un-comment this line
   }
@@ -240,9 +250,11 @@ export class ConnectService {
   }
 
   public async nextTokenId() {
+    // console.log("====> call next TokenId <=====");
     await this.connectContract();
+    // console.log("===pass=> call next TokenId <=====");
     var response = await this.contract.methods.nextTokenId().call();
-
+    // console.log("======> nextTokenId <===response=", response);
     return response;
   }
 

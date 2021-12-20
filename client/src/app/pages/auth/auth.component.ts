@@ -42,9 +42,15 @@ export class AuthComponent implements OnInit {
       this.authService.login(this.form.value.email, this.form.value.password).subscribe(
         (res) => {
           this.utility.stopLoader()
-       
+            console.log("===> res <====", res);
             this.utility.showSuccessAlert('Success!', 'Logged in successfully', );
-            this.router.navigate(['app/issue-token']);
+            if(res.user.role === "internal" || res.user.role === "external")
+            {
+              this.router.navigate(['app/list-token']);
+            }
+            else{
+              this.router.navigate(['app/issue-token']);
+            }
         
         },
         (error) => {
