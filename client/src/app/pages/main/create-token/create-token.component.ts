@@ -81,8 +81,6 @@ export class CreateTokenComponent implements OnInit {
     var self = this;
     // const preview = document.getElementById("preview");
     const reader = new FileReader();
-    const reader1 = new FileReader();
-    const reader2 = new FileReader();
     let byteArray;
     let byteArray1;
     let byteArray2;
@@ -101,13 +99,8 @@ export class CreateTokenComponent implements OnInit {
         );
         self.utility.startLoader("Data encryption in progress. Please wait...");
         // fianalJSON["agreement"] = result["path"];
-      },
-      false
-    );
 
-    await reader1.addEventListener("loadend",
-    async function () {
-      byteArray1 = self.convertDataURIToBinary(reader.result);
+        byteArray1 = self.convertDataURIToBinary(reader.result);
         self.utility.startLoader("Uploading document....1");
         var result1 = await ipfs.add(byteArray1);
         self.utility.startLoader(
@@ -115,10 +108,8 @@ export class CreateTokenComponent implements OnInit {
         );
         self.utility.startLoader("Data encryption in progress. Please wait...");
         // fianalJSON["credit_Enhancement"] = result1["path"];
-    }, false );
-    await reader2.addEventListener("loadend",
-    async function () {
-      byteArray2 = self.convertDataURIToBinary(reader.result);
+
+        byteArray2 = self.convertDataURIToBinary(reader.result);
         self.utility.startLoader("Uploading document....2");
         var result2 = await ipfs.add(byteArray2);
         self.utility.startLoader(
@@ -127,16 +118,18 @@ export class CreateTokenComponent implements OnInit {
         self.utility.startLoader("Data encryption in progress. Please wait...");
         // fianalJSON["guarantee"] = result2["path"];
         await self.createToken(fianalJSON);
-    }, false );
+      },
+      false
+    );
 
     if (file) {
      await reader.readAsDataURL(file);
     }
     if (file1) {
-     await reader1.readAsDataURL(file1);
+     await reader.readAsDataURL(file1);
     }
     if (file2) {
-     await reader2.readAsDataURL(file2);
+     await reader.readAsDataURL(file2);
     }
   }
 
