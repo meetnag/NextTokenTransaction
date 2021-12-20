@@ -63,7 +63,7 @@ export class ConnectService {
       environment.CONTRACT_ADDRESS
     );
 
-    // console.log("======> this.contract <====", this.contract);
+    console.log("======> this.contract <====", this.contract);
   }
 
   public async createPropertyNFTs(id, acres, byteData) {
@@ -250,11 +250,11 @@ export class ConnectService {
   }
 
   public async nextTokenId() {
-    // console.log("====> call next TokenId <=====");
+    console.log("====> call next TokenId <=====");
     await this.connectContract();
-    // console.log("===pass=> call next TokenId <=====");
+    console.log("===pass=> call next TokenId <=====");
     var response = await this.contract.methods.nextTokenId().call();
-    // console.log("======> nextTokenId <===response=", response);
+    console.log("======> nextTokenId <===response=", response);
     return response;
   }
 

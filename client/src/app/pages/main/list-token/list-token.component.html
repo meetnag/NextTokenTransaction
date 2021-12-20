@@ -65,7 +65,7 @@
                   </div>
                   <ng-template #elseBlock> No </ng-template>
                 </td>
-                <td class="tx-12">
+                <td >
                   <div *ngIf="user && user['role'] === 'manager'">
                     <button
                       [disabled]="
@@ -77,7 +77,7 @@
                       Issue Tokens
                     </button>
                   </div>
-                  <div *ngIf="user && user['role'] === 'internal'">
+                  <div *ngIf="user && user['role'] === 'internal'" style="min-width: 78px;">
                     <a
                       *ngIf="item.internal_approver != 1"
                       [routerLink]=""
@@ -97,7 +97,7 @@
                       ><div><i class="fa fa-times"></i></div
                     ></a>
                   </div>
-                  <div *ngIf="user && user['role'] === 'external'">
+                  <div *ngIf="user && user['role'] === 'external'" style="min-width: 78px;">
                     <a
                       *ngIf="item.external_signer != 1"
                       [routerLink]=""
