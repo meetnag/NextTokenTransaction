@@ -85,7 +85,9 @@ export class CreateTokenComponent implements OnInit {
     let byteArray1;
     let byteArray2;
     var fianalJSON = self.form.value;
-  
+    fianalJSON["agreement"] = file.name;
+    fianalJSON["credit_Enhancement"] = file1.name;
+    fianalJSON["guarantee"] = file2.name;
     await reader.addEventListener(
       "loadend",
       async function () {
