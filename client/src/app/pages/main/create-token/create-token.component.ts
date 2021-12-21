@@ -74,10 +74,18 @@ export class CreateTokenComponent implements OnInit {
     const file = (<HTMLInputElement>document.getElementById("document"))
       .files[0];
     const file1 = (<HTMLInputElement>document.getElementById("document1"))
-      .files[1];
+      .files[0];
     const file2 = (<HTMLInputElement>document.getElementById("document2"))
-      .files[2];
+      .files[0];
 
+      console.log("========> file <====",file);
+      console.log("========> file <====",file.name);
+      
+      console.log("========> file1 <====",file1);
+      console.log("========> file1 <====",file1.name);
+
+      console.log("========> file2 <====",file2);
+      console.log("========> file2 <====",file2.name);
     var self = this;
     // const preview = document.getElementById("preview");
     const reader = new FileReader();
