@@ -30,16 +30,21 @@
                         <table  class="table mg-b-0 tx-13">
                         <thead>
                             <tr class="tx-10">
+                                <th class="pd-y-5">Invoice No</th>
                                 <th class="pd-y-5">Token Id</th>
                                 <th class="pd-y-5">No Of Token</th>
                                 <th class="pd-y-5">Description</th>
                                 <th class="pd-y-5">Status</th>
+                                <th class="pd-y-5">Vendor Accepted Token</th>
                                 <th *ngIf="userRole !== 'admin'" class="pd-y-5">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <ng-container *ngFor="let item of transfers">
                                 <tr *ngIf="item.status === 'REQUESTED' && item.user === userId">
+                                    <td>
+                                        {{ item.invoice_no }}
+                                        </td>
                                     <td>
                                     {{ item.tokenId }}
                                     </td>
@@ -51,6 +56,13 @@
                                     </td>
                                     <td class="pd-l-20">
                                         {{ item.status }}
+                                    </td>
+                                    <td class="pd-l-20">
+                                        <div *ngIf="item.vendor_accepted_token === 1; else elseBlock">
+                                            Yes
+                                        </div>
+                                        <ng-template #elseBlock> No </ng-template>
+                                        <!-- {{ item.vendor_accepted_token }} -->
                                     </td>
                                     <td *ngIf="userRole !== 'admin'" style="min-width: 78px;">
                                         <a *ngIf="item.status === 'REQUESTED' && item.user === userId" [routerLink]="" (click)="approveTransfer(item)"  title="Approve" data-toggle="tooltip"  class="tooltp btn btn-success btn-icon rounded-circle"><div><i class="fa fa-check"></i></div></a>
@@ -68,16 +80,21 @@
                         <table  class="table mg-b-0 tx-13">
                         <thead>
                             <tr class="tx-10">
+                                <th class="pd-y-5">Invoice No</th>
                                 <th class="pd-y-5">Token Id</th>
                                 <th class="pd-y-5">No Of Token</th>
                                 <th class="pd-y-5">Description</th>
                                 <th class="pd-y-5">Status</th>
+                                <th class="pd-y-5">Vendor Accepted Token</th>
                                 <th *ngIf="userRole !== 'admin'" class="pd-y-5">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <ng-container *ngFor="let item of transfers">
                                 <tr *ngIf="item.user !== userId">
+                                    <td>
+                                        {{ item.invoice_no }}
+                                    </td>
                                     <td>
                                     {{ item.tokenId }}
                                     </td>
@@ -90,9 +107,16 @@
                                     <td class="pd-l-20">
                                         {{ item.status }}
                                     </td>
+                                    <td class="pd-l-20">
+                                        <div *ngIf="item.vendor_accepted_token === 1; else elseBlock">
+                                            Yes
+                                        </div>
+                                        <ng-template #elseBlock> No </ng-template>
+                                        <!-- {{ item.vendor_accepted_token }} -->
+                                    </td>
                                     <td *ngIf="userRole !== 'admin'" style="min-width: 78px;">
                                         
-                                        <a *ngIf="item.status === 'APPROVED' && item.user !== userId" [routerLink]="" (click)="openTransferModal(item)" title="Transfer" data-toggle="tooltip"  class="mr-1 tooltp btn btn-info btn-icon rounded-circle"><div><i class="fa fa-exchange"></i></div></a>
+                                        <a *ngIf="item.status === 'APPROVED' && item.user !== userId && item.vendor_accepted_token === 1" [routerLink]="" (click)="openTransferModal(item)" title="Transfer" data-toggle="tooltip"  class="mr-1 tooltp btn btn-info btn-icon rounded-circle"><div><i class="fa fa-exchange"></i></div></a>
                                     </td>
                                 </tr>
                             </ng-container>
@@ -119,6 +143,11 @@
               </div>
               <div class="modal-body">
                     <form [formGroup]="form">
+                        <div class="form-group">
+                            <label for="">Invoice No</label>
+                            <input type="text" class="form-control" name="invoice" id="invoice" formControlName="invoice" readonly>
+                            <app-error-field [errorMsg]="getForm.invoice"></app-error-field>
+                        </div>
                         <div class="form-group">
                           <label for="">Token Id</label>
                           <input type="number" class="form-control" name="tokenId" id="tokenId" formControlName="tokenId" readonly>

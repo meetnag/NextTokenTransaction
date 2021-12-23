@@ -27,6 +27,7 @@ export class TransferComponent implements OnInit {
       tokenId: [null, Validators.required],
       numberOfToken: [null, Validators.required],
       description: [null, Validators.required],
+      invoice_no: ["INV-61701", Validators.required],
       status: ['REQUESTED', Validators.required],
     });
     

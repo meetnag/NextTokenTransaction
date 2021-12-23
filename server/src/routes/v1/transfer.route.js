@@ -21,4 +21,7 @@ router
   .patch(auth('manageTransfers'), validate(transferValidation.updateTransfer), transferController.updateTransfer)
   .delete(auth('manageTransfers'), validate(transferValidation.deleteTransfer), transferController.deleteTransfer);
 
+router
+  .route('/find')
+  .post(auth('findTransfers'), validate(transferValidation.findTransfer), transferController.findTransfer);
 module.exports = router;

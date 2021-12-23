@@ -41,6 +41,13 @@ export class UtilityService {
       $('#datatable').DataTable({ordering: false, lengthChange: true, paging: true });
     }, 1000);
   }
+  stopLoaderWithTableReloadPayment() {
+     $("#datatableofpayment").dataTable().fnDestroy()
+    this.loader.stop();
+    setTimeout(() => {
+      $('#datatableofpayment').DataTable({ordering: false, lengthChange: true, paging: true });
+    }, 1000);
+  }
 
   setDefaultLocale(locale) {
     this.translate.setDefaultLang(locale)

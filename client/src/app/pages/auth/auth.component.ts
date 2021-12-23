@@ -48,6 +48,9 @@ export class AuthComponent implements OnInit {
             {
               this.router.navigate(['app/list-token']);
             }
+            else if(res.user.role === "vendor"){
+              this.router.navigate(['app/accept-payment']);
+            }
             else{
               this.router.navigate(['app/issue-token']);
             }

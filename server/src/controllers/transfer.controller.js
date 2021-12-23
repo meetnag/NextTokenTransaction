@@ -29,6 +29,16 @@ const getTransfer = catchAsync(async (req, res) => {
   res.send(transfer);
 });
 
+const findTransfer = catchAsync(async (req, res) => {
+  // console.log("======> findTransfer <===", JSON.stringify(req.body));
+  const transfer = await transferService.getTransfer(req.body);
+  // console.log("=====> transfer <====",JSON.stringify(transfer))
+  if (!transfer) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Transfer not found');
+  }
+  res.send(transfer);
+});
+
 const updateTransfer = catchAsync(async (req, res) => {
   const transfer = await transferService.updateTransferById(req.params.transferId, req.body);
   res.send(transfer);
@@ -44,6 +54,7 @@ module.exports = {
   getAllTransfers,
   getTransfers,
   getTransfer,
+  findTransfer,
   updateTransfer,
   deleteTransfer,
 };
