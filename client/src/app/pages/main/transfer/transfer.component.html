@@ -31,6 +31,22 @@
                     <app-error-field [errorMsg]="getForm.numberOfToken"></app-error-field>
                 </div>
                 </div><!-- col-4 -->
+
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label class="form-control-label">Invoice No: <span class="tx-danger">*</span></label>
+                        <!-- <input class="form-control" formControlName="numberOfToken" type="number" name="numberOfToken"
+                            placeholder="Enter Token Count" min="1" step="1"
+                            onkeypress="return event.charCode >= 48 && event.charCode <= 57"> -->
+                            <select class="form-control" formControlName="invoice_no" name="invoice_no" >
+                                <option value="INV-61701">INV-61701</option>
+                                <option value="INV-61792">INV-61792</option>
+                                <option value="INV-62031">INV-62031</option>
+                            </select>
+                        <app-error-field [errorMsg]="getForm.invoice_no"></app-error-field>
+                    </div>
+                </div><!-- col-4 -->
+
                  <div class="col-lg-12">
                 <div class="form-group">
                     <label class="form-control-label">Description: <span class="tx-danger">*</span></label>

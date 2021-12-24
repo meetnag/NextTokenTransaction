@@ -16,6 +16,18 @@ const transferSchema = mongoose.Schema(
       type: Number,
       required: true,
     },
+    invoice_no: {
+      type: String,
+      required: true,
+    },
+    vendor_accepted_token: {
+      type: Number,
+      default: 2,
+    },
+    ar_account: {
+      type: String,
+      default: '',
+    },
     description: {
       type: String,
       required: true,

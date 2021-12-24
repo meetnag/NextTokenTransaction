@@ -17,8 +17,9 @@ import { TransferRequestComponent } from './transfer-request/transfer-request.co
 import { ListTokenComponent } from './list-token/list-token.component';
 import { BurnTokenComponent } from './burn-token/burn-token.component';
 import { BalanceComponent } from './balance/balance.component';
+import { AcceptPaymentComponent } from './accept-payment/accept-payment.component';
 @NgModule({
-  declarations: [MainComponent, UsersComponent, UserProfileComponent, AddUserComponent, EditUserComponent, CreateTokenComponent, SetRoleComponent, TransferComponent, TransferRequestComponent, ListTokenComponent, BurnTokenComponent, BalanceComponent],
+  declarations: [MainComponent, UsersComponent, UserProfileComponent, AddUserComponent, EditUserComponent, CreateTokenComponent, SetRoleComponent, TransferComponent, TransferRequestComponent, ListTokenComponent, BurnTokenComponent, BalanceComponent, AcceptPaymentComponent],
   imports: [
     CommonModule,
     RouterModule,

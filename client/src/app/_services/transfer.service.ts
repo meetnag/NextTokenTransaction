@@ -23,6 +23,14 @@ export class TransferService {
     );
   }
 
+  findTransfers(transferBody: Object) {
+    return this.http.post(`${this.apiUrl}transfers/find`,transferBody).pipe(
+      map((response: Response) => {
+        return response;
+      })
+    );
+  }
+
   // Get transfer by id
   getTransferById(transferId: String) {
     return this.http.get(`${this.apiUrl}transfers/${transferId}`).pipe(

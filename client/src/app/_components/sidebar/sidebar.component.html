@@ -22,9 +22,10 @@
         <li *ngIf="user && user['role'] !== 'admin'" class="sidebar-nav-item">
           <a [routerLink]="['/app/burn-token']"   class="sidebar-nav-link"><i class="icon ion-arrow-swap"></i> Burn Token</a>
         </li>
-        
         <li *ngIf="user && user['role'] === 'admin'" class="sidebar-nav-item">
           <a [routerLink]="['/app/set-role']"  class="sidebar-nav-link"><i class="icon ion-arrow-swap"></i> Set Roles</a>
         </li>
-        
+        <li class="sidebar-nav-item">
+          <a [routerLink]="['/app/accept-payment']"  class="sidebar-nav-link"><i class="icon ion-arrow-swap"></i> Accept Payment</a>
+        </li>
     </ul>

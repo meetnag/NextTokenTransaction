@@ -35,6 +35,12 @@ const getAllTransfers = async (user) => {
   return transfers;
 };
 
+const getTransfer = async (findData) => {
+  let transfers = [];
+  transfers = await Transfer.find(findData);
+  return transfers;
+};
+
 /**
  * Query for transfers
  * @param {Object} filter - Mongo filter
@@ -91,6 +97,7 @@ const deleteTransferById = async (transferId) => {
 module.exports = {
   createTransfer,
   getAllTransfers,
+  getTransfer,
   queryTransfers,
   getTransferById,
   updateTransferById,

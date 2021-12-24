@@ -40,6 +40,7 @@ export class TransferRequestComponent implements OnInit {
     console.log("userrole is ====>", this.userRole);
     this.getAllTransfers();
     this.form = this.formBuilder.group({
+      invoice: [null, [Validators.required]],
       tokenId: [null, [Validators.required]],
       numberOfToken: [null, [Validators.required]],
       address: [null, [Validators.required]],
@@ -67,6 +68,9 @@ export class TransferRequestComponent implements OnInit {
   }
 
   async approveTransfer(item) {
+    console.log("==approveTransfer==> this.mainComponent.userWalletAddress <====", this.mainComponent.userWalletAddress);
+    console.log("==approveTransfer==> this.connectService.account <====",this.connectService.account);
+    
     if (this.mainComponent.userWalletAddress === this.connectService.account) {
       this.utility.startLoader();
       let resp: any;
@@ -75,6 +79,7 @@ export class TransferRequestComponent implements OnInit {
       } else {
         resp = await this.connectService.setApprovedByManager();
       }
+      // resp = true
 
       if (resp) {
         this.utility.stopLoader();
@@ -99,8 +104,11 @@ export class TransferRequestComponent implements OnInit {
     console.log(this.selectedItem);
     
     this.form.patchValue({
+      invoice: this.selectedItem.invoice_no,
       tokenId: this.selectedItem.tokenId,
       numberOfToken: this.selectedItem.numberOfToken,
+      address: this.selectedItem.ar_account,
+
     });
     $('#modelId').modal('show');
   }
@@ -114,6 +122,7 @@ export class TransferRequestComponent implements OnInit {
         this.form.value.numberOfToken,
         this.form.value.data
       );
+      // const resp = true;
       this.utility.stopLoader();
       if (resp) {
         $('#modelId').modal('hide');

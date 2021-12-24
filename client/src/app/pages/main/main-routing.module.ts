@@ -12,6 +12,7 @@ import { TransferRequestComponent } from './transfer-request/transfer-request.co
 import { ListTokenComponent } from './list-token/list-token.component';
 import { BurnTokenComponent } from './burn-token/burn-token.component';
 import { BalanceComponent } from './balance/balance.component';
+import { AcceptPaymentComponent } from "./accept-payment/accept-payment.component";
 
 const routes: Routes = [
   {
@@ -29,6 +30,7 @@ const routes: Routes = [
       { path: 'list-token', component: ListTokenComponent },
       { path: 'burn-token', component: BurnTokenComponent },
       { path: 'check-balance', component: BalanceComponent },
+      { path: "accept-payment", component: AcceptPaymentComponent },
     ],
   },
 ];
