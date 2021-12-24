@@ -102,7 +102,6 @@ export class TransferRequestComponent implements OnInit {
       tokenId: this.selectedItem.tokenId,
       numberOfToken: this.selectedItem.numberOfToken,
       address: this.selectedItem.ar_account,
-
     });
     $('#modelId').modal('show');
   }
