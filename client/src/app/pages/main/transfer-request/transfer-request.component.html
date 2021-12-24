@@ -50,7 +50,7 @@
                                         {{ item.description }}
                                     </td>
                                     <td class="pd-l-20">
-                                        {{ item.status }}
+                                        {{ item.status }} 
                                     </td>
                                     <td *ngIf="userRole !== 'admin'" style="min-width: 78px;">
                                         <a *ngIf="item.status === 'REQUESTED' && item.user === userId" [routerLink]="" (click)="approveTransfer(item)"  title="Approve" data-toggle="tooltip"  class="tooltp btn btn-success btn-icon rounded-circle"><div><i class="fa fa-check"></i></div></a>
