@@ -27,15 +27,22 @@ export class AcceptPaymentComponent implements OnInit {
   form: FormGroup;
   user: any = [];
   transfers: any = [];
-  startDate = formatDate(new Date(new Date().setDate(new Date().getDate() + 30)),"MM-dd-yyyy", "en");
+  startDate = formatDate(
+    new Date(new Date().setDate(new Date().getDate() + 30)),
+    "MM-dd-yyyy",
+    "en"
+  );
   todayDate = formatDate(new Date(), "MM-dd-yyyy", "en");
-  userRole = JSON.parse(localStorage.getItem('user'))['role'];
+  userRole = JSON.parse(localStorage.getItem("user"))["role"];
 
   ngOnInit(): void {
     this.getTransfer();
     // this.startDate = formatDate(this.startDate, "yyyy-MM-dd", "en");
     this.form = this.formBuilder.group({
-      ar_account: ["0x39A1531a8e244C79b71d38cc276d443c63091E0C", Validators.required],
+      ar_account: [
+        "0x39A1531a8e244C79b71d38cc276d443c63091E0C",
+        Validators.required,
+      ],
       id: [null, Validators.required],
     });
   }
@@ -46,44 +53,50 @@ export class AcceptPaymentComponent implements OnInit {
 
   getTransfer() {
     this.utility.startLoader();
-    this.transferService.findTransfers({
-      status:"APPROVED",
-      vendor_accepted_token:2
-    }).subscribe(
-      (res:any) => {
-        console.log( "=====> call <==getTransfer===",res);
-        this.utility.stopLoader();
-        if(res.length != 0)
-        {
-          this.form.patchValue({
-            id: res[0].id,
-          });
+    this.transferService
+      .findTransfers({
+        status: "APPROVED",
+        vendor_accepted_token: 2,
+      })
+      .subscribe(
+        (res: any) => {
+          console.log("=====> call <==getTransfer===", res);
+          this.utility.stopLoader();
+          if (res.length != 0) {
+            this.form.patchValue({
+              id: res[0].id,
+            });
+          }
+          this.transfers = res;
+        },
+        (error) => {
+          console.log(error);
+          this.utility.stopLoader();
         }
-        this.transfers = res;
-      },
-      (error) => {
-        console.log(error);
-        this.utility.stopLoader();
-      }
-    );
+      );
   }
 
   upload(item) {
     this.utility.startLoader();
-    this.transferService.updateTransfer(item.id, {vendor_accepted_token:1, ar_account:this.form.value.ar_account}).subscribe(
-      (res) => {
-        this.utility.stopLoader();
-        // this.router.onSameUrlNavigation = "reload";
-        // this.getTransfer(); 
-        // this.router.navigate(['app/accept-payment']);
-        window.location.reload();
-      },
-      (error) => {
-        console.log(error);
-        this.utility.stopLoader();
-        this.utility.showErrorAlert("Error", error);
-      }
-    );
+    this.transferService
+      .updateTransfer(item.id, {
+        vendor_accepted_token: 1,
+        ar_account: this.form.value.ar_account,
+      })
+      .subscribe(
+        (res) => {
+          this.utility.stopLoader();
+          // this.router.onSameUrlNavigation = "reload";
+          // this.getTransfer();
+          // this.router.navigate(['app/accept-payment']);
+          window.location.reload();
+        },
+        (error) => {
+          console.log(error);
+          this.utility.stopLoader();
+          this.utility.showErrorAlert("Error", error);
+        }
+      );
     // this.updateTransferById(item.id, { status: 'REJECTED' });
   }
 }

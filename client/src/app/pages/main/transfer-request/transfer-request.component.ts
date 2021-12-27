@@ -1,17 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import {
   UtilityService,
   TransferService,
   ConnectService,
-} from '../../../_services';
-import { Router } from '@angular/router';
-import { MainComponent } from '../main.component';
+} from "../../../_services";
+import { Router } from "@angular/router";
+import { MainComponent } from "../main.component";
 declare var $: any;
 
 @Component({
-  templateUrl: './transfer-request.component.html',
-  styleUrls: ['./transfer-request.component.css'],
+  templateUrl: "./transfer-request.component.html",
+  styleUrls: ["./transfer-request.component.css"],
 })
 export class TransferRequestComponent implements OnInit {
   constructor(
@@ -22,13 +22,13 @@ export class TransferRequestComponent implements OnInit {
     private connectService: ConnectService,
     private mainComponent: MainComponent
   ) {
-    this.utility.updatePageSEO('Transfer Token | NFT', 'Transfer Token | NFT');
+    this.utility.updatePageSEO("Transfer Token | NFT", "Transfer Token | NFT");
   }
 
   form: FormGroup;
   transfers: any = [];
-  userId = JSON.parse(localStorage.getItem('user'))['id'];
-  userRole = JSON.parse(localStorage.getItem('user'))['role'];
+  userId = JSON.parse(localStorage.getItem("user"))["id"];
+  userRole = JSON.parse(localStorage.getItem("user"))["role"];
   selectedItem: any = [];
 
   ngOnInit(): void {
@@ -62,13 +62,19 @@ export class TransferRequestComponent implements OnInit {
   }
 
   async approveTransfer(item) {
-    console.log("==approveTransfer==> this.mainComponent.userWalletAddress <====", this.mainComponent.userWalletAddress);
-    console.log("==approveTransfer==> this.connectService.account <====",this.connectService.account);
-    
+    console.log(
+      "==approveTransfer==> this.mainComponent.userWalletAddress <====",
+      this.mainComponent.userWalletAddress
+    );
+    console.log(
+      "==approveTransfer==> this.connectService.account <====",
+      this.connectService.account
+    );
+
     if (this.mainComponent.userWalletAddress === this.connectService.account) {
       this.utility.startLoader();
       let resp: any;
-      if (this.userRole === 'owner') {
+      if (this.userRole === "owner") {
         resp = await this.connectService.setApprovedByowner();
       } else {
         resp = await this.connectService.setApprovedByManager();
@@ -77,33 +83,33 @@ export class TransferRequestComponent implements OnInit {
 
       if (resp) {
         this.utility.stopLoader();
-        this.updateTransferById(item.id, { status: 'APPROVED' });
+        this.updateTransferById(item.id, { status: "APPROVED" });
       } else {
-        this.utility.showErrorAlert('Error', 'Something went wrong');
+        this.utility.showErrorAlert("Error", "Something went wrong");
       }
     } else {
       this.utility.showErrorAlert(
-        'Error',
-        'Please choose authorized metamask account in order to approve this request'
+        "Error",
+        "Please choose authorized metamask account in order to approve this request"
       );
     }
   }
 
   rejectTransfer(item) {
-    this.updateTransferById(item.id, { status: 'REJECTED' });
+    this.updateTransferById(item.id, { status: "REJECTED" });
   }
 
   openTransferModal(item) {
-    this.selectedItem = item
+    this.selectedItem = item;
     console.log(this.selectedItem);
-    
+
     this.form.patchValue({
       invoice: this.selectedItem.invoice_no,
       tokenId: this.selectedItem.tokenId,
       numberOfToken: this.selectedItem.numberOfToken,
       address: this.selectedItem.ar_account,
     });
-    $('#modelId').modal('show');
+    $("#modelId").modal("show");
   }
 
   async transferAction() {
@@ -118,13 +124,13 @@ export class TransferRequestComponent implements OnInit {
       // const resp = true;
       this.utility.stopLoader();
       if (resp) {
-        $('#modelId').modal('hide');
-        this.updateTransferById(this.selectedItem.id, { status: 'TRANSFERED' });
+        $("#modelId").modal("hide");
+        this.updateTransferById(this.selectedItem.id, { status: "TRANSFERED" });
       }
     } else {
       this.utility.showErrorAlert(
-        'Error',
-        'Please choose authorized metamask account in order to approve this request'
+        "Error",
+        "Please choose authorized metamask account in order to approve this request"
       );
     }
   }

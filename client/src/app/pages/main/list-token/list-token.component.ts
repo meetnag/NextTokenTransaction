@@ -90,21 +90,27 @@ export class ListTokenComponent implements OnInit {
     );
   }
   async upload(iteam) {
-    console.log("======> upload iteam <==22222222222=",iteam)
-    console.log("======> upload this.mainComponent.userWalletAddress <===",this.mainComponent.userWalletAddress)
-    console.log("======> upload this.connectService.account <===",this.connectService.account)
+    console.log("======> upload iteam <==22222222222=", iteam);
+    console.log(
+      "======> upload this.mainComponent.userWalletAddress <===",
+      this.mainComponent.userWalletAddress
+    );
+    console.log(
+      "======> upload this.connectService.account <===",
+      this.connectService.account
+    );
     if (this.mainComponent.userWalletAddress === this.connectService.account) {
       this.utility.startLoader();
       const tokenId = await this.connectService.nextTokenId();
       console.log("========> token id <=====", tokenId);
-      
+
       const resp = await this.connectService.createToken(
         iteam.numberOfToken,
         iteam.agreement,
         iteam.description
       );
 
-      console.log("======upload===> resp <===========",resp)
+      console.log("======upload===> resp <===========", resp);
       if (resp) {
         this.coinService.updateCoin(iteam.id, { tokenId: tokenId }).subscribe(
           (res) => {

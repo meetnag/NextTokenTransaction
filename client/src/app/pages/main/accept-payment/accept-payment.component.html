@@ -1,24 +1,26 @@
 <div class="container">
-    <div class="slim-pageheader">
-        <ol class="breadcrumb slim-breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Accept Payment</li>
-        </ol>
-        <h6 class="slim-pagetitle">
-          <div  *ngIf="transfers.length != 0; else elseBlockHader">
-            Accept CPToken Payment
-          </div>
-          <ng-template #elseBlockHader> You do not have any invoices available to accept the CPToken payment </ng-template>
-        </h6>
-    </div>
-    <!-- slim-pageheader -->
+  <div class="slim-pageheader">
+    <ol class="breadcrumb slim-breadcrumb">
+      <li class="breadcrumb-item"><a href="#">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Accept Payment</li>
+    </ol>
+    <h6 class="slim-pagetitle">
+      <div *ngIf="transfers.length != 0; else elseBlockHader">
+        Accept CPToken Payment
+      </div>
+      <ng-template #elseBlockHader>
+        You do not have any invoices available to accept the CPToken payment
+      </ng-template>
+    </h6>
+  </div>
+  <!-- slim-pageheader -->
 
-    <div *ngIf="transfers.length != 0" class="row row-sm mg-t-20">
-        <div class="col-xl-8 mg-t-20 mg-xl-t-0">
-          <div class="card card-table">
-            <div class="table-responsive p-3">
-              <table id="datatableofpayment" class="table mg-b-0 tx-13">
-                <!-- <thead>
+  <div *ngIf="transfers.length != 0" class="row row-sm mg-t-20">
+    <div class="col-xl-8 mg-t-20 mg-xl-t-0">
+      <div class="card card-table">
+        <div class="table-responsive p-3">
+          <table id="datatableofpayment" class="table mg-b-0 tx-13">
+            <!-- <thead>
                   <tr class="tx-10">
                     <th class="pd-y-5">Token Id</th>
                     <th class="pd-y-5">Amount</th>
@@ -26,8 +28,8 @@
                     <th class="pd-y-5">Token maturity</th>
                     <th class="pd-y-5">Date of Expiration</th>
                     <th class="pd-y-5">Renewal on Maturity</th> -->
-                    <!-- <th class="pd-y-5">Document Name</th> -->
-                    <!-- <th *ngIf="user && user['role'] === 'manager'" class="pd-y-5">
+            <!-- <th class="pd-y-5">Document Name</th> -->
+            <!-- <th *ngIf="user && user['role'] === 'manager'" class="pd-y-5">
                       Internal Approval Status
                     </th>
                     <th *ngIf="user && user['role'] === 'manager'" class="pd-y-5">
@@ -36,39 +38,40 @@
                     <th class="pd-y-5">Action</th>
                   </tr>
                 </thead> -->
-                <tbody>
-                  <tr class="remove_border col-lg-6">
-                    <td class="remove_border" >Invoice No: </td> 
-                    <td class="remove_border">
-                        <!-- {{transfers[0].invoice_no}} -->
-                        <div *ngIf="transfers.length != 0; else elseBlock">
-                            {{transfers[0].invoice_no}}
-                          </div>
-                          <ng-template #elseBlock>  </ng-template>
-                    </td>
-                  </tr>
-                  <tr class="remove_border">
-                    <td class="remove_border">Invoice Due Date: </td> <td class="remove_border">{{startDate}}</td>
-                  </tr>
-                  <tr class="remove_border">
-                    <td class="remove_border">Token Type: </td> <td class="remove_border">CPToken-0x54349483902ZFB1eb23</td>
-                  </tr>
-                  <tr class="remove_border">
-                    <td class="remove_border">Total CPTokens: </td> 
-                    <td class="remove_border">
-                        <!-- {{transfers[0].numberOfToken}} -->
-                        <div *ngIf="transfers.length != 0; else elseBlock">
-                            {{transfers[0].numberOfToken}}
-                          </div>
-                          <ng-template #elseBlock>  </ng-template>
-                    </td>
-                  </tr>
-                  <tr class="remove_border">
-                    <td class="remove_border">AR Account: </td> 
-                    <td class="remove_border">
-                      {{form.ar_account}}
-                      0x39A1531a8e244C79b71d38cc276d443c63091E0C
-                        <!-- <form [formGroup]="form">
+            <tbody>
+              <tr class="remove_border col-lg-6">
+                <td class="remove_border">Invoice No:</td>
+                <td class="remove_border">
+                  <!-- {{transfers[0].invoice_no}} -->
+                  <div *ngIf="transfers.length != 0; else elseBlock">
+                    {{ transfers[0].invoice_no }}
+                  </div>
+                  <ng-template #elseBlock> </ng-template>
+                </td>
+              </tr>
+              <tr class="remove_border">
+                <td class="remove_border">Invoice Due Date:</td>
+                <td class="remove_border">{{ startDate }}</td>
+              </tr>
+              <tr class="remove_border">
+                <td class="remove_border">Token Type:</td>
+                <td class="remove_border">CPToken-0x54349483902ZFB1eb23</td>
+              </tr>
+              <tr class="remove_border">
+                <td class="remove_border">Total CPTokens:</td>
+                <td class="remove_border">
+                  <!-- {{transfers[0].numberOfToken}} -->
+                  <div *ngIf="transfers.length != 0; else elseBlock">
+                    {{ transfers[0].numberOfToken }}
+                  </div>
+                  <ng-template #elseBlock> </ng-template>
+                </td>
+              </tr>
+              <tr class="remove_border">
+                <td class="remove_border">AR Account:</td>
+                <td class="remove_border">
+                  0x39A1531a8e244C79b71d38cc276d443c63091E0C
+                  <!-- <form [formGroup]="form">
                         <div class="form-group">
                         <input
                             class="form-control"
@@ -81,29 +84,37 @@
                         <app-error-field [errorMsg]="getForm.ar_account"></app-error-field>
                     </div>
                 </form> -->
-                    </td>
-                  </tr>
-                  <tr class="remove_border">
-                    <td class="remove_border">Transaction Date: </td> <td class="remove_border">{{todayDate}}</td>
-                  </tr>
-                  <tr>
-                    <td class="remove_border"></td>
-                      <td class="remove_border">
-                        <!-- <div class="modal-footer form-layout-footer remove_border"> -->
-                        <div class="">
-                            <button [disabled]="!form.valid || transfers[0].id === undefined" type="button" (click)="upload(transfers[0])" class="btn btn-primary bd-0">Accept Payment</button>
-                        </div>
-                      </td>
-                  </tr>
-                </tbody> 
-              </table>
-            </div>
-            <!-- table-responsive -->
-          </div>
-          <!-- card -->
+                </td>
+              </tr>
+              <tr class="remove_border">
+                <td class="remove_border">Transaction Date:</td>
+                <td class="remove_border">{{ todayDate }}</td>
+              </tr>
+              <tr>
+                <td class="remove_border"></td>
+                <td class="remove_border">
+                  <!-- <div class="modal-footer form-layout-footer remove_border"> -->
+                  <div class="">
+                    <button
+                      [disabled]="!form.valid || transfers[0].id === undefined"
+                      type="button"
+                      (click)="upload(transfers[0])"
+                      class="btn btn-primary bd-0"
+                    >
+                      Accept Payment
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        <!-- col-6 -->
+        <!-- table-responsive -->
       </div>
-    <!-- section-wrapper -->
+      <!-- card -->
+    </div>
+    <!-- col-6 -->
+  </div>
+  <!-- section-wrapper -->
 </div>
 <!-- container -->

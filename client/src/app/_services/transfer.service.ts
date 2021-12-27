@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
-import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
-import { environment } from '../../environments/environment';
+import { Injectable } from "@angular/core";
+import { DomSanitizer } from "@angular/platform-browser";
+import { HttpClient } from "@angular/common/http";
+import { map } from "rxjs/operators";
+import { environment } from "../../environments/environment";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class TransferService {
   public readonly apiUrl = environment.API_BASE_URL;
@@ -24,7 +24,7 @@ export class TransferService {
   }
 
   findTransfers(transferBody: Object) {
-    return this.http.post(`${this.apiUrl}transfers/find`,transferBody).pipe(
+    return this.http.post(`${this.apiUrl}transfers/find`, transferBody).pipe(
       map((response: Response) => {
         return response;
       })

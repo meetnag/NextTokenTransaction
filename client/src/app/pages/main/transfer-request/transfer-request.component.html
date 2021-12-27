@@ -1,179 +1,344 @@
-  <div class="container">
-    <div class="slim-pageheader">
-      <ol class="breadcrumb slim-breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Manage Transfer Requests</li>
-      </ol>
-      <h6 class="slim-pagetitle">Manage Transfer Requests</h6>
-    </div><!-- slim-pageheader -->
-
-    
-
-    <div class="row row-sm mg-t-20">
-      <div class="col-xl-12 mg-t-20 mg-xl-t-0">
-        <div class="card card-table">
-         <div class="card-header">
-            <button [routerLink]="['/app/transfer']"  class="btn btn-primary mg-b-10"><i class="fa fa-plus mg-r-5"></i> Create Transfer Request</button>
-          </div>
-         <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item" role="presentation">
-                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">My Pending Request</a>
-            </li>
-            <li class="nav-item" role="presentation">
-                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">My Approved Request</a>
-            </li>
-            
-            </ul>
-            <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                    <div class="table-responsive p-3">
-                        <table  class="table mg-b-0 tx-13">
-                        <thead>
-                            <tr class="tx-10">
-                                <th class="pd-y-5">Invoice No</th>
-                                <th class="pd-y-5">Token Id</th>
-                                <th class="pd-y-5">No Of Token</th>
-                                <th class="pd-y-5">Description</th>
-                                <th class="pd-y-5">Status</th>
-                                <th class="pd-y-5">Vendor Accepted Token</th>
-                                <th *ngIf="userRole !== 'admin'" class="pd-y-5">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <ng-container *ngFor="let item of transfers">
-                                <tr *ngIf="item.status === 'REQUESTED' && item.user === userId">
-                                    <td>
-                                        {{ item.invoice_no }}
-                                        </td>
-                                    <td>
-                                    {{ item.tokenId }}
-                                    </td>
-                                    <td class="tx-12">
-                                        {{ item.numberOfToken }}
-                                    </td>
-                                    <td class="pd-l-20 word_width">
-                                        {{ item.description }}
-                                    </td>
-                                    <td class="pd-l-20">
-                                        {{ item.status }}
-                                    </td>
-                                    <td class="pd-l-20">
-                                        <div *ngIf="item.vendor_accepted_token === 1; else elseBlock">
-                                            Yes
-                                        </div>
-                                        <ng-template #elseBlock> No </ng-template>
-                                        <!-- {{ item.vendor_accepted_token }} -->
-                                    </td>
-                                    <td *ngIf="userRole !== 'admin'" style="min-width: 78px;">
-                                        <a *ngIf="item.status === 'REQUESTED' && item.user === userId" [routerLink]="" (click)="approveTransfer(item)"  title="Approve" data-toggle="tooltip"  class="tooltp btn btn-success btn-icon rounded-circle"><div><i class="fa fa-check"></i></div></a>
-                                        <a *ngIf="item.status === 'REQUESTED' && item.user === userId" [routerLink]="" (click)="rejectTransfer(item)" title="Reject" data-toggle="tooltip"  class="mr-1 tooltp btn btn-danger btn-icon rounded-circle"><div><i class="fa fa-times"></i></div></a>
-                                        <a *ngIf="item.status === 'APPROVED' && item.user !== userId" [routerLink]="" (click)="rejectTransfer(item)" title="Transfer" data-toggle="tooltip"  class="mr-1 tooltp btn btn-info btn-icon rounded-circle"><div><i class="fa fa-exchange"></i></div></a>
-                                    </td>
-                                </tr>
-                            </ng-container>
-                        </tbody>
-                        </table>
-                    </div><!-- table-responsive -->
-                </div>
-                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                    <div class="table-responsive p-3">
-                        <table  class="table mg-b-0 tx-13">
-                        <thead>
-                            <tr class="tx-10">
-                                <th class="pd-y-5">Invoice No</th>
-                                <th class="pd-y-5">Token Id</th>
-                                <th class="pd-y-5">No Of Token</th>
-                                <th class="pd-y-5">Description</th>
-                                <th class="pd-y-5">Status</th>
-                                <th class="pd-y-5">Vendor Accepted Token</th>
-                                <th *ngIf="userRole !== 'admin'" class="pd-y-5">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <ng-container *ngFor="let item of transfers">
-                                <tr *ngIf="item.user !== userId">
-                                    <td>
-                                        {{ item.invoice_no }}
-                                    </td>
-                                    <td>
-                                    {{ item.tokenId }}
-                                    </td>
-                                    <td class="tx-12">
-                                        {{ item.numberOfToken }}
-                                    </td>
-                                    <td class="pd-l-20 word_width">
-                                        {{ item.description }}
-                                    </td>
-                                    <td class="pd-l-20">
-                                        {{ item.status }}
-                                    </td>
-                                    <td class="pd-l-20">
-                                        <div *ngIf="item.vendor_accepted_token === 1; else elseBlock">
-                                            Yes
-                                        </div>
-                                        <ng-template #elseBlock> No </ng-template>
-                                        <!-- {{ item.vendor_accepted_token }} -->
-                                    </td>
-                                    <td *ngIf="userRole !== 'admin'" style="min-width: 78px;">
-                                        
-                                        <a *ngIf="item.status === 'APPROVED' && item.user !== userId && item.vendor_accepted_token === 1" [routerLink]="" (click)="openTransferModal(item)" title="Transfer" data-toggle="tooltip"  class="mr-1 tooltp btn btn-info btn-icon rounded-circle"><div><i class="fa fa-exchange"></i></div></a>
-                                    </td>
-                                </tr>
-                            </ng-container>
-                        </tbody>
-                        </table>
-                    </div><!-- table-responsive -->
-                </div>
-            </div>
-        </div><!-- card -->
-      </div><!-- col-6 -->
-    </div><!-- row -->
-  </div><!-- container -->
-
-  
-  <!-- Modal -->
-  <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-      <div class="modal-dialog modal-lg" style="width: 400px;" role="document">
-          <div class="modal-content">
-              <div class="modal-header">
-                  <h5 class="modal-title">Transfer Token</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                      </button>
-              </div>
-              <div class="modal-body">
-                    <form [formGroup]="form">
-                        <div class="form-group">
-                            <label for="">Invoice No</label>
-                            <input type="text" class="form-control" name="invoice" id="invoice" formControlName="invoice" readonly>
-                            <app-error-field [errorMsg]="getForm.invoice"></app-error-field>
-                        </div>
-                        <div class="form-group">
-                          <label for="">Token Id</label>
-                          <input type="number" class="form-control" name="tokenId" id="tokenId" formControlName="tokenId" readonly>
-                          <app-error-field [errorMsg]="getForm.tokenId"></app-error-field>
-                        </div>
-                        <div class="form-group">
-                          <label for="">Token Count</label>
-                          <input type="number" class="form-control" name="numberOfToken" id="numberOfToken" formControlName="numberOfToken" readonly>
-                          <app-error-field [errorMsg]="getForm.numberOfToken"></app-error-field>
-                        </div>
-                        <div class="form-group">
-                          <label for="">Beneficiary Address</label>
-                          <input type="text" class="form-control" name="address" id="address" formControlName="address" placeholder="Enter Beneficiary Address">
-                          <app-error-field [errorMsg]="getForm.address"></app-error-field>
-                        </div>
-                        <div class="form-group">
-                          <label for="">Data</label>
-                          <input type="text" class="form-control" name="data" id="data" formControlName="data" placeholder="Enter Data">
-                          <app-error-field [errorMsg]="getForm.data"></app-error-field>
-                        </div>
-                    </form>
-              </div>
-              <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="button" (click)="transferAction()" class="btn btn-primary">Transfer</button>
-              </div>
-          </div>
-      </div>
+<div class="container">
+  <div class="slim-pageheader">
+    <ol class="breadcrumb slim-breadcrumb">
+      <li class="breadcrumb-item"><a href="#">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">
+        Manage Transfer Requests
+      </li>
+    </ol>
+    <h6 class="slim-pagetitle">Manage Transfer Requests</h6>
   </div>
+  <!-- slim-pageheader -->
+
+  <div class="row row-sm mg-t-20">
+    <div class="col-xl-12 mg-t-20 mg-xl-t-0">
+      <div class="card card-table">
+        <div class="card-header">
+          <button
+            [routerLink]="['/app/transfer']"
+            class="btn btn-primary mg-b-10"
+          >
+            <i class="fa fa-plus mg-r-5"></i> Create Transfer Request
+          </button>
+        </div>
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <a
+              class="nav-link active"
+              id="home-tab"
+              data-toggle="tab"
+              href="#home"
+              role="tab"
+              aria-controls="home"
+              aria-selected="true"
+              >My Pending Request</a
+            >
+          </li>
+          <li class="nav-item" role="presentation">
+            <a
+              class="nav-link"
+              id="profile-tab"
+              data-toggle="tab"
+              href="#profile"
+              role="tab"
+              aria-controls="profile"
+              aria-selected="false"
+              >My Approved Request</a
+            >
+          </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+          <div
+            class="tab-pane fade show active"
+            id="home"
+            role="tabpanel"
+            aria-labelledby="home-tab"
+          >
+            <div class="table-responsive p-3">
+              <table class="table mg-b-0 tx-13">
+                <thead>
+                  <tr class="tx-10">
+                    <th class="pd-y-5">Invoice No</th>
+                    <th class="pd-y-5">Token Id</th>
+                    <th class="pd-y-5">No Of Token</th>
+                    <th class="pd-y-5">Description</th>
+                    <th class="pd-y-5">Status</th>
+                    <th class="pd-y-5">Vendor Accepted Token</th>
+                    <th *ngIf="userRole !== 'admin'" class="pd-y-5">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <ng-container *ngFor="let item of transfers">
+                    <tr
+                      *ngIf="
+                        item.status === 'REQUESTED' && item.user === userId
+                      "
+                    >
+                      <td>
+                        {{ item.invoice_no }}
+                      </td>
+                      <td>
+                        {{ item.tokenId }}
+                      </td>
+                      <td class="tx-12">
+                        {{ item.numberOfToken }}
+                      </td>
+                      <td class="pd-l-20 word_width">
+                        {{ item.description }}
+                      </td>
+                      <td class="pd-l-20">
+                        {{ item.status }}
+                      </td>
+                      <td class="pd-l-20">
+                        <div
+                          *ngIf="
+                            item.vendor_accepted_token === 1;
+                            else elseBlock
+                          "
+                        >
+                          Yes
+                        </div>
+                        <ng-template #elseBlock> No </ng-template>
+                        <!-- {{ item.vendor_accepted_token }} -->
+                      </td>
+                      <td *ngIf="userRole !== 'admin'" style="min-width: 78px">
+                        <a
+                          *ngIf="
+                            item.status === 'REQUESTED' && item.user === userId
+                          "
+                          [routerLink]=""
+                          (click)="approveTransfer(item)"
+                          title="Approve"
+                          data-toggle="tooltip"
+                          class="tooltp btn btn-success btn-icon rounded-circle"
+                          ><div><i class="fa fa-check"></i></div
+                        ></a>
+                        <a
+                          *ngIf="
+                            item.status === 'REQUESTED' && item.user === userId
+                          "
+                          [routerLink]=""
+                          (click)="rejectTransfer(item)"
+                          title="Reject"
+                          data-toggle="tooltip"
+                          class="
+                            mr-1
+                            tooltp
+                            btn btn-danger btn-icon
+                            rounded-circle
+                          "
+                          ><div><i class="fa fa-times"></i></div
+                        ></a>
+                        <a
+                          *ngIf="
+                            item.status === 'APPROVED' && item.user !== userId
+                          "
+                          [routerLink]=""
+                          (click)="rejectTransfer(item)"
+                          title="Transfer"
+                          data-toggle="tooltip"
+                          class="
+                            mr-1
+                            tooltp
+                            btn btn-info btn-icon
+                            rounded-circle
+                          "
+                          ><div><i class="fa fa-exchange"></i></div
+                        ></a>
+                      </td>
+                    </tr>
+                  </ng-container>
+                </tbody>
+              </table>
+            </div>
+            <!-- table-responsive -->
+          </div>
+          <div
+            class="tab-pane fade"
+            id="profile"
+            role="tabpanel"
+            aria-labelledby="profile-tab"
+          >
+            <div class="table-responsive p-3">
+              <table class="table mg-b-0 tx-13">
+                <thead>
+                  <tr class="tx-10">
+                    <th class="pd-y-5">Invoice No</th>
+                    <th class="pd-y-5">Token Id</th>
+                    <th class="pd-y-5">No Of Token</th>
+                    <th class="pd-y-5">Description</th>
+                    <th class="pd-y-5">Status</th>
+                    <th class="pd-y-5">Vendor Accepted Token</th>
+                    <th *ngIf="userRole !== 'admin'" class="pd-y-5">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <ng-container *ngFor="let item of transfers">
+                    <tr *ngIf="item.user !== userId">
+                      <td>
+                        {{ item.invoice_no }}
+                      </td>
+                      <td>
+                        {{ item.tokenId }}
+                      </td>
+                      <td class="tx-12">
+                        {{ item.numberOfToken }}
+                      </td>
+                      <td class="pd-l-20 word_width">
+                        {{ item.description }}
+                      </td>
+                      <td class="pd-l-20">
+                        {{ item.status }}
+                      </td>
+                      <td class="pd-l-20">
+                        <div
+                          *ngIf="
+                            item.vendor_accepted_token === 1;
+                            else elseBlock
+                          "
+                        >
+                          Yes
+                        </div>
+                        <ng-template #elseBlock> No </ng-template>
+                        <!-- {{ item.vendor_accepted_token }} -->
+                      </td>
+                      <td *ngIf="userRole !== 'admin'" style="min-width: 78px">
+                        <a
+                          *ngIf="
+                            item.status === 'APPROVED' &&
+                            item.user !== userId &&
+                            item.vendor_accepted_token === 1
+                          "
+                          [routerLink]=""
+                          (click)="openTransferModal(item)"
+                          title="Transfer"
+                          data-toggle="tooltip"
+                          class="
+                            mr-1
+                            tooltp
+                            btn btn-info btn-icon
+                            rounded-circle
+                          "
+                          ><div><i class="fa fa-exchange"></i></div
+                        ></a>
+                      </td>
+                    </tr>
+                  </ng-container>
+                </tbody>
+              </table>
+            </div>
+            <!-- table-responsive -->
+          </div>
+        </div>
+      </div>
+      <!-- card -->
+    </div>
+    <!-- col-6 -->
+  </div>
+  <!-- row -->
+</div>
+<!-- container -->
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="modelId"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="modelTitleId"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg" style="width: 400px" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Transfer Token</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="form">
+          <div class="form-group">
+            <label for="">Invoice No</label>
+            <input
+              type="text"
+              class="form-control"
+              name="invoice"
+              id="invoice"
+              formControlName="invoice"
+              readonly
+            />
+            <app-error-field [errorMsg]="getForm.invoice"></app-error-field>
+          </div>
+          <div class="form-group">
+            <label for="">Token Id</label>
+            <input
+              type="number"
+              class="form-control"
+              name="tokenId"
+              id="tokenId"
+              formControlName="tokenId"
+              readonly
+            />
+            <app-error-field [errorMsg]="getForm.tokenId"></app-error-field>
+          </div>
+          <div class="form-group">
+            <label for="">Token Count</label>
+            <input
+              type="number"
+              class="form-control"
+              name="numberOfToken"
+              id="numberOfToken"
+              formControlName="numberOfToken"
+              readonly
+            />
+            <app-error-field
+              [errorMsg]="getForm.numberOfToken"
+            ></app-error-field>
+          </div>
+          <div class="form-group">
+            <label for="">Beneficiary Address</label>
+            <input
+              type="text"
+              class="form-control"
+              name="address"
+              id="address"
+              formControlName="address"
+              placeholder="Enter Beneficiary Address"
+            />
+            <app-error-field [errorMsg]="getForm.address"></app-error-field>
+          </div>
+          <div class="form-group">
+            <label for="">Data</label>
+            <input
+              type="text"
+              class="form-control"
+              name="data"
+              id="data"
+              formControlName="data"
+              placeholder="Enter Data"
+            />
+            <app-error-field [errorMsg]="getForm.data"></app-error-field>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+        <button
+          type="button"
+          (click)="transferAction()"
+          class="btn btn-primary"
+        >
+          Transfer
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -35,7 +35,7 @@ export class CreateTokenComponent implements OnInit {
   form: FormGroup;
   userId = JSON.parse(localStorage.getItem("user"))["id"];
   startDate = new Date(new Date().setDate(new Date().getDate() + 30));
-  isChecked = true
+  isChecked = true;
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
@@ -44,7 +44,7 @@ export class CreateTokenComponent implements OnInit {
       data: [null, Validators.required],
       days: [60, Validators.required],
       credit_Enhancement: [null, Validators.required],
-      renewal: ['Yes', Validators.required],
+      renewal: ["Yes", Validators.required],
       guarantee: [null, Validators.required],
       date_of_Expiration: [
         formatDate(this.startDate, "yyyy-MM-dd", "en"),
@@ -70,7 +70,7 @@ export class CreateTokenComponent implements OnInit {
     return array;
   }
 
- async upload() {
+  async upload() {
     const file = (<HTMLInputElement>document.getElementById("document"))
       .files[0];
     const file1 = (<HTMLInputElement>document.getElementById("document1"))
@@ -78,14 +78,14 @@ export class CreateTokenComponent implements OnInit {
     const file2 = (<HTMLInputElement>document.getElementById("document2"))
       .files[0];
 
-      console.log("========> file <====",file);
-      console.log("========> file <====",file.name);
-      
-      console.log("========> file1 <====",file1);
-      console.log("========> file1 <====",file1.name);
+    console.log("========> file <====", file);
+    console.log("========> file <====", file.name);
 
-      console.log("========> file2 <====",file2);
-      console.log("========> file2 <====",file2.name);
+    console.log("========> file1 <====", file1);
+    console.log("========> file1 <====", file1.name);
+
+    console.log("========> file2 <====", file2);
+    console.log("========> file2 <====", file2.name);
     var self = this;
     // const preview = document.getElementById("preview");
     const reader = new FileReader();
@@ -133,13 +133,13 @@ export class CreateTokenComponent implements OnInit {
     );
 
     if (file) {
-     await reader.readAsDataURL(file);
+      await reader.readAsDataURL(file);
     }
     if (file1) {
-     await reader.readAsDataURL(file1);
+      await reader.readAsDataURL(file1);
     }
     if (file2) {
-     await reader.readAsDataURL(file2);
+      await reader.readAsDataURL(file2);
     }
   }
 
