@@ -66,6 +66,7 @@
                   <tr class="remove_border">
                     <td class="remove_border">AR Account: </td> 
                     <td class="remove_border">
+                      {{form.ar_account}}
                       0x39A1531a8e244C79b71d38cc276d443c63091E0C
                         <!-- <form [formGroup]="form">
                         <div class="form-group">
@@ -89,7 +90,7 @@
                     <td class="remove_border"></td>
                       <td class="remove_border">
                         <!-- <div class="modal-footer form-layout-footer remove_border"> -->
-                        <div class=" ">
+                        <div class="">
                             <button [disabled]="!form.valid || transfers[0].id === undefined" type="button" (click)="upload(transfers[0])" class="btn btn-primary bd-0">Accept Payment</button>
                         </div>
                       </td>

@@ -29,15 +29,9 @@ export class TransferRequestComponent implements OnInit {
   transfers: any = [];
   userId = JSON.parse(localStorage.getItem('user'))['id'];
   userRole = JSON.parse(localStorage.getItem('user'))['role'];
-  
-
-
-
   selectedItem: any = [];
 
   ngOnInit(): void {
-    console.log("userid is ====>", this.userId);
-    console.log("userrole is ====>", this.userRole);
     this.getAllTransfers();
     this.form = this.formBuilder.group({
       invoice: [null, [Validators.required]],

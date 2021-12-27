@@ -19,3 +19,8 @@
 ::ng-deep .dataTables_wrapper {
     overflow: scroll;
 }
+
+.word_width {
+    word-break: break-all !important;
+    width: 20% !important;
+  }
