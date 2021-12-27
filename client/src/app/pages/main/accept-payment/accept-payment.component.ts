@@ -36,6 +36,7 @@ export class AcceptPaymentComponent implements OnInit {
     // this.startDate = formatDate(this.startDate, "yyyy-MM-dd", "en");
     this.form = this.formBuilder.group({
       ar_account: ["0x39A1531a8e244C79b71d38cc276d443c63091E0C", Validators.required],
+      id: [null, Validators.required],
     });
   }
 
@@ -49,10 +50,16 @@ export class AcceptPaymentComponent implements OnInit {
       status:"APPROVED",
       vendor_accepted_token:2
     }).subscribe(
-      (res) => {
-        console.log(res);
-        this.transfers = res;
+      (res:any) => {
+        console.log( "=====> call <==getTransfer===",res);
         this.utility.stopLoader();
+        if(res.length != 0)
+        {
+          this.form.patchValue({
+            id: res[0].id,
+          });
+        }
+        this.transfers = res;
       },
       (error) => {
         console.log(error);
@@ -66,8 +73,10 @@ export class AcceptPaymentComponent implements OnInit {
     this.transferService.updateTransfer(item.id, {vendor_accepted_token:1, ar_account:this.form.value.ar_account}).subscribe(
       (res) => {
         this.utility.stopLoader();
-        this.getTransfer();
+        // this.router.onSameUrlNavigation = "reload";
+        // this.getTransfer(); 
         // this.router.navigate(['app/accept-payment']);
+        window.location.reload();
       },
       (error) => {
         console.log(error);

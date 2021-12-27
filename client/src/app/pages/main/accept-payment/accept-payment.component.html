@@ -35,11 +35,11 @@
                   <tr class="remove_border">
                     <td class="remove_border" >Invoice No: </td> 
                     <td class="remove_border">
-                        {{transfers[0].invoice_no}}
-                        <!-- <div *ngIf="transfers.length != 0; else elseBlock">
-                            transfers[0].invoice_no
+                        <!-- {{transfers[0].invoice_no}} -->
+                        <div *ngIf="transfers.length != 0; else elseBlock">
+                            {{transfers[0].invoice_no}}
                           </div>
-                          <ng-template #elseBlock>  </ng-template> -->
+                          <ng-template #elseBlock>  </ng-template>
                     </td>
                   </tr>
                   <tr class="remove_border">
@@ -51,11 +51,11 @@
                   <tr class="remove_border">
                     <td class="remove_border">Total CPTokens: </td> 
                     <td class="remove_border">
-                        {{transfers[0].numberOfToken}}
-                        <!-- <div *ngIf="transfers.length != 0; else elseBlock">
-                            transfers[0].numberOfToken
+                        <!-- {{transfers[0].numberOfToken}} -->
+                        <div *ngIf="transfers.length != 0; else elseBlock">
+                            {{transfers[0].numberOfToken}}
                           </div>
-                          <ng-template #elseBlock>  </ng-template> -->
+                          <ng-template #elseBlock>  </ng-template>
                     </td>
                   </tr>
                   <tr class="remove_border">
@@ -82,7 +82,7 @@
                   <tr>
                       <td class="remove_border">
                         <div class="modal-footer remove_border">
-                            <button [disabled]="!form.valid || transfers.length === 0" type="button" (click)="upload(transfers[0])" class="btn btn-primary">Accept Payment</button>
+                            <button [disabled]="!form.valid || transfers[0].id === undefined" type="button" (click)="upload(transfers[0])" class="btn btn-primary">Accept Payment</button>
                         </div>
                       </td>
                   </tr>
