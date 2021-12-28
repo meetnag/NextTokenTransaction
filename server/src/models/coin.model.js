@@ -35,6 +35,18 @@ const coinSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    agreement_id: {
+      type: String,
+      required: true,
+    },
+    credit_Enhancement_id: {
+      type: String,
+      required: true,
+    },
+    guarantee_id: {
+      type: String,
+      required: true,
+    },
     renewal: {
       type: String,
       default: 'Yes',

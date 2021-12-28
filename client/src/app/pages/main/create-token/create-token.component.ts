@@ -94,6 +94,7 @@ export class CreateTokenComponent implements OnInit {
     let byteArray;
     let byteArray1;
     let byteArray2;
+    let fileStore = 0;
     var fianalJSON = self.form.value;
     fianalJSON["agreement"] = file.name;
     fianalJSON["credit_Enhancement"] = file1.name;
@@ -110,7 +111,7 @@ export class CreateTokenComponent implements OnInit {
           "Document uploaded sucessfully. Please wait..."
         );
         self.utility.startLoader("Data encryption in progress. Please wait...");
-        // fianalJSON["agreement"] = result["path"];
+        fianalJSON["agreement_id"] = result["path"];
 
         byteArray1 = self.convertDataURIToBinary(reader.result);
         self.utility.startLoader("Uploading document....1");
@@ -119,7 +120,7 @@ export class CreateTokenComponent implements OnInit {
           "Document uploaded sucessfully. Please wait..."
         );
         self.utility.startLoader("Data encryption in progress. Please wait...");
-        // fianalJSON["credit_Enhancement"] = result1["path"];
+        fianalJSON["credit_Enhancement_id"] = result1["path"];
 
         byteArray2 = self.convertDataURIToBinary(reader.result);
         self.utility.startLoader("Uploading document....2");
@@ -128,7 +129,7 @@ export class CreateTokenComponent implements OnInit {
           "Document uploaded sucessfully. Please wait..."
         );
         self.utility.startLoader("Data encryption in progress. Please wait...");
-        // fianalJSON["guarantee"] = result2["path"];
+        fianalJSON["guarantee_id"] = result2["path"];
         await self.createToken(fianalJSON);
       },
       false
@@ -146,6 +147,8 @@ export class CreateTokenComponent implements OnInit {
   }
 
   async createToken(data) {
+    console.log("===============createToken======> data <=====", data);
+    
     // if (this.mainComponent.userWalletAddress === this.connectService.account) {
     //   // comment this line
     //   this.utility.startLoader();
@@ -173,6 +176,9 @@ export class CreateTokenComponent implements OnInit {
       date_of_Expiration: formatDate(new Date(data.date_of_Expiration),"MM-dd-yyyy","en"),
       days: data.days,
       renewal: data.renewal,
+      agreement_id: data.agreement_id,
+      credit_Enhancement_id: data.credit_Enhancement_id,
+      guarantee_id: data.guarantee_id,
     });
     // }
     // comment next 6 line
