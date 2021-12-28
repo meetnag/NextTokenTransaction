@@ -35,6 +35,8 @@ export class AcceptPaymentComponent implements OnInit {
   todayDate = formatDate(new Date(), "MM-dd-yyyy", "en");
   userRole = JSON.parse(localStorage.getItem("user"))["role"];
 
+  done = false;
+  acceptButtonHit = false;
   ngOnInit(): void {
     this.getTransfer();
     // this.startDate = formatDate(this.startDate, "yyyy-MM-dd", "en");
@@ -66,6 +68,9 @@ export class AcceptPaymentComponent implements OnInit {
             this.form.patchValue({
               id: res[0].id,
             });
+          }else{
+            if(this.acceptButtonHit)
+                this.done = true;
           }
           this.transfers = res;
         },
@@ -86,10 +91,11 @@ export class AcceptPaymentComponent implements OnInit {
       .subscribe(
         (res) => {
           this.utility.stopLoader();
+          this.acceptButtonHit = true;
           // this.router.onSameUrlNavigation = "reload";
-          // this.getTransfer();
+          this.getTransfer();
           // this.router.navigate(['app/accept-payment']);
-          window.location.reload();
+          // window.location.reload();
         },
         (error) => {
           console.log(error);

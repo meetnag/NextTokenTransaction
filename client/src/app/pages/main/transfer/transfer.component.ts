@@ -60,6 +60,7 @@ export class TransferComponent implements OnInit {
   async createTransferRequest() {
     let formData = this.form.value;
     formData["user"] = this.user.id;
+    formData["vendor_accepted_token"] = 2;
     this.transferService.createTransfer(formData).subscribe(
       (res) => {
         this.utility.stopLoader();

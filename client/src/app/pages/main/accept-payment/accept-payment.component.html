@@ -5,12 +5,19 @@
       <li class="breadcrumb-item active" aria-current="page">Accept Payment</li>
     </ol>
     <h6 class="slim-pagetitle">
+      <div *ngIf="!done; else elseBlockDone">
+
+      
       <div *ngIf="transfers.length != 0; else elseBlockHader">
         Accept CPToken Payment
       </div>
       <ng-template #elseBlockHader>
         You do not have any invoices available to accept the CPToken payment
       </ng-template>
+    </div>
+    <ng-template #elseBlockDone>
+      Thanks for accepting CPToken payment
+    </ng-template>
     </h6>
   </div>
   <!-- slim-pageheader -->

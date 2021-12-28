@@ -8,6 +8,7 @@ const createTransfer = {
     numberOfToken: Joi.required(),
     invoice_no: Joi.required(),
     description: Joi.required(),
+    vendor_accepted_token: Joi.required(),
     status: Joi.allow('', null),
   }),
 };
