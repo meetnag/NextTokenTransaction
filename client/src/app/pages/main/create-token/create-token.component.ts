@@ -34,10 +34,15 @@ export class CreateTokenComponent implements OnInit {
 
   form: FormGroup;
   userId = JSON.parse(localStorage.getItem("user"))["id"];
-  startDate = new Date(new Date().setDate(new Date().getDate() + 30));
+  startDate = formatDate(
+    new Date(new Date().setDate(new Date().getDate() + 30)),
+    "yyyy-MM-dd",
+    "en"
+  );
   isChecked = true;
 
   ngOnInit(): void {
+    
     this.form = this.formBuilder.group({
       amount: [null, Validators.required],
       agreement: [null, Validators.required],
@@ -46,10 +51,7 @@ export class CreateTokenComponent implements OnInit {
       credit_Enhancement: [null, Validators.required],
       renewal: ["Yes", Validators.required],
       guarantee: [null, Validators.required],
-      date_of_Expiration: [
-        formatDate(this.startDate, "yyyy-MM-dd", "en"),
-        Validators.required,
-      ],
+      date_of_Expiration: [this.startDate, Validators.required],
     });
   }
 
@@ -168,7 +170,7 @@ export class CreateTokenComponent implements OnInit {
       description: data.data,
       tokenId: "",
       user: this.userId,
-      date_of_Expiration: data.date_of_Expiration,
+      date_of_Expiration: formatDate(new Date(data.date_of_Expiration),"MM-dd-yyyy","en"),
       days: data.days,
       renewal: data.renewal,
     });
