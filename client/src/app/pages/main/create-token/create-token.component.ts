@@ -75,30 +75,30 @@ export class CreateTokenComponent implements OnInit {
   async upload() {
     const file = (<HTMLInputElement>document.getElementById("document"))
       .files[0];
-    const file1 = (<HTMLInputElement>document.getElementById("document1"))
-      .files[0];
-    const file2 = (<HTMLInputElement>document.getElementById("document2"))
-      .files[0];
+    // const file1 = (<HTMLInputElement>document.getElementById("document1"))
+    //   .files[0];
+    // const file2 = (<HTMLInputElement>document.getElementById("document2"))
+    //   .files[0];
 
-    console.log("========> file <====", file);
-    console.log("========> file <====", file.name);
+    // console.log("========> file <====", file);
+    // console.log("========> file <====", file.name);
 
-    console.log("========> file1 <====", file1);
-    console.log("========> file1 <====", file1.name);
+    // console.log("========> file1 <====", file1);
+    // console.log("========> file1 <====", file1.name);
 
-    console.log("========> file2 <====", file2);
-    console.log("========> file2 <====", file2.name);
+    // console.log("========> file2 <====", file2);
+    // console.log("========> file2 <====", file2.name);
     var self = this;
     // const preview = document.getElementById("preview");
     const reader = new FileReader();
     let byteArray;
-    let byteArray1;
-    let byteArray2;
-    let fileStore = 0;
+    // let byteArray1;
+    // let byteArray2;
+    // let fileStore = 0;
     var fianalJSON = self.form.value;
     fianalJSON["agreement"] = file.name;
-    fianalJSON["credit_Enhancement"] = file1.name;
-    fianalJSON["guarantee"] = file2.name;
+    // fianalJSON["credit_Enhancement"] = file1.name;
+    // fianalJSON["guarantee"] = file2.name;
     await reader.addEventListener(
       "loadend",
       async function () {
@@ -111,7 +111,55 @@ export class CreateTokenComponent implements OnInit {
           "Document uploaded sucessfully. Please wait..."
         );
         self.utility.startLoader("Data encryption in progress. Please wait...");
+        console.log("=======> agreement_id <=====",result["path"]);
+        
         fianalJSON["agreement_id"] = result["path"];
+
+        // byteArray1 = self.convertDataURIToBinary(reader.result);
+        // self.utility.startLoader("Uploading document....1");
+        // var result1 = await ipfs.add(byteArray1);
+        // self.utility.startLoader(
+        //   "Document uploaded sucessfully. Please wait..."
+        // );
+        // self.utility.startLoader("Data encryption in progress. Please wait...");
+        // fianalJSON["credit_Enhancement_id"] = result1["path"];
+
+        // byteArray2 = self.convertDataURIToBinary(reader.result);
+        // self.utility.startLoader("Uploading document....2");
+        // var result2 = await ipfs.add(byteArray2);
+        // self.utility.startLoader(
+        //   "Document uploaded sucessfully. Please wait..."
+        // );
+        // self.utility.startLoader("Data encryption in progress. Please wait...");
+        // fianalJSON["guarantee_id"] = result2["path"];
+        await self.uploadfile1(fianalJSON);
+      },
+      false
+    );
+
+    if (file) {
+      await reader.readAsDataURL(file);
+    }
+    // if (file1) {
+    //   await reader.readAsDataURL(file1);
+    // }
+    // if (file2) {
+    //   await reader.readAsDataURL(file2);
+    // }
+  }
+  async uploadfile1(fianalJSON) {
+    const file1 = (<HTMLInputElement>document.getElementById("document1"))
+      .files[0];
+    
+    var self = this;
+    const reader = new FileReader();
+    let byteArray1;
+
+    fianalJSON["credit_Enhancement"] = file1.name;
+    await reader.addEventListener(
+      "loadend",
+      async function () {
+        // convert image file to base64 string
 
         byteArray1 = self.convertDataURIToBinary(reader.result);
         self.utility.startLoader("Uploading document....1");
@@ -120,7 +168,34 @@ export class CreateTokenComponent implements OnInit {
           "Document uploaded sucessfully. Please wait..."
         );
         self.utility.startLoader("Data encryption in progress. Please wait...");
+        console.log("=======> credit_Enhancement_id <=====",result1["path"]);
         fianalJSON["credit_Enhancement_id"] = result1["path"];
+
+        await self.uploadfile2(fianalJSON);
+      },
+      false
+    );
+
+    if (file1) {
+      await reader.readAsDataURL(file1);
+    }
+  }
+
+  async uploadfile2(fianalJSON) {
+    const file2 = (<HTMLInputElement>document.getElementById("document2"))
+      .files[0];
+
+    // console.log("========> file2 <====", file2);
+    // console.log("========> file2 <====", file2.name);
+    var self = this;
+    const reader = new FileReader();
+    let byteArray2;
+    
+    fianalJSON["guarantee"] = file2.name;
+    await reader.addEventListener(
+      "loadend",
+      async function () {
+        // convert image file to base64 string
 
         byteArray2 = self.convertDataURIToBinary(reader.result);
         self.utility.startLoader("Uploading document....2");
@@ -129,18 +204,13 @@ export class CreateTokenComponent implements OnInit {
           "Document uploaded sucessfully. Please wait..."
         );
         self.utility.startLoader("Data encryption in progress. Please wait...");
+        console.log("=======> guarantee_id <=====",result2["path"]);
         fianalJSON["guarantee_id"] = result2["path"];
         await self.createToken(fianalJSON);
       },
       false
     );
 
-    if (file) {
-      await reader.readAsDataURL(file);
-    }
-    if (file1) {
-      await reader.readAsDataURL(file1);
-    }
     if (file2) {
       await reader.readAsDataURL(file2);
     }
