@@ -6,7 +6,20 @@
         </li> -->
 
   <li *ngIf="user && user['role'] != 'vendor'" class="sidebar-nav-item">
-    <a [routerLink]="['/app/issue-token']" class="sidebar-nav-link"
+    <a [routerLink]="['/app/invoice-Tokenization']" class="sidebar-nav-link"
+      ><i class="icon ion-arrow-swap"></i> Invoice Tokenization</a
+    >
+  </li>
+  <li *ngIf="user && user['role'] != 'vendor'" class="sidebar-nav-item">
+    <a
+      [routerLink]="['/app/list-of-invoice-Tokenization']"
+      routerLinkActive="router-link-active"
+      class="sidebar-nav-link"
+      ><i class="icon ion-arrow-swap"></i> List of Invoice Tokenization</a
+    >
+  </li>
+  <li *ngIf="user && user['role'] != 'vendor'" class="sidebar-nav-item">
+    <a [routerLink]="['/app/issue-token']" routerLinkActive="router-link-active" class="sidebar-nav-link" 
       ><i class="icon ion-arrow-swap"></i> Issue Token</a
     >
   </li>
@@ -53,6 +66,11 @@
   <li *ngIf="user && user['role'] === 'vendor'" class="sidebar-nav-item">
     <a [routerLink]="['/app/accept-payment']" class="sidebar-nav-link"
       ><i class="icon ion-arrow-swap"></i> Accept Payment</a
+    >
+  </li>
+  <li *ngIf="user && user['role'] != 'vendor'" class="sidebar-nav-item">
+    <a [routerLink]="['/app/transfer-token']" routerLinkActive="router-link-active" class="sidebar-nav-link" 
+      ><i class="icon ion-arrow-swap"></i> Transfer Token</a
     >
   </li>
 </ul>

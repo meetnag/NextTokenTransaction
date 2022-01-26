@@ -60,7 +60,8 @@ export class AuthComponent implements OnInit {
             } else if (res.user.role === "vendor") {
               this.router.navigate(["app/accept-payment"]);
             } else {
-              this.router.navigate(["app/issue-token"]);
+              // this.router.navigate(["app/issue-token"]);
+              this.router.navigate(["app/invoice-Tokenization"]);
             }
           },
           (error) => {

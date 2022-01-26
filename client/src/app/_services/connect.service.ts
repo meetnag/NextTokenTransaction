@@ -239,6 +239,21 @@ export class ConnectService {
 
     return response;
   }
+  public async safeTransferFromTo(fromAccount, to, tokenId, tokenAmt, data) {
+    await this.connectContract();
+    var hexData = await this.convertJSONtoHEX(data);
+    var response = await this.contract.methods
+      .safeTransferFrom(fromAccount, to, tokenId, tokenAmt, hexData)
+      .send({ from: fromAccount })
+      .once("receipt", (receipt) => {
+        console.log("receipt==========", receipt);
+      })
+      .catch((error) => {
+        console.log("error==========", error);
+      });
+
+    return response;
+  }
 
   public async burnToken(address, tokenId, tokenAmt) {
     await this.connectContract();

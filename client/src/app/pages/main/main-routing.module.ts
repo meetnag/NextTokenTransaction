@@ -13,6 +13,9 @@ import { ListTokenComponent } from "./list-token/list-token.component";
 import { BurnTokenComponent } from "./burn-token/burn-token.component";
 import { BalanceComponent } from "./balance/balance.component";
 import { AcceptPaymentComponent } from "./accept-payment/accept-payment.component";
+import { ListInvoiceTokenComponent } from "./list-invoice-token/list-invoice-token.component";
+import { InvoiceTokenComponent } from "./invoice-token/invoice-token.component";
+import { TransferTokenComponent } from "./transfer-token/transfer-token.component";
 
 const routes: Routes = [
   {
@@ -31,6 +34,9 @@ const routes: Routes = [
       { path: "burn-token", component: BurnTokenComponent },
       { path: "check-balance", component: BalanceComponent },
       { path: "accept-payment", component: AcceptPaymentComponent },
+      { path: "invoice-Tokenization", component: InvoiceTokenComponent },
+      { path: "list-of-invoice-Tokenization", component: ListInvoiceTokenComponent },
+      { path: "transfer-token", component: TransferTokenComponent },
     ],
   },
 ];

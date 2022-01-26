@@ -112,7 +112,7 @@ export class TransferRequestComponent implements OnInit {
     $("#modelId").modal("show");
   }
 
-  async transferAction() {
+  async transferAction() { // safeTransferFrom 
     if (this.mainComponent.userWalletAddress === this.connectService.account) {
       this.utility.startLoader();
       const resp = await this.connectService.safeTransferFrom(

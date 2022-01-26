@@ -18,6 +18,9 @@ import { ListTokenComponent } from "./list-token/list-token.component";
 import { BurnTokenComponent } from "./burn-token/burn-token.component";
 import { BalanceComponent } from "./balance/balance.component";
 import { AcceptPaymentComponent } from "./accept-payment/accept-payment.component";
+import { InvoiceTokenComponent } from './invoice-token/invoice-token.component';
+import { ListInvoiceTokenComponent } from './list-invoice-token/list-invoice-token.component';
+import { TransferTokenComponent } from './transfer-token/transfer-token.component';
 @NgModule({
   declarations: [
     MainComponent,
@@ -33,6 +36,9 @@ import { AcceptPaymentComponent } from "./accept-payment/accept-payment.componen
     BurnTokenComponent,
     BalanceComponent,
     AcceptPaymentComponent,
+    InvoiceTokenComponent,
+    ListInvoiceTokenComponent,
+    TransferTokenComponent,
   ],
   imports: [
     CommonModule,
