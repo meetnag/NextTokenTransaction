@@ -5,6 +5,7 @@ import {
   UtilityService,
   TransferService,
   UserService,
+  ConnectService
 } from "../../../_services";
 import { Router } from "@angular/router";
 
@@ -19,7 +20,8 @@ export class AcceptPaymentComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private transferService: TransferService,
-    private userService: UserService
+    private userService: UserService,
+    private connectService: ConnectService,
   ) {
     this.utility.updatePageSEO("Accept Payment | NFT", "Accept Payment | NFT");
   }
@@ -34,6 +36,7 @@ export class AcceptPaymentComponent implements OnInit {
   );
   todayDate = formatDate(new Date(), "MM-dd-yyyy", "en");
   userRole = JSON.parse(localStorage.getItem("user"))["role"];
+  useremail = JSON.parse(localStorage.getItem("user"))["email"];
 
   done = false;
   acceptButtonHit = false;
@@ -81,8 +84,20 @@ export class AcceptPaymentComponent implements OnInit {
       );
   }
 
-  upload(item) {
+  async upload(item) {
+
     this.utility.startLoader();
+    const agr = this.form.value.invoice_no +"|"+ this.form.value.numberOfToken +"|"+ this.todayDate;
+    const resp = await this.connectService.recordOnBlockchain(
+      this.useremail,
+      agr
+    );
+
+    console.log("===========> resp <====in transfer==",resp);
+    this.utility.stopLoader();
+    if(resp)
+    {
+      this.utility.startLoader();
     this.transferService
       .updateTransfer(item.id, {
         vendor_accepted_token: 1,
@@ -103,6 +118,8 @@ export class AcceptPaymentComponent implements OnInit {
           this.utility.showErrorAlert("Error", error);
         }
       );
+    }
+    
     // this.updateTransferById(item.id, { status: 'REJECTED' });
   }
 }

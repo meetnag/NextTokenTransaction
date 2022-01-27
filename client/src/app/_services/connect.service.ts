@@ -243,8 +243,8 @@ export class ConnectService {
     await this.connectContract();
     var hexData = await this.convertJSONtoHEX(data);
     var response = await this.contract.methods
-      .safeTransferFrom(this.account, to, tokenId, tokenAmt, hexData)
-      .send({ from: this.account })
+      .safeTransferFrom(fromAccount, to, tokenId, tokenAmt, hexData)
+      .send({ from: fromAccount })
       .once("receipt", (receipt) => {
         console.log("receipt==========", receipt);
       })
@@ -265,6 +265,20 @@ export class ConnectService {
       })
       .catch((error) => {
         console.log("error==========", error);
+      });
+
+    return response;
+  }
+  public async recordOnBlockchain(email_id, data) {
+    await this.connectContract();
+    var response = await this.contract.methods
+      .recordOnBlockchain(email_id, data)
+      .send({ from: this.account })
+      .once("receipt", (receipt) => {
+        console.log(" recordOnBlockchain receipt==========", receipt);
+      })
+      .catch((error) => {
+        console.log(" recordOnBlockchain error==========", error);
       });
 
     return response;
