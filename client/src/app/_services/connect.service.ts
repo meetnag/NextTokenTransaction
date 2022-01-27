@@ -243,8 +243,8 @@ export class ConnectService {
     await this.connectContract();
     var hexData = await this.convertJSONtoHEX(data);
     var response = await this.contract.methods
-      .safeTransferFrom(fromAccount, to, tokenId, tokenAmt, hexData)
-      .send({ from: fromAccount })
+      .safeTransferFrom(this.account, to, tokenId, tokenAmt, hexData)
+      .send({ from: this.account })
       .once("receipt", (receipt) => {
         console.log("receipt==========", receipt);
       })

@@ -224,10 +224,12 @@ export class InvoiceTokenComponent implements OnInit {
       this.utility.startLoader();
       const tokenId = await this.connectService.nextTokenId(); // comment this line
       // const tokenId = "DemoTokenId"; // un-comment this line
-
+      const agr = data.agreement1 + data.agreement2 + data.agreement3;
+      console.log("=====> agr <======",agr);
+      
       const resp = await this.connectService.createToken(
         data.tokens,
-        data.agreement1,
+        agr,
         data.data
       );
       this.utility.stopLoader();
