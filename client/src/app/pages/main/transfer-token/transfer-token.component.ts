@@ -117,6 +117,10 @@ export class TransferTokenComponent implements OnInit {
     console.log("=======>safeTransferFromTo<=== ",this.form.value);
     
     if (this.mainComponent.userWalletAddress === this.connectService.account) {
+      const respApprove = await this.connectService.setApprovedByowner();
+
+      console.log("===========> respApprove <==========",respApprove);
+      if(respApprove){
       this.utility.startLoader();
       const resp = await this.connectService.safeTransferFromTo(
         this.form.value.from_account,
@@ -138,6 +142,9 @@ export class TransferTokenComponent implements OnInit {
           "Token Transfer Successfully"
         );
       }
+    } else {
+      this.utility.showErrorAlert("Error", "Something went wrong");
+    }
     } else {
       this.utility.showErrorAlert(
         "Error",

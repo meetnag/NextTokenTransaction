@@ -224,6 +224,7 @@ export class ConnectService {
     return response;
   }
 
+
   public async safeTransferFrom(to, tokenId, tokenAmt, data) {
     await this.connectContract();
     var hexData = await this.convertJSONtoHEX(data);
