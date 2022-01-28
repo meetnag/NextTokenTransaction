@@ -86,16 +86,17 @@ export class AcceptPaymentComponent implements OnInit {
 
   async upload(item) {
 
-    this.utility.startLoader();
-    const agr = this.form.value.invoice_no +"|"+ this.form.value.numberOfToken +"|"+ this.todayDate;
-    const resp = await this.connectService.recordOnBlockchain(
-      this.useremail,
-      agr
-    );
+    // this.utility.startLoader();
+   // const agr = this.form.value.invoice_no +"|"+ this.form.value.numberOfToken +"|"+ this.todayDate;
+    // const resp = await this.connectService.recordOnBlockchain(
+      // this.useremail,
+      // agr
+   // );
 
-    console.log("===========> resp <====in transfer==",resp);
-    this.utility.stopLoader();
-    if(resp)
+    // console.log("===========> resp <====in transfer==",resp);
+  //  this.utility.stopLoader();
+    const resp = true;
+     if(resp)
     {
       this.utility.startLoader();
     this.transferService
