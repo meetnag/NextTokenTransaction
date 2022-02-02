@@ -9,14 +9,14 @@
 
       
       <div *ngIf="transfers.length != 0; else elseBlockHader">
-        Accept CPToken Payment
+        Accept Token Payment
       </div>
       <ng-template #elseBlockHader>
-        You do not have any invoices available to accept the CPToken payment
+        You do not have any invoices available to accept the Token payment
       </ng-template>
     </div>
     <ng-template #elseBlockDone>
-      Thanks for accepting CPToken payment
+      Thanks for accepting Token payment
     </ng-template>
     </h6>
   </div>
@@ -65,7 +65,7 @@
                 <td class="remove_border">CPToken-0x54349483902ZFB1eb23</td>
               </tr> -->
               <tr class="remove_border">
-                <td class="remove_border">Total CPTokens:</td>
+                <td class="remove_border">Total Tokens:</td>
                 <td class="remove_border">
                   <!-- {{transfers[0].numberOfToken}} -->
                   <div *ngIf="transfers.length != 0; else elseBlock">

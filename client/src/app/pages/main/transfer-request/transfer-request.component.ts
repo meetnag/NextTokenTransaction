@@ -75,12 +75,23 @@ export class TransferRequestComponent implements OnInit {
       this.utility.startLoader();
       let resp: any;
       if (this.userRole === "owner") {
+        console.log(
+          "1this.userRole <====",
+          this.userRole
+        );
         resp = await this.connectService.setApprovedByowner();
       } else {
+        console.log(
+          "2this.userRole <====",
+          this.userRole
+        );
         resp = await this.connectService.setApprovedByManager();
       }
       // resp = true
-
+      console.log(
+        "3 resp <====",
+        resp
+      );
       if (resp) {
         this.utility.stopLoader();
         this.updateTransferById(item.id, { status: "APPROVED" });

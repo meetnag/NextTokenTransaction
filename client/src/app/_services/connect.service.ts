@@ -210,6 +210,8 @@ export class ConnectService {
   }
 
   public async setApprovedByowner() {
+    console.log("=====setApprovedByowner1=", "calling");
+
     await this.connectContract();
     var response = await this.contract.methods
       .setApprovedByowner()
@@ -220,6 +222,7 @@ export class ConnectService {
       .catch((error) => {
         console.log("error==========", error);
       });
+      console.log("end of setapproverbyowner", "yes");
 
     return response;
   }

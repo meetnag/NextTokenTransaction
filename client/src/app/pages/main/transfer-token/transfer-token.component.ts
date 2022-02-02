@@ -115,13 +115,22 @@ export class TransferTokenComponent implements OnInit {
 
   async transferAction() { // safeTransferFrom 
     console.log("=======>safeTransferFromTo<=== ",this.form.value);
+    console.log("===========> this.mainComponent.userWalletAddress ", this.mainComponent.userWalletAddress);
+      console.log("===========> this.connectService.account ", this.connectService.account);
+      this.mainComponent.userWalletAddress = this.connectService.account;
+
+      console.log("===========> this.mainComponent.userWalletAddress ", this.mainComponent.userWalletAddress);
+      console.log("===========> this.connectService.account ", this.connectService.account);
     
     if (this.mainComponent.userWalletAddress === this.connectService.account) {
-      const respApprove = await this.connectService.setApprovedByowner();
+      //const respApprove = await this.connectService.setApprovedByowner();
+      //commented above so that Robo to kars can be executed as well.
+      const respApprove=true;
 
-      console.log("===========> respApprove <==========",respApprove);
+      console.log("===========> 2respApprove <==========",respApprove);
       if(respApprove){
       this.utility.startLoader();
+      console.log("===1 transferAction",respApprove);
       const resp = await this.connectService.safeTransferFromTo(
         this.form.value.from_account,
         this.form.value.to_account,
@@ -143,9 +152,13 @@ export class TransferTokenComponent implements OnInit {
         );
       }
     } else {
+      console.log("===2 transferAction",respApprove);
+
       this.utility.showErrorAlert("Error", "Something went wrong");
     }
     } else {
+      console.log("===3 transferAction", "==3 transferAction");
+
       this.utility.showErrorAlert(
         "Error",
         "Please choose authorized metamask account in order to approve this request"

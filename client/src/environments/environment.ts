@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   API_BASE_URL: 'http://localhost:3001/v1/',
-  CONTRACT_ADDRESS: '0x18Bc161C5622245Db0045CB52D2f135788A3bCdd',
+  CONTRACT_ADDRESS: '0x1130C5dDEC604Ae477cEf628f70c0c9B376a15bf',
 };
 
 /*
