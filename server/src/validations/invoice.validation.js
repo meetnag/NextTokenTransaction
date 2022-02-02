@@ -64,7 +64,6 @@ const approveCoin = {
   }),
   body: Joi.object()
     .keys({
-      internal_approver: Joi.allow('', null),
       external_signer: Joi.allow('', null),
     })
     .min(1),

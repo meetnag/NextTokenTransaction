@@ -47,6 +47,10 @@ const coinSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    external_signer: {
+      type: Number,
+      default: 2,
+    },
   },
   {
     timestamps: true,

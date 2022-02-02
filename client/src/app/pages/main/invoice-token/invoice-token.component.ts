@@ -219,26 +219,24 @@ export class InvoiceTokenComponent implements OnInit {
   async createToken(data) {
     console.log("===============createToken======> data <=====", data);
 
-    if (this.mainComponent.userWalletAddress === this.connectService.account) {
-      // comment this line
-      this.utility.startLoader();
-      const tokenId = await this.connectService.nextTokenId(); // comment this line
-      // const tokenId = "DemoTokenId"; // un-comment this line
-      const agr = data.agreement1 + data.agreement2 + data.agreement3;
-      console.log("=====> agr <======",agr);
+    // if (this.mainComponent.userWalletAddress === this.connectService.account) {
+    //   this.utility.startLoader();
+    //   const tokenId = await this.connectService.nextTokenId(); // comment this line
+    //   const agr = data.agreement1 + data.agreement2 + data.agreement3;
+    //   console.log("=====> agr <======",agr);
       
-      const resp = await this.connectService.createToken(
-        data.tokens,
-        agr,
-        data.data
-      );
-      this.utility.stopLoader();
+    //   const resp = await this.connectService.createToken(
+    //     data.tokens,
+    //     agr,
+    //     data.data
+    //   );
+    //   this.utility.stopLoader();
 
-    if (resp) {
+    // if (resp) {
     this.utility.startLoader();
     this.saveToken({
       user: this.userId,
-      tokenId: tokenId,
+      tokenId: "",
       invoiceNo: data.invoiceNo,
       tokens: data.tokens,
       agreement1: data.agreement1,
@@ -249,14 +247,13 @@ export class InvoiceTokenComponent implements OnInit {
       agreement3_id: data.agreement3_id,
       description: data.data,
     });
-    }
-    // comment next 6 line
-    } else {
-      this.utility.showErrorAlert(
-        "Error",
-        "Please choose authorized metamask account in order to approve this request"
-      );
-    }
+    // }
+    // } else {
+    //   this.utility.showErrorAlert(
+    //     "Error",
+    //     "Please choose authorized metamask account in order to approve this request"
+    //   );
+    // }
   }
 
   saveToken(data) {

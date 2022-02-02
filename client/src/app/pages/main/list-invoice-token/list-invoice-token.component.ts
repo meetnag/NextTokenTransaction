@@ -107,10 +107,10 @@ export class ListInvoiceTokenComponent implements OnInit {
       this.utility.startLoader();
       const tokenId = await this.connectService.nextTokenId();
       console.log("========> token id <=====", tokenId);
-
+      const agr = iteam.agreement1 + iteam.agreement2 + iteam.agreement3;
       const resp = await this.connectService.createToken(
         iteam.tokens,//numberOfToken,
-        iteam.agreement1,
+        agr,
         iteam.description
       );
 
