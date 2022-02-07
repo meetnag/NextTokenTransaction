@@ -44,6 +44,11 @@ const ApproveCoin = catchAsync(async (req, res) => {
   res.send(coin);
 });
 
+const getCoinsByToken = catchAsync(async (req, res) => {
+  const result = await invoiceService.getCoinsByToken(req.params.tokenId);
+  res.send(result);
+});
+
 module.exports = {
   createCoin,
   getAllCoins,
@@ -52,4 +57,5 @@ module.exports = {
   updateCoin,
   deleteCoin,
   ApproveCoin,
+  getCoinsByToken,
 };

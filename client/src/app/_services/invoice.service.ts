@@ -69,4 +69,13 @@ export class InvoiceService {
         })
       );
   }
+
+  // Get coin by token id
+  getCoinByTokenId(tokenId: String) {
+    return this.http.get(`${this.apiUrl}invoice/getInvoice/${tokenId}`).pipe(
+      map((response: Response) => {
+        return response;
+      })
+    );
+  }
 }

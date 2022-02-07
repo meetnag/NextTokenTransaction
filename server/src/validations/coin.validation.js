@@ -73,6 +73,12 @@ const approveCoin = {
     .min(1),
 };
 
+const getCoinByTokenId = {
+  params: Joi.object().keys({
+    tokenId: Joi.string(),
+  }),
+};
+
 module.exports = {
   createCoin,
   getAllCoins,
@@ -81,4 +87,5 @@ module.exports = {
   updateCoin,
   deleteCoin,
   approveCoin,
+  getCoinByTokenId,
 };

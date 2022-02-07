@@ -77,6 +77,12 @@ const deleteCoinById = async (coinId) => {
   return coin;
 };
 
+const getCoinsByToken = async (tokenId) => {
+  let coins = [];
+  coins = await Coin.find({ tokenId }).sort([['createdAt', 'desc']]);
+  return coins;
+};
+
 module.exports = {
   createCoin,
   getAllCoins,
@@ -84,4 +90,5 @@ module.exports = {
   getCoinById,
   updateCoinById,
   deleteCoinById,
+  getCoinsByToken,
 };
