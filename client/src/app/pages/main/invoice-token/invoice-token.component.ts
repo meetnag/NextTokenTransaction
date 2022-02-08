@@ -262,7 +262,7 @@ export class InvoiceTokenComponent implements OnInit {
         this.utility.stopLoader();
         this.utility.showSuccessAlert(
           "Success",
-          "Invoice Token Created Successfully"
+          "Invoice Token Request Created Successfully"
         );
         this.router.navigate(["/app/list-of-invoice-Tokenization"]);
       },
