@@ -57,7 +57,7 @@ export class AuthComponent implements OnInit {
             this.utility.showSuccessAlert("Success!", "Logged in successfully");
             if (res.user.role === "external") {
               this.router.navigate(["app/list-of-invoice-Tokenization"]);
-            } else if (res.user.role === "internal" || res.user.role === "external") {
+            }else if (res.user.role === "internal" || res.user.role === "external") {
               this.router.navigate(["app/list-token"]);
             } else if (res.user.role === "vendor") {
               this.router.navigate(["app/accept-payment"]);

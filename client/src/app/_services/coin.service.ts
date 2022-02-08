@@ -69,4 +69,13 @@ export class CoinService {
         })
       );
   }
+
+   // Get coin by token id
+   getCoinByTokenId(tokenId: String) {
+    return this.http.get(`${this.apiUrl}coins/getCoins/${tokenId}`).pipe(
+      map((response: Response) => {
+        return response;
+      })
+    );
+  }
 }

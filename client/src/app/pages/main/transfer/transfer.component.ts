@@ -4,6 +4,8 @@ import {
   UtilityService,
   TransferService,
   UserService,
+  CoinService,
+  InvoiceService
 } from "../../../_services";
 import { Router } from "@angular/router";
 
@@ -17,7 +19,9 @@ export class TransferComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private transferService: TransferService,
-    private userService: UserService
+    private userService: UserService,
+    private coinService: CoinService,
+    private invoiceService: InvoiceService
   ) {
     this.utility.updatePageSEO("Transfer Token | NFT", "Transfer Token | NFT");
   }
@@ -70,6 +74,70 @@ export class TransferComponent implements OnInit {
         );
         this.form.reset();
         this.router.navigate(["app/transfer-request"]);
+    let tokenId = formData.tokenId;
+    let list: any = [];
+    this.utility.startLoader();
+    this.coinService.getCoinByTokenId(tokenId).subscribe(
+      (res:any) => {
+        list = res;
+        if (list.length === 0) {
+          this.invoiceService.getCoinByTokenId(tokenId).subscribe(
+            (resInvoice) => {
+              list = resInvoice;
+              if (list.length !== 0) {
+                formData["user"] = this.user.id;
+                formData["vendor_accepted_token"] = 2;
+                formData["agreement1"] = list[0].agreement1;
+                formData["agreement2"] = list[0].agreement2;
+                formData["agreement3"] = list[0].agreement3;
+                this.transferService.createTransfer(formData).subscribe(
+                  (res) => {
+                    this.utility.stopLoader();
+                    this.utility.showSuccessAlert(
+                      "Success!",
+                      "Transfer Request Has been placed successfully"
+                    );
+                    this.form.reset();
+                    this.router.navigate(["app/transfer-request"]);
+                  },
+                  (error) => {
+                    this.utility.stopLoader();
+                    this.utility.showErrorAlert("Error", error);
+                  }
+                );
+              }else{
+                this.utility.stopLoader();
+                this.utility.showErrorAlert("Error", 'TokenId is worng');
+              }
+            },
+            (error) => {
+              this.utility.stopLoader();
+              this.utility.showErrorAlert("Error", error);
+            }
+          );
+        }else{
+          formData["user"] = this.user.id;
+          formData["vendor_accepted_token"] = 2;
+          formData["agreement1"] = list[0].agreement;
+          formData["agreement2"] = list[0].credit_Enhancement;
+          formData["agreement3"] = list[0].guarantee;
+          this.transferService.createTransfer(formData).subscribe(
+            (res) => {
+              this.utility.stopLoader();
+              this.utility.showSuccessAlert(
+                "Success!",
+                "Transfer Request Has been placed successfully"
+              );
+              this.form.reset();
+              this.router.navigate(["app/transfer-request"]);
+            },
+            (error) => {
+              this.utility.stopLoader();
+              this.utility.showErrorAlert("Error", error);
+            }
+          );
+        }
+        this.utility.stopLoaderWithTableReload();
       },
       (error) => {
         this.utility.stopLoader();

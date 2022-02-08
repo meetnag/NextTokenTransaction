@@ -23,4 +23,7 @@ router
   .route('/Approve/:coinId')
   .patch(auth('manageCoins'), validate(coinValidation.approveCoin), coinController.ApproveCoin);
 
+router
+  .route('/getCoins/:tokenId')
+  .get(auth('getCoins'), validate(coinValidation.getCoinByTokenId), coinController.getCoinsByToken);
 module.exports = router;
