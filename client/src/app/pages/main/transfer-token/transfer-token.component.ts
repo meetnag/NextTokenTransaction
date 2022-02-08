@@ -144,7 +144,7 @@ export class TransferTokenComponent implements OnInit {
       this.utility.stopLoader();
       if (resp) {
         // $("#modelId").modal("hide");
-        // this.updateTransferById(this.selectedItem.id, { status: "TRANSFERED" });
+        // this.updateTransferById(this.selectedItem.id, { status: "TRANSFERRED" });
 
         this.utility.showSuccessAlert(
           "Success",

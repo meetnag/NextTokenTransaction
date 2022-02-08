@@ -94,7 +94,7 @@ export class TransferRequestComponent implements OnInit {
       );
       if (resp) {
         this.utility.stopLoader();
-        this.updateTransferById(item.id, { status: "APPROVED" });
+        this.updateTransferById(item.id, { status: "ACCEPTED" });
       } else {
         this.utility.showErrorAlert("Error", "Something went wrong");
       }
@@ -136,7 +136,7 @@ export class TransferRequestComponent implements OnInit {
       this.utility.stopLoader();
       if (resp) {
         $("#modelId").modal("hide");
-        this.updateTransferById(this.selectedItem.id, { status: "TRANSFERED" });
+        this.updateTransferById(this.selectedItem.id, { status: "TRANSFERRED" });
       }
     } else {
       this.utility.showErrorAlert(

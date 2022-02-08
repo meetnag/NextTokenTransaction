@@ -19,8 +19,8 @@ export class ListInvoiceTokenComponent implements OnInit {
     private mainComponent: MainComponent
   ) {
     this.utility.updatePageSEO(
-      "List Of Invoice Tokenization | NFT",
-      "List Of Invoice Tokenization | NFT"
+      "List Of Documents | NFT",
+      "List Of Documents | NFT"
     );
   }
 
@@ -34,7 +34,9 @@ export class ListInvoiceTokenComponent implements OnInit {
   getTokenList() {
     this.utility.startLoader();
     this.invoiceService.getInvoices().subscribe(
+
       (res) => {
+        console.log("======> coinlist <== ", res);
         this.coinList = res;
         this.utility.stopLoaderWithTableReload();
       },
@@ -107,7 +109,7 @@ export class ListInvoiceTokenComponent implements OnInit {
       this.utility.startLoader();
       const tokenId = await this.connectService.nextTokenId();
       console.log("========> token id <=====", tokenId);
-      const agr = iteam.agreement1 + iteam.agreement2 + iteam.agreement3;
+      const agr = iteam.agreement1 + "   " + iteam.agreement2 + "   " + iteam.agreement3 + "  ";
       const resp = await this.connectService.createToken(
         iteam.tokens,//numberOfToken,
         agr,

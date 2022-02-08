@@ -34,7 +34,7 @@ const transferSchema = mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ['REQUESTED', 'APPROVED', 'REJECTED', 'TRANSFERED'],
+      enum: ['REQUESTED', 'ACCEPTED', 'REJECTED', 'TRANSFERRED'],
       default: 'REQUESTED',
     },
   },

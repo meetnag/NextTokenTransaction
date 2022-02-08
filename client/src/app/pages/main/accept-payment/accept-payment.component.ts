@@ -55,12 +55,11 @@ export class AcceptPaymentComponent implements OnInit {
   get getForm() {
     return this.form.controls;
   }
-
   getTransfer() {
     this.utility.startLoader();
     this.transferService
       .findTransfers({
-        status: "APPROVED",
+        status: "ACCEPTED",
         vendor_accepted_token: 2,
       })
       .subscribe(
@@ -86,15 +85,32 @@ export class AcceptPaymentComponent implements OnInit {
 
   async upload(item) {
 
-    // this.utility.startLoader();
-   // const agr = this.form.value.invoice_no +"|"+ this.form.value.numberOfToken +"|"+ this.todayDate;
-    // const resp = await this.connectService.recordOnBlockchain(
-      // this.useremail,
-      // agr
-   // );
+    /*this.utility.startLoader();
+    //console.log("===========> this =", this);
+    var str = this.transfers[0].invoice_no;
+    //var index = this.useremail.indexOf( "@");
+    var i = this.useremail.indexOf('@');
+    var startIndex = i * .2 | 0;
+    var endIndex   = i * .9 | 0;
+    var obfuscatedEmail = this.useremail.slice(0, startIndex) +
+    this.useremail.slice(startIndex, endIndex).replace(/./g, '*') +
+    this.useremail.slice(endIndex);
+    
 
-    // console.log("===========> resp <====in transfer==",resp);
-  //  this.utility.stopLoader();
+    //const agr = this.form.value.invoice_no +"|"+ this.form.value.numberOfToken +"|"+ this.todayDate;
+    const agr = "  Reference: " + str.substring((str.length)-3,str.length) + " | " + this.transfers[0].numberOfToken + " | " + this.todayDate;
+    
+    //console.log("invoice_no "  ,   this.transfers[0].invoice_no );
+    //console.log("ar_account "  ,  this.form.controls.ar_account.value);
+    console.log("ar_account "  ,  agr);
+
+    const resp = await this.connectService.recordOnBlockchain(
+      this.form.controls.ar_account.value,
+      obfuscatedEmail,
+      agr
+    );
+     console.log("===========> resp <====in transfer==",resp);
+    this.utility.stopLoader();*/
     const resp = true;
      if(resp)
     {

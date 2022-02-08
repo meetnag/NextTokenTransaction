@@ -10,17 +10,17 @@
       ><i class="icon ion-arrow-swap"></i> Invoice Tokenization</a
     >
   </li>
-  <li *ngIf="user && user['role'] != 'vendor'" class="sidebar-nav-item">
+  <li *ngIf="user && user['role'] != 'vendor2'" class="sidebar-nav-item">
     <a
       [routerLink]="['/app/list-of-invoice-Tokenization']"
       routerLinkActive="router-link-active"
       class="sidebar-nav-link"
-      ><i class="icon ion-arrow-swap"></i> List of Invoice Tokenization</a
+      ><i class="icon ion-arrow-swap"></i> List of Documents</a
     >
   </li>
   <li *ngIf="user && user['role'] != 'vendor'" class="sidebar-nav-item">
     <a [routerLink]="['/app/issue-token']" routerLinkActive="router-link-active" class="sidebar-nav-link" 
-      ><i class="icon ion-arrow-swap"></i> Issue Token</a
+      ><i class="icon ion-arrow-swap"></i> Issue Tokens</a
     >
   </li>
   <li *ngIf="user && user['role'] != 'vendor'" class="sidebar-nav-item">
@@ -28,7 +28,7 @@
       [routerLink]="['/app/list-token']"
       routerLinkActive="router-link-active"
       class="sidebar-nav-link"
-      ><i class="icon ion-arrow-swap"></i> List of Token</a
+      ><i class="icon ion-arrow-swap"></i> List of Tokens</a
     >
   </li>
   <li *ngIf="user && user['role'] != 'vendor'" class="sidebar-nav-item">
@@ -52,7 +52,7 @@
     class="sidebar-nav-item"
   >
     <a [routerLink]="['/app/burn-token']" class="sidebar-nav-link"
-      ><i class="icon ion-arrow-swap"></i> Burn Token</a
+      ><i class="icon ion-arrow-swap"></i> Burn Tokens</a
     >
   </li>
   <li
@@ -70,7 +70,7 @@
   </li>
   <li *ngIf="user && user['role'] != 'vendor2'" class="sidebar-nav-item">
     <a [routerLink]="['/app/transfer-token']" routerLinkActive="router-link-active" class="sidebar-nav-link" 
-      ><i class="icon ion-arrow-swap"></i> Transfer Token</a
+      ><i class="icon ion-arrow-swap"></i> Transfer Tokens</a
     >
   </li>
 </ul>

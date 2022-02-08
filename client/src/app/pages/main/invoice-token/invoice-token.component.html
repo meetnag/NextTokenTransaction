@@ -22,7 +22,7 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group">
-                            <label class="form-control-label">Tokens: <span class="tx-danger">*</span></label>
+                            <label class="form-control-label">Tokens: <span class="tx-danger">*</span> [1 Token = 1 USD of the invoice purchase amount]</label>
                             <input class="form-control" type="number" formControlName="tokens" name="tokens" placeholder="Enter Tokens" />
                             <app-error-field [errorMsg]="getForm.tokens"></app-error-field>
                         </div>
@@ -30,7 +30,7 @@
                     <!-- col-4 -->
                     <div class="col-lg-6">
                         <div class="form-group">
-                            <label class="form-control-label">Agreement 1: <span class="tx-danger">*</span></label>
+                            <label class="form-control-label">Document(s) 1: <span class="tx-danger">*</span></label>
                             <input class="form-control" formControlName="agreement1" type="file" name="agreement1"
                                 placeholder="Enter agreement" id="document" />
                             <app-error-field [errorMsg]="getForm.agreement1"></app-error-field>
@@ -47,7 +47,7 @@
                     </div> -->
                     <div class="col-lg-6">
                         <div class="form-group">
-                            <label class="form-control-label">Agreement 2: <span
+                            <label class="form-control-label">Document(s) 2: <span
                                     class="tx-danger">*</span></label>
                             <input class="form-control" formControlName="agreement2" type="file"
                                 name="agreement2" placeholder="Enter credit Agreement" id="document1" />
@@ -75,7 +75,7 @@
                     </div> -->
                     <div class="col-lg-6">
                         <div class="form-group">
-                            <label class="form-control-label">Agreement 3: <span class="tx-danger">*</span></label>
+                            <label class="form-control-label">Document(s) 3: <span class="tx-danger">*</span></label>
                             <input class="form-control" formControlName="agreement3" type="file" name="agreement3"
                                 placeholder="Enter Agreement" id="document2" />
                             <app-error-field [errorMsg]="getForm.agreement3"></app-error-field>
@@ -92,7 +92,7 @@
                     </div> -->
                     <div class="col-lg-12">
                         <div class="form-group">
-                            <label class="form-control-label">Data: <span class="tx-danger">*</span></label>
+                            <label class="form-control-label">Message - (Public) <span class="tx-danger">*</span></label>
                             <input class="form-control" formControlName="data" type="text" name="data"
                                 placeholder="Enter Data" />
                             <app-error-field [errorMsg]="getForm.data"></app-error-field>
@@ -103,7 +103,7 @@
                 <!-- row -->
                 <div class="form-layout-footer">
                     <button [disabled]="!form.valid" (click)="upload()" class="btn btn-primary bd-0">
-                        Start Tokenize Issuance
+                        Start Tokenizing Invoice
                     </button>
                 </div>
                 <!-- form-layout-footer -->

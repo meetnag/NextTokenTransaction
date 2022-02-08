@@ -9,14 +9,14 @@
 
       
       <div *ngIf="transfers.length != 0; else elseBlockHader">
-        Accept Token Payment
+        Accept Invoice Sale
       </div>
       <ng-template #elseBlockHader>
         You do not have any invoices available to accept the Token payment
       </ng-template>
     </div>
     <ng-template #elseBlockDone>
-      Thanks for accepting Token payment
+      You approved the invoice sale and your payment is being processed.
     </ng-template>
     </h6>
   </div>

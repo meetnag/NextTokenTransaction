@@ -31,7 +31,7 @@ export class TransferComponent implements OnInit {
       tokenId: [null, Validators.required],
       numberOfToken: [null, Validators.required],
       description: [null, Validators.required],
-      invoice_no: ["INV-61701", Validators.required],
+      invoice_no: ["", Validators.required],
       status: ["REQUESTED", Validators.required],
     });
   }
@@ -66,7 +66,7 @@ export class TransferComponent implements OnInit {
         this.utility.stopLoader();
         this.utility.showSuccessAlert(
           "Success!",
-          "Transfer Request Has been placed successfully"
+          "Transfer request has been placed successfully"
         );
         this.form.reset();
         this.router.navigate(["app/transfer-request"]);

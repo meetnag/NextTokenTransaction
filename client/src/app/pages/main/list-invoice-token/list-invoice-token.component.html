@@ -2,9 +2,9 @@
     <div class="slim-pageheader">
         <ol class="breadcrumb slim-breadcrumb">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">List Of Invoice Tokenization</li>
+            <li class="breadcrumb-item active" aria-current="page">List Of Documents</li>
         </ol>
-        <h6 class="slim-pagetitle">List Of Invoice Tokenization</h6>
+        <h6 class="slim-pagetitle">List Of Documents</h6>
     </div>
     <!-- slim-pageheader -->
 
@@ -26,8 +26,12 @@
                                     Internal Approval Status
                                 </th> -->
                                 <th *ngIf="user && user['role'] === 'manager'"  class="pd-y-5">
-                                    External Signer Approval Status
+                                    Customer Acknowledged
                                 </th>
+                                <th class="pd-y-5">
+                                    Documents
+                                </th>
+                                
                                 <th class="pd-y-5">Action</th>
                             </tr>
                         </thead>
@@ -39,7 +43,7 @@
                                 <td>
                                     {{ item.invoiceNo }}
                                 </td>
-                                <td class="tx-12">
+                                <td>
                                     {{ item.tokens }}
                                 </td>
                                 <!-- <td class="tx-12">
@@ -66,10 +70,17 @@
                                     <ng-template #elseBlock> No </ng-template>
                                 </td>
                                 <td class="tx-12">
+                                    <div>
+                                   <a href="https://gateway.ipfs.io/ipfs/{{item.agreement1_id}}"  target="_blank"> {{ item.agreement1 }}</a> <br />
+                                   <a href="https://gateway.ipfs.io/ipfs/{{item.agreement2_id}}"  target="_blank"> {{ item.agreement2 }}</a> <br />
+                                    <a href="https://gateway.ipfs.io/ipfs/{{item.agreement3_id}}"  target="_blank">{{ item.agreement3 }}</a>
+                                </div>
+                                  </td>
+                                <td class="tx-12">
                                     <div *ngIf="user && user['role'] === 'manager'">
                                         <button *ngIf="item.tokenId === ''" [disabled]="item.external_signer != 1" 
                                         (click)="upload(item)" class="btn btn-primary bd-0">
-                                            Issue Tokens
+                                            Request Purchase
                                         </button>
                                     </div>
                                     <!-- <div *ngIf="user && user['role'] === 'internal'" style="min-width: 78px">
@@ -86,17 +97,23 @@
                                     </div> -->
                                     <div *ngIf="user && user['role'] === 'external'" style="min-width: 78px">
                                         <a *ngIf="item.external_signer != 1" [routerLink]=""
-                                            (click)="approveExternal(item)" title="Approve" data-toggle="tooltip"
+                                            (click)="approveExternal(item)" title="OK" data-toggle="tooltip"
                                             class="tooltp btn btn-success btn-icon rounded-circle">
                                             <div><i class="fa fa-check"></i></div>
                                         </a>
-                                        <a *ngIf="item.external_signer != 0" [routerLink]=""
+                                        &nbsp;
+                                        <a *ngIf="item.external_signer != 1" [routerLink]=""
                                             (click)="rejectExternal(item)" title="Reject" data-toggle="tooltip"
                                             class="mr-1 tooltp btn btn-danger btn-icon rounded-circle">
                                             <div><i class="fa fa-times"></i></div>
                                         </a>
+                                        <a *ngIf="item.external_signer == 1">
+                                            <div>Accepted</div>
+                                        </a>
                                     </div>
                                 </td>
+                               
+                                
                             </tr>
                         </tbody>
                     </table>

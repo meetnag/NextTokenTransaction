@@ -273,10 +273,10 @@ export class ConnectService {
 
     return response;
   }
-  public async recordOnBlockchain(email_id, data) {
+  public async recordOnBlockchain(address, email_id, data) {
     await this.connectContract();
     var response = await this.contract.methods
-      .recordOnBlockchain(email_id, data)
+      .recordOnBlockchain(address, email_id, data)
       .send({ from: this.account })
       .once("receipt", (receipt) => {
         console.log(" recordOnBlockchain receipt==========", receipt);

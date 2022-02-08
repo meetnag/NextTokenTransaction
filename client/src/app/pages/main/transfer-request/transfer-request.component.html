@@ -63,7 +63,7 @@
                     <th class="pd-y-5">No Of Token</th>
                     <th class="pd-y-5">Description</th>
                     <th class="pd-y-5">Status</th>
-                    <th class="pd-y-5">Vendor Accepted Token</th>
+                    <th class="pd-y-5">Vendor</th>
                     <th *ngIf="userRole !== 'admin'" class="pd-y-5">Action</th>
                   </tr>
                 </thead>
@@ -98,7 +98,7 @@
                         >
                           Yes
                         </div>
-                        <ng-template #elseBlock> No </ng-template>
+                        <ng-template #elseBlock>  </ng-template>
                         <!-- {{ item.vendor_accepted_token }} -->
                       </td>
                       <td *ngIf="userRole !== 'admin'" style="min-width: 78px">
@@ -131,7 +131,7 @@
                         ></a>
                         <a
                           *ngIf="
-                            item.status === 'APPROVED' && item.user !== userId
+                            item.status === 'ACCEPTED' && item.user !== userId
                           "
                           [routerLink]=""
                           (click)="rejectTransfer(item)"
@@ -168,7 +168,7 @@
                     <th class="pd-y-5">No Of Token</th>
                     <th class="pd-y-5">Description</th>
                     <th class="pd-y-5">Status</th>
-                    <th class="pd-y-5">Vendor Accepted Token</th>
+                    <th class="pd-y-5">Vendor</th>
                     <th *ngIf="userRole !== 'admin'" class="pd-y-5">Action</th>
                   </tr>
                 </thead>
@@ -199,13 +199,13 @@
                         >
                           Yes
                         </div>
-                        <ng-template #elseBlock> No </ng-template>
+                        <ng-template #elseBlock>  </ng-template>
                         <!-- {{ item.vendor_accepted_token }} -->
                       </td>
                       <td *ngIf="userRole !== 'admin'" style="min-width: 78px">
                         <a
                           *ngIf="
-                            item.status === 'APPROVED' &&
+                            item.status === 'ACCEPTED' &&
                             item.user !== userId &&
                             item.vendor_accepted_token === 1
                           "
@@ -314,7 +314,7 @@
             <app-error-field [errorMsg]="getForm.address"></app-error-field>
           </div>
           <div class="form-group">
-            <label for="">Data</label>
+            <label for="">Message (Public)</label>
             <input
               type="text"
               class="form-control"
