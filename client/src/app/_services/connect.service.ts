@@ -23,13 +23,14 @@ export class ConnectService {
         this.web3 = window.web3.currentProvider;
       } else {
         this.web3 = new Web3.providers.HttpProvider(
-          "https://kovan.infura.io/v3/f99366737d854f5e91ab29dad087fcd5"
+          "https://bsc-dataseed.binance.org/"
         );
       }
 
-      console.log("transfer.service :: constructor :: window.ethereum");
+      console.log("transfer.service :: constructor :: window.ethereum", window.ethereum);
       window.web3 = new Web3(window.ethereum);
-      console.log("transfer.service :: constructor :: this.web3");
+      console.log("transfer.service :: constructor :: this.web3", this.web3);
+      console.log("transfer.service :: constructor :: window.web3", window.web3);
       console.log(this.web3);
       this.enable = this.enableMetaMaskAccount();
       console.log(this.enable);

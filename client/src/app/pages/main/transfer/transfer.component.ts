@@ -63,23 +63,14 @@ export class TransferComponent implements OnInit {
 
   async createTransferRequest() {
     let formData = this.form.value;
-    formData["user"] = this.user.id;
-    formData["vendor_accepted_token"] = 2;
-    this.transferService.createTransfer(formData).subscribe(
-      (res) => {
-        this.utility.stopLoader();
-        this.utility.showSuccessAlert(
-          "Success!",
-          "Transfer request has been placed successfully"
-        );
-        this.form.reset();
-        this.router.navigate(["app/transfer-request"]);
     let tokenId = formData.tokenId;
     let list: any = [];
     this.utility.startLoader();
     this.coinService.getCoinByTokenId(tokenId).subscribe(
       (res:any) => {
         list = res;
+        console.log ("list is ==> ", list);
+
         if (list.length === 0) {
           this.invoiceService.getCoinByTokenId(tokenId).subscribe(
             (resInvoice) => {
@@ -90,6 +81,10 @@ export class TransferComponent implements OnInit {
                 formData["agreement1"] = list[0].agreement1;
                 formData["agreement2"] = list[0].agreement2;
                 formData["agreement3"] = list[0].agreement3;
+                formData["agreement1_id"] = list[0].agreement1_id;
+                formData["agreement2_id"] = list[0].agreement2_id;
+                formData["agreement3_id"] = list[0].agreement3_id;
+                console.log ("formData==> ", formData);
                 this.transferService.createTransfer(formData).subscribe(
                   (res) => {
                     this.utility.stopLoader();
@@ -121,6 +116,11 @@ export class TransferComponent implements OnInit {
           formData["agreement1"] = list[0].agreement;
           formData["agreement2"] = list[0].credit_Enhancement;
           formData["agreement3"] = list[0].guarantee;
+          formData["agreement1_id"] = list[0].agreement_id;
+          formData["agreement2_id"] = list[0].credit_Enhancement_id;
+          formData["agreement3_id"] = list[0].guarantee_id;
+          console.log ("formData2 ==> ", formData);
+
           this.transferService.createTransfer(formData).subscribe(
             (res) => {
               this.utility.stopLoader();

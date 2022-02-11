@@ -44,6 +44,18 @@ const transferSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    agreement1_id: {
+      type: String,
+      required: true,
+    },
+    agreement2_id: {
+      type: String,
+      required: true,
+    },
+    agreement3_id: {
+      type: String,
+      required: true,
+    },
     status: {
       type: String,
       enum: ['REQUESTED', 'ACCEPTED', 'REJECTED', 'TRANSFERRED'],

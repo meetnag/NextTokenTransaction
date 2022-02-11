@@ -62,7 +62,17 @@
               </tr>
               <tr class="remove_border">
                 <td class="remove_border">Documents:</td>
-                <td class="remove_border">{{ transfers[0].agreement1 }} <br> {{ transfers[0].agreement2 }} <br> {{ transfers[0].agreement3 }} </td>
+                <!--<td class="remove_border">{{ transfers[0].agreement1 }} <br> {{ transfers[0].agreement2 }} <br> {{ transfers[0].agreement3 }} </td>-->
+                <td class="remove_border">
+                
+                  <a href="https://gateway.ipfs.io/ipfs/{{transfers[0].agreement1_id}}"  target="_blank"> {{ transfers[0].agreement1 }}</a> <br />
+                  <a href="https://gateway.ipfs.io/ipfs/{{transfers[0].agreement2_id}}"  target="_blank"> {{ transfers[0].agreement2 }}</a> <br />
+                  <a href="https://gateway.ipfs.io/ipfs/{{transfers[0].agreement3_id}}"  target="_blank">{{ transfers[0].agreement3 }}</a>
+                
+                  </td>
+          
+
+
               </tr>
               <tr class="remove_border">
                 <td class="remove_border">Total Tokens:</td>
