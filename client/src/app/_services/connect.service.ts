@@ -23,7 +23,7 @@ export class ConnectService {
         this.web3 = window.web3.currentProvider;
       } else {
         this.web3 = new Web3.providers.HttpProvider(
-          "https://bsc-dataseed.binance.org/"
+          "https://kovan.infura.io/v3/f99366737d854f5e91ab29dad087fcd5"
         );
       }
 

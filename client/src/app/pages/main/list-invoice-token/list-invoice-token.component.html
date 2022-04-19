@@ -2,9 +2,9 @@
     <div class="slim-pageheader">
         <ol class="breadcrumb slim-breadcrumb">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">List Of Documents</li>
+            <li class="breadcrumb-item active" aria-current="page">List Of TA Token Documents</li>
         </ol>
-        <h6 class="slim-pagetitle">List Of Documents</h6>
+        <h6 class="slim-pagetitle">List Of TA Token Documents</h6>
     </div>
     <!-- slim-pageheader -->
 
@@ -25,9 +25,9 @@
                                 <!-- <th *ngIf="user && user['role'] === 'manager'" class="pd-y-5">
                                     Internal Approval Status
                                 </th> -->
-                                <th *ngIf="user && user['role'] === 'manager'"  class="pd-y-5">
+                                <!--<th *ngIf="user && user['role'] === 'manager'"  class="pd-y-5">
                                     Customer Acknowledged
-                                </th>
+                                </th>-->
                                 <th class="pd-y-5">
                                     Documents
                                 </th>
@@ -63,12 +63,12 @@
                                     </div>
                                     <ng-template #elseBlock> No </ng-template>
                                 </td> -->
-                                <td *ngIf="user && user['role'] === 'manager'" class="tx-12">
+                                <!--<td *ngIf="user && user['role'] === 'manager'" class="tx-12">
                                     <div *ngIf="item.external_signer === 1; else elseBlock">
                                         Yes
                                     </div>
                                     <ng-template #elseBlock> No </ng-template>
-                                </td>
+                                </td>-->
                                 <td class="tx-12">
                                     <div>
                                    <a href="https://gateway.ipfs.io/ipfs/{{item.agreement1_id}}"  target="_blank"> {{ item.agreement1 }}</a> <br />
