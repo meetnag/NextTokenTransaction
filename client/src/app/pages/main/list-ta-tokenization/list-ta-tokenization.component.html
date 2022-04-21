@@ -33,7 +33,7 @@
                                 </th>
 
                                 <th class="pd-y-5">Action</th>
-                                <th *ngIf="user && user['role'] === 'manager' && item.agreement5 === null" class="pd-y-5">edit</th>
+                                <th *ngIf="user && user['role'] === 'manager' " class="pd-y-5">edit</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -162,8 +162,8 @@
                                         </a>
                                     </div>
                                 </td>
-                                <td class="tx-12" >
-                                    <div *ngIf="user && user['role'] === 'manager'">
+                                <td *ngIf="user && user['role'] === 'manager'" class="tx-12" >
+                                    <div >
                                         <button *ngIf="item.agreement5 === null" (click)="testing(item)" class="btn btn-primary bd-0" title="Transfer"
                                             data-toggle="tooltip">
                                             uploade document
