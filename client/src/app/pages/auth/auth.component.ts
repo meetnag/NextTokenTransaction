@@ -55,14 +55,15 @@ export class AuthComponent implements OnInit {
             this.utility.stopLoader();
             console.log("===> res <====", res);
             this.utility.showSuccessAlert("Success!", "Logged in successfully");
-            if (res.user.role === "external") {
-              this.router.navigate(["app/list-of-ta-Tokenization"]);
+            if (res.user.role === "invbuyer") {
+              this.router.navigate(["app/list-of-wrapper-Tokenization"]);
             } else if (
               res.user.role === "internal" ||
-              res.user.role === "external"
+              res.user.role === "external" ||
+              res.user.role === "owner" ||
+              res.user.role === "vendor" ||
+              res.user.role === "lender"
             ) {
-              this.router.navigate(["app/list-token"]);
-            } else if (res.user.role === "vendor") {
               this.router.navigate(["app/list-of-ta-Tokenization"]);
             } else {
               // this.router.navigate(["app/issue-token"]);
