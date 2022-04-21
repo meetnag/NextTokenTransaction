@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import {
   UtilityService,
   ConnectService,
-  TaTokenService,
+  WrapperTokenService,
 } from "../../../_services";
 import { MainComponent } from "../main.component";
 import { formatDate } from "@angular/common";
@@ -18,21 +18,21 @@ const ipfs = new IpfsHttpClient({
 declare var $: any;
 
 @Component({
-  selector: "app-list-ta-tokenization",
-  templateUrl: "./list-ta-tokenization.component.html",
-  styleUrls: ["./list-ta-tokenization.component.css"],
+  selector: "app-list-wrapper-tokenization",
+  templateUrl: "./list-wrapper-tokenization.component.html",
+  styleUrls: ["./list-wrapper-tokenization.component.css"],
 })
-export class ListTaTokenizationComponent implements OnInit {
+export class ListWrapperTokenizationComponent implements OnInit {
   constructor(
     private utility: UtilityService,
     private connectService: ConnectService,
-    private invoiceService: TaTokenService,
+    private invoiceService: WrapperTokenService,
     private mainComponent: MainComponent,
     private formBuilder: FormBuilder
   ) {
     this.utility.updatePageSEO(
-      "List Of TA Documents | NFT",
-      "List Of TA Documents | NFT"
+      "List Of Wrapper Documents | NFT",
+      "List Of Wrapper Documents | NFT"
     );
   }
 
@@ -57,7 +57,7 @@ export class ListTaTokenizationComponent implements OnInit {
 
   getTokenList() {
     this.utility.startLoader();
-    this.invoiceService.getTaTokens().subscribe(
+    this.invoiceService.getWrapperTokens().subscribe(
       (res) => {
         console.log("======> coinlist <== ", res);
         this.coinList = res;
@@ -106,12 +106,12 @@ export class ListTaTokenizationComponent implements OnInit {
 
     return resp;
   }
-  async approveLender(iteam) {
+  async approveInvbuyer(iteam) {
     const resp = await this.approve(iteam);
     if (resp) {
       this.utility.startLoader();
       this.invoiceService
-        .approveTaToken(iteam.id, { lender_approver: 1 })
+        .approveWrapperToken(iteam.id, { invbuyer_signer: 1 })
         .subscribe(
           (res) => {
             this.getTokenList();
@@ -123,41 +123,10 @@ export class ListTaTokenizationComponent implements OnInit {
         );
     }
   }
-  rejectLender(iteam) {
+  rejectInvbuyer(iteam) {
     this.utility.startLoader();
     this.invoiceService
-      .approveTaToken(iteam.id, { lender_approver: 0 })
-      .subscribe(
-        (res) => {
-          this.getTokenList();
-        },
-        (error) => {
-          this.utility.stopLoader();
-          this.utility.showErrorAlert("Error", error);
-        }
-      );
-  }
-  async approveVendor(iteam) {
-    const resp = await this.approve(iteam);
-    if (resp) {
-      this.utility.startLoader();
-      this.invoiceService
-        .approveTaToken(iteam.id, { vendor_signer: 1 })
-        .subscribe(
-          (res) => {
-            this.getTokenList();
-          },
-          (error) => {
-            this.utility.stopLoader();
-            this.utility.showErrorAlert("Error", error);
-          }
-        );
-    }
-  }
-  rejectVendor(iteam) {
-    this.utility.startLoader();
-    this.invoiceService
-      .approveTaToken(iteam.id, { vendor_signer: 0 })
+      .approveWrapperToken(iteam.id, { invbuyer_signer: 0 })
       .subscribe(
         (res) => {
           this.getTokenList();
@@ -174,7 +143,7 @@ export class ListTaTokenizationComponent implements OnInit {
     if (resp) {
       this.utility.startLoader();
       this.invoiceService
-        .approveTaToken(iteam.id, { owner_approver: 1 })
+        .approveWrapperToken(iteam.id, { owner_approver: 1 })
         .subscribe(
           (res) => {
             this.getTokenList();
@@ -190,7 +159,7 @@ export class ListTaTokenizationComponent implements OnInit {
   rejectOwner(iteam) {
     this.utility.startLoader();
     this.invoiceService
-      .approveTaToken(iteam.id, { owner_approver: 0 })
+      .approveWrapperToken(iteam.id, { owner_approver: 0 })
       .subscribe(
         (res) => {
           this.getTokenList();
@@ -202,64 +171,6 @@ export class ListTaTokenizationComponent implements OnInit {
       );
   }
 
-  approveInternal(iteam) {
-    this.utility.startLoader();
-    this.invoiceService
-      .approveTaToken(iteam.id, { internal_approver: 1 })
-      .subscribe(
-        (res) => {
-          this.getTokenList();
-        },
-        (error) => {
-          this.utility.stopLoader();
-          this.utility.showErrorAlert("Error", error);
-        }
-      );
-  }
-
-  rejectInternal(iteam) {
-    this.utility.startLoader();
-    this.invoiceService
-      .approveTaToken(iteam.id, { internal_approver: 0 })
-      .subscribe(
-        (res) => {
-          this.getTokenList();
-        },
-        (error) => {
-          this.utility.stopLoader();
-          this.utility.showErrorAlert("Error", error);
-        }
-      );
-  }
-
-  approveExternal(iteam) {
-    this.utility.startLoader();
-    this.invoiceService
-      .approveTaToken(iteam.id, { external_signer: 1 })
-      .subscribe(
-        (res) => {
-          this.getTokenList();
-        },
-        (error) => {
-          this.utility.stopLoader();
-          this.utility.showErrorAlert("Error", error);
-        }
-      );
-  }
-  rejectExternal(iteam) {
-    this.utility.startLoader();
-    this.invoiceService
-      .approveTaToken(iteam.id, { external_signer: 0 })
-      .subscribe(
-        (res) => {
-          this.getTokenList();
-        },
-        (error) => {
-          this.utility.stopLoader();
-          this.utility.showErrorAlert("Error", error);
-        }
-      );
-  }
   async upload(iteam) {
     console.log("======> upload iteam <==22222222222=", iteam);
     console.log(
@@ -291,7 +202,7 @@ export class ListTaTokenizationComponent implements OnInit {
       console.log("======upload===> resp <===========", resp);
       if (resp) {
         this.invoiceService
-          .updateTaToken(iteam.id, { tokenId: tokenId })
+          .updateWrapperToken(iteam.id, { tokenId: tokenId })
           .subscribe(
             (res) => {
               this.getTokenList();
@@ -310,76 +221,10 @@ export class ListTaTokenizationComponent implements OnInit {
     }
   }
 
-  testing(item) {
-    this.form.patchValue({
-      id: item.id,
-    });
-    $("#modelId").modal("show");
-  }
-
-  convertDataURIToBinary(dataURI) {
-    var base64Index = dataURI.indexOf(";base64,") + ";base64,".length;
-    var base64 = dataURI.substring(base64Index);
-    var raw = window.atob(base64);
-    var rawLength = raw.length;
-    var array = new Uint8Array(new ArrayBuffer(rawLength));
-
-    for (let i = 0; i < rawLength; i++) {
-      array[i] = raw.charCodeAt(i);
-    }
-    return array;
-  }
-
-  async updateDocument() {
-    console.log("===> updateDocument <====", this.form.value);
-
-    const file = (<HTMLInputElement>document.getElementById("document4"))
-      .files[0];
-
-    var self = this;
-    // const preview = document.getElementById("preview");
-    const reader = new FileReader();
-    let byteArray;
-
-    var fianalJSON = {};
-    fianalJSON["agreement5"] = file.name;
-
-    await reader.addEventListener(
-      "loadend",
-      async function () {
-        // convert image file to base64 string
-
-        byteArray = self.convertDataURIToBinary(reader.result);
-        self.utility.startLoader("Uploading document....");
-        var result = await ipfs.add(byteArray);
-        self.utility.startLoader(
-          "Document uploaded sucessfully. Please wait..."
-        );
-        self.utility.startLoader("Data encryption in progress. Please wait...");
-        console.log("=======> agreement5_id <=====", result["path"]);
-
-        fianalJSON["agreement5_id"] = result["path"];
-
-        await self.uploadfile1(fianalJSON);
-      },
-      false
-    );
-
-    if (file) {
-      await reader.readAsDataURL(file);
-    }
-  }
-
-  uploadfile1(fianalJSON) {
-    this.invoiceService.updateTaToken(this.form.value.id, fianalJSON).subscribe(
-      (res) => {
-        $("#modelId").modal("hide");
-        this.getTokenList();
-      },
-      (error) => {
-        this.utility.stopLoader();
-        this.utility.showErrorAlert("Error", error);
-      }
+  cashTxnComplete() {
+    this.utility.showSuccessAlert(
+      "Success",
+      "I hereby Consent to the Completion of the Cash Transaction."
     );
   }
 }

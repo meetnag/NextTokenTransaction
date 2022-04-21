@@ -6,3 +6,4 @@ module.exports.transferService = require('./transfer.service');
 module.exports.coinService = require('./coin.service');
 module.exports.invoiceService = require('./invoice.service');
 module.exports.taTokenService = require('./taToken.service');
+module.exports.wrapperTokenService = require('./wrapperToken.service');

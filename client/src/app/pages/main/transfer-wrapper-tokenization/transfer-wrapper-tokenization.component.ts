@@ -6,11 +6,11 @@ import { MainComponent } from "../main.component";
 import { formatDate } from "@angular/common";
 
 @Component({
-  selector: "app-transfer-ta-tokenization",
-  templateUrl: "./transfer-ta-tokenization.component.html",
-  styleUrls: ["./transfer-ta-tokenization.component.css"],
+  selector: "app-transfer-wrapper-tokenization",
+  templateUrl: "./transfer-wrapper-tokenization.component.html",
+  styleUrls: ["./transfer-wrapper-tokenization.component.css"],
 })
-export class TransferTaTokenizationComponent implements OnInit {
+export class TransferWrapperTokenizationComponent implements OnInit {
   constructor(
     private utility: UtilityService,
     private formBuilder: FormBuilder,
@@ -19,8 +19,8 @@ export class TransferTaTokenizationComponent implements OnInit {
     private mainComponent: MainComponent
   ) {
     this.utility.updatePageSEO(
-      "Transfer Ta Token | NFT",
-      "Transfer Ta Token | NFT"
+      "Transfer Wrapper Token | NFT",
+      "Transfer Wrapper Token | NFT"
     );
   }
   form: FormGroup;
@@ -93,7 +93,7 @@ export class TransferTaTokenizationComponent implements OnInit {
 
           this.utility.showSuccessAlert(
             "Success",
-            "TA Token Transfer Successfully"
+            "Wrapper Token Transfer Successfully"
           );
         }
       } else {

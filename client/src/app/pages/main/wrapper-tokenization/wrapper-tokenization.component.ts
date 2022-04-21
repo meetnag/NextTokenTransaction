@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { UtilityService, TaTokenService } from "../../../_services";
+import { UtilityService, WrapperTokenService } from "../../../_services";
 import { Router } from "@angular/router";
 import { formatDate } from "@angular/common";
 const IpfsHttpClient = require("ipfs-http-client");
@@ -12,20 +12,20 @@ const ipfs = new IpfsHttpClient({
 });
 
 @Component({
-  selector: "app-ta-tokenization",
-  templateUrl: "./ta-tokenization.component.html",
-  styleUrls: ["./ta-tokenization.component.css"],
+  selector: "app-wrapper-tokenization",
+  templateUrl: "./wrapper-tokenization.component.html",
+  styleUrls: ["./wrapper-tokenization.component.css"],
 })
-export class TaTokenizationComponent implements OnInit {
+export class WrapperTokenizationComponent implements OnInit {
   constructor(
     private utility: UtilityService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private invoiceService: TaTokenService
+    private invoiceService: WrapperTokenService
   ) {
     this.utility.updatePageSEO(
-      "TA Tokenization | NFT",
-      "TA Tokenization | NFT"
+      "Wrapper Tokenization | NFT",
+      "Wrapper Tokenization | NFT"
     );
   }
 
@@ -46,7 +46,7 @@ export class TaTokenizationComponent implements OnInit {
       agreement2: [null, Validators.required],
       agreement3: [null, Validators.required],
       agreement4: [null, Validators.required],
-      agreement5: [null],
+      agreement5: [null, Validators.required],
       data: [null, Validators.required],
     });
   }
@@ -273,14 +273,14 @@ export class TaTokenizationComponent implements OnInit {
   }
 
   saveToken(data) {
-    this.invoiceService.createTaToken(data).subscribe(
+    this.invoiceService.createWrapperToken(data).subscribe(
       (res) => {
         this.utility.stopLoader();
         this.utility.showSuccessAlert(
           "Success",
-          "Ta Token Request Created Successfully"
+          "Wrapper Token Request Created Successfully"
         );
-        this.router.navigate(["/app/list-of-ta-Tokenization"]);
+        this.router.navigate(["/app/list-of-wrapper-Tokenization"]);
       },
       (error) => {
         this.utility.stopLoader();

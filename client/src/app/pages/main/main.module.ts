@@ -24,6 +24,9 @@ import { TransferTokenComponent } from './transfer-token/transfer-token.componen
 import { TaTokenizationComponent } from './ta-tokenization/ta-tokenization.component';
 import { ListTaTokenizationComponent } from './list-ta-tokenization/list-ta-tokenization.component';
 import { TransferTaTokenizationComponent } from './transfer-ta-tokenization/transfer-ta-tokenization.component';
+import { WrapperTokenizationComponent } from './wrapper-tokenization/wrapper-tokenization.component';
+import { ListWrapperTokenizationComponent } from './list-wrapper-tokenization/list-wrapper-tokenization.component';
+import { TransferWrapperTokenizationComponent } from './transfer-wrapper-tokenization/transfer-wrapper-tokenization.component';
 @NgModule({
   declarations: [
     MainComponent,
@@ -45,6 +48,9 @@ import { TransferTaTokenizationComponent } from './transfer-ta-tokenization/tran
     TaTokenizationComponent,
     ListTaTokenizationComponent,
     TransferTaTokenizationComponent,
+    WrapperTokenizationComponent,
+    ListWrapperTokenizationComponent,
+    TransferWrapperTokenizationComponent,
   ],
   imports: [
     CommonModule,

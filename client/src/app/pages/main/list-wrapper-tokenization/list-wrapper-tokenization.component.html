@@ -1,0 +1,134 @@
+<div class="container">
+    <div class="slim-pageheader">
+        <ol class="breadcrumb slim-breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">List Of Wrapper Token Documents</li>
+        </ol>
+        <h6 class="slim-pagetitle">List Of Wrapper Token Documents</h6>
+    </div>
+    <!-- slim-pageheader -->
+
+    <div class="row row-sm mg-t-20">
+        <div class="col-xl-12 mg-t-20 mg-xl-t-0">
+            <div class="card card-table">
+                <div class="table-responsive p-3">
+                    <table id="datatable" class="table mg-b-0 tx-13">
+                        <thead>
+                            <tr class="tx-10">
+                                <th class="pd-y-5">Token Id</th>
+                                <th class="pd-y-5">Invoice No</th>
+
+                                <th class="pd-y-5"> NO. Of Tokens </th>
+                                <!-- <th class="pd-y-5">Date of Expiration</th>
+                                <th class="pd-y-5">Renewal on Maturity</th> -->
+                                <!-- <th class="pd-y-5">Document Name</th> -->
+                                <!-- <th *ngIf="user && user['role'] === 'manager'" class="pd-y-5">
+                                    Internal Approval Status
+                                </th> -->
+                                <!--<th *ngIf="user && user['role'] === 'manager'"  class="pd-y-5">
+                                    Customer Acknowledged
+                                </th>-->
+                                <th class="pd-y-5">
+                                    Documents
+                                </th>
+
+                                <th class="pd-y-5">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of coinList">
+                                <td>
+                                    {{ item.tokenId }}
+                                </td>
+                                <td>
+                                    {{ item.invoiceNo }}
+                                </td>
+                                <td>
+                                    {{ item.tokens }}
+                                </td>
+                                
+                                <td class="tx-12">
+                                    <div>
+                                        <a href="https://gateway.ipfs.io/ipfs/{{item.agreement1_id}}" target="_blank">
+                                            {{ item.agreement1 }}</a> <br />
+                                        <a href="https://gateway.ipfs.io/ipfs/{{item.agreement2_id}}" target="_blank">
+                                            {{ item.agreement2 }}</a> <br />
+                                        <a href="https://gateway.ipfs.io/ipfs/{{item.agreement3_id}}" target="_blank">
+                                            {{ item.agreement3 }}</a> <br />
+                                        <a href="https://gateway.ipfs.io/ipfs/{{item.agreement4_id}}" target="_blank">
+                                            {{ item.agreement4 }}</a>
+                                        <a *ngIf="item.agreement5 !== null"
+                                            href="https://gateway.ipfs.io/ipfs/{{item.agreement5_id}}" target="_blank">
+                                            {{ item.agreement5 }}</a>
+                                    </div>
+                                </td>
+                                <td class="tx-12">
+                                    <div *ngIf="user && user['role'] === 'manager'">
+                                        <button *ngIf="item.tokenId === ''" [disabled]="item.invbuyer_signer != 1 || item.owner_approver != 1"
+                                            (click)="upload(item)" class="btn btn-primary bd-0">
+                                            Request Purchase
+                                        </button>
+                                    </div>
+
+                                    <!-- <div *ngIf="user && user['role'] === 'manager'">
+                                        <button
+                                            *ngIf="item.tokenId !== '' && item.external_signer === 1 && item.agreement5 === null"
+                                            (click)="testing(item)" class="btn btn-primary bd-0" title="Transfer"
+                                            data-toggle="tooltip">
+                                            uploade document
+                                        </button>
+                                    </div> -->
+
+                                    <div *ngIf="user && user['role'] === 'invbuyer'" style="min-width: 78px">
+                                        <a *ngIf="item.invbuyer_signer != 1" [routerLink]="" (click)="approveInvbuyer(item)"
+                                            title="OK" data-toggle="tooltip"
+                                            class="tooltp btn btn-success btn-icon rounded-circle">
+                                            <div><i class="fa fa-check"></i></div>
+                                        </a>
+                                        &nbsp;
+                                        <a *ngIf="item.invbuyer_signer != 1" [routerLink]="" (click)="rejectInvbuyer(item)"
+                                            title="Reject" data-toggle="tooltip"
+                                            class="mr-1 tooltp btn btn-danger btn-icon rounded-circle">
+                                            <div><i class="fa fa-times"></i></div>
+                                        </a>
+                                        <a *ngIf="item.invbuyer_signer == 1">
+                                            <div>Accepted</div>
+                                        </a>
+                                    </div>
+
+                                    <div *ngIf="user && user['role'] === 'owner' && item.invbuyer_signer == 1"
+                                        style="min-width: 78px">
+                                        <a *ngIf="item.owner_approver != 1" [routerLink]=""
+                                            (click)="approvOwner(item)" title="Approve" data-toggle="tooltip"
+                                            class="tooltp btn btn-success btn-icon rounded-circle">
+                                            <div><i class="fa fa-check"></i></div>
+                                        </a>
+                                        <a *ngIf="item.owner_approver != 1" [routerLink]="" (click)="rejectOwner(item)"
+                                            title="Reject" data-toggle="tooltip"
+                                            class="mr-1 tooltp btn btn-danger btn-icon rounded-circle">
+                                            <div><i class="fa fa-times"></i></div>
+                                        </a>
+                                        <a *ngIf="item.owner_approver == 1">
+                                            <div>Accepted
+                                                <button (click)="cashTxnComplete()"
+                                                    class="btn btn-primary bd-0">
+                                                    Cash TXN Complete
+                                                </button>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- table-responsive -->
+            </div>
+            <!-- card -->
+        </div>
+        <!-- col-6 -->
+    </div>
+    <!-- row -->
+</div>
+<!-- container -->
+

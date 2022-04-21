@@ -19,7 +19,10 @@ import { TransferTokenComponent } from "./transfer-token/transfer-token.componen
 import { TaTokenizationComponent } from "./ta-tokenization/ta-tokenization.component";
 import { ListTaTokenizationComponent } from "./list-ta-tokenization/list-ta-tokenization.component";
 import { TransferTaTokenizationComponent } from "./transfer-ta-tokenization/transfer-ta-tokenization.component";
-TransferTaTokenizationComponent;
+import { WrapperTokenizationComponent } from "./wrapper-tokenization/wrapper-tokenization.component";
+import { ListWrapperTokenizationComponent } from "./list-wrapper-tokenization/list-wrapper-tokenization.component";
+import { TransferWrapperTokenizationComponent } from "./transfer-wrapper-tokenization/transfer-wrapper-tokenization.component";
+
 const routes: Routes = [
   {
     path: "",
@@ -43,12 +46,23 @@ const routes: Routes = [
         component: ListInvoiceTokenComponent,
       },
       { path: "transfer-token", component: TransferTokenComponent },
+
       { path: "ta-Tokenization", component: TaTokenizationComponent },
       {
         path: "list-of-ta-Tokenization",
         component: ListTaTokenizationComponent,
       },
       { path: "transfer-ta-token", component: TransferTaTokenizationComponent },
+
+      { path: "wrapper-Tokenization", component: WrapperTokenizationComponent },
+      {
+        path: "list-of-wrapper-Tokenization",
+        component: ListWrapperTokenizationComponent,
+      },
+      {
+        path: "transfer-wrapper-token",
+        component: TransferWrapperTokenizationComponent,
+      },
     ],
   },
 ];
