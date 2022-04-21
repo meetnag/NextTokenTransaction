@@ -73,17 +73,24 @@ export class ListTaTokenizationComponent implements OnInit {
   async approve(iteam) {
     this.utility.startLoader();
     console.log("===========> this =", this);
-    var str = iteam.invoice_no;
+    console.log("===========> iteam =", iteam);
+    var str = iteam.invoiceNo;
+    console.log("pass");
+
     // var index = this.useremail.indexOf( "@");
     var i = this.useremail.indexOf("@");
+    console.log("pass1");
     var startIndex = (i * 0.2) | 0;
+    console.log("pass2");
     var endIndex = (i * 0.9) | 0;
+    console.log("pass3");
     var obfuscatedEmail =
       this.useremail.slice(0, startIndex) +
       this.useremail.slice(startIndex, endIndex).replace(/./g, "*") +
       this.useremail.slice(endIndex);
+    console.log("pass4");
+    console.log("===> v <==", str);
 
-    //const agr = this.form.value.invoice_no +"|"+ this.form.value.numberOfToken +"|"+ this.todayDate;
     const agr =
       "  Reference: " +
       str.substring(str.length - 3, str.length) +
@@ -91,9 +98,8 @@ export class ListTaTokenizationComponent implements OnInit {
       iteam.numberOfToken +
       " | " +
       this.todayDate;
+    console.log("pass5");
 
-    //console.log("invoice_no "  ,   this.transfers[0].invoice_no );
-    //console.log("ar_account "  ,  this.form.controls.ar_account.value);
     console.log("ListTaTokenizationComponent : ar_account :: ", agr);
 
     const resp = await this.connectService.recordOnBlockchain(

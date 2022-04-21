@@ -73,7 +73,7 @@ export class ListWrapperTokenizationComponent implements OnInit {
   async approve(iteam) {
     this.utility.startLoader();
     console.log("===========> this =", this);
-    var str = iteam.invoice_no;
+    var str = iteam.invoiceNo;
     // var index = this.useremail.indexOf( "@");
     var i = this.useremail.indexOf("@");
     var startIndex = (i * 0.2) | 0;
@@ -83,7 +83,6 @@ export class ListWrapperTokenizationComponent implements OnInit {
       this.useremail.slice(startIndex, endIndex).replace(/./g, "*") +
       this.useremail.slice(endIndex);
 
-    //const agr = this.form.value.invoice_no +"|"+ this.form.value.numberOfToken +"|"+ this.todayDate;
     const agr =
       "  Reference: " +
       str.substring(str.length - 3, str.length) +
@@ -92,8 +91,6 @@ export class ListWrapperTokenizationComponent implements OnInit {
       " | " +
       this.todayDate;
 
-    //console.log("invoice_no "  ,   this.transfers[0].invoice_no );
-    //console.log("ar_account "  ,  this.form.controls.ar_account.value);
     console.log("ListTaTokenizationComponent : ar_account :: ", agr);
 
     const resp = await this.connectService.recordOnBlockchain(
