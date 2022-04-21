@@ -1,0 +1,232 @@
+<div class="container">
+    <div class="slim-pageheader">
+        <ol class="breadcrumb slim-breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">List Of TA Token Documents</li>
+        </ol>
+        <h6 class="slim-pagetitle">List Of TA Token Documents</h6>
+    </div>
+    <!-- slim-pageheader -->
+
+    <div class="row row-sm mg-t-20">
+        <div class="col-xl-12 mg-t-20 mg-xl-t-0">
+            <div class="card card-table">
+                <div class="table-responsive p-3">
+                    <table id="datatable" class="table mg-b-0 tx-13">
+                        <thead>
+                            <tr class="tx-10">
+                                <th class="pd-y-5">Token Id</th>
+                                <th class="pd-y-5">Invoice No</th>
+
+                                <th class="pd-y-5"> NO. Of Tokens </th>
+                                <!-- <th class="pd-y-5">Date of Expiration</th>
+                                <th class="pd-y-5">Renewal on Maturity</th> -->
+                                <!-- <th class="pd-y-5">Document Name</th> -->
+                                <!-- <th *ngIf="user && user['role'] === 'manager'" class="pd-y-5">
+                                    Internal Approval Status
+                                </th> -->
+                                <!--<th *ngIf="user && user['role'] === 'manager'"  class="pd-y-5">
+                                    Customer Acknowledged
+                                </th>-->
+                                <th class="pd-y-5">
+                                    Documents
+                                </th>
+
+                                <th class="pd-y-5">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of coinList">
+                                <td>
+                                    {{ item.tokenId }}
+                                </td>
+                                <td>
+                                    {{ item.invoiceNo }}
+                                </td>
+                                <td>
+                                    {{ item.tokens }}
+                                </td>
+                                <!-- <td class="tx-12">
+                                    {{ item.date_of_Expiration }}
+                                </td>
+                                <td class="tx-12">
+                                    {{ item.renewal }}
+                                </td> -->
+                                <!-- <td class="tx-12 word_width">
+                  {{ item.agreement }} <br />
+                  {{ item.credit_Enhancement }} <br />
+                  {{ item.guarantee }}
+                </td> -->
+                                <!-- <td *ngIf="user && user['role'] === 'manager'" class="tx-12">
+                                    <div *ngIf="item.internal_approver === 1; else elseBlock">
+                                        Yes
+                                    </div>
+                                    <ng-template #elseBlock> No </ng-template>
+                                </td> -->
+                                <!--<td *ngIf="user && user['role'] === 'manager'" class="tx-12">
+                                    <div *ngIf="item.external_signer === 1; else elseBlock">
+                                        Yes
+                                    </div>
+                                    <ng-template #elseBlock> No </ng-template>
+                                </td>-->
+                                <td class="tx-12">
+                                    <div>
+                                        <a href="https://gateway.ipfs.io/ipfs/{{item.agreement1_id}}" target="_blank">
+                                            {{ item.agreement1 }}</a> <br />
+                                        <a href="https://gateway.ipfs.io/ipfs/{{item.agreement2_id}}" target="_blank">
+                                            {{ item.agreement2 }}</a> <br />
+                                        <a href="https://gateway.ipfs.io/ipfs/{{item.agreement3_id}}" target="_blank">
+                                            {{ item.agreement3 }}</a> <br />
+                                        <a href="https://gateway.ipfs.io/ipfs/{{item.agreement4_id}}" target="_blank">
+                                            {{ item.agreement4 }}</a>
+                                        <a *ngIf="item.agreement5 !== null" href="https://gateway.ipfs.io/ipfs/{{item.agreement5_id}}" target="_blank">
+                                            {{ item.agreement5 }}</a>
+                                    </div>
+                                </td>
+                                <td class="tx-12">
+                                    
+                                    
+                                    
+                                    
+                                    <div *ngIf="user && user['role'] === 'manager'">
+                                        <button *ngIf="item.tokenId === ''" [disabled]="item.vendor_signer != 1"
+                                            (click)="upload(item)" class="btn btn-primary bd-0">
+                                            Request Purchase
+                                        </button>
+                                    </div>
+
+                                    <div *ngIf="user && user['role'] === 'manager'">
+                                        <button *ngIf="item.tokenId !== '' && item.external_signer === 1 && item.agreement5 === null" (click)="testing(item)" class="btn btn-primary bd-0" title="Transfer" data-toggle="tooltip">
+                                            uploade document
+                                        </button>
+                                    </div>
+
+                                    <div *ngIf="user && user['role'] === 'vendor'" style="min-width: 78px">
+                                        <a *ngIf="item.vendor_signer != 1" [routerLink]="" (click)="approveVendor(item)" title="OK"
+                                            data-toggle="tooltip" class="tooltp btn btn-success btn-icon rounded-circle">
+                                            <div><i class="fa fa-check"></i></div>
+                                        </a>
+                                        &nbsp;
+                                        <a *ngIf="item.vendor_signer != 1" [routerLink]="" (click)="rejectVendor(item)" title="Reject"
+                                            data-toggle="tooltip" class="mr-1 tooltp btn btn-danger btn-icon rounded-circle">
+                                            <div><i class="fa fa-times"></i></div>
+                                        </a>
+                                        <a *ngIf="item.vendor_signer == 1">
+                                            <div>Accepted</div>
+                                        </a>
+                                    </div>
+
+                                    <div *ngIf="user && user['role'] === 'owner' && item.agreement5 !== null" style="min-width: 78px">
+                                        <a *ngIf="item.agreement5 !== null && item.owner_approver != 1" [routerLink]=""
+                                            (click)="approvOwner(item)" title="Approve" data-toggle="tooltip"
+                                            class="tooltp btn btn-success btn-icon rounded-circle">
+                                            <div><i class="fa fa-check"></i></div>
+                                        </a>
+                                        <a *ngIf="item.owner_approver != 1" [routerLink]=""
+                                            (click)="rejectOwner(item)" title="Reject" data-toggle="tooltip"
+                                            class="mr-1 tooltp btn btn-danger btn-icon rounded-circle">
+                                            <div><i class="fa fa-times"></i></div>
+                                        </a>
+                                        <a *ngIf="item.owner_approver == 1">
+                                            <div>Accepted</div>
+                                        </a>
+                                    </div>
+                                    <div *ngIf="user && user['role'] === 'external'" style="min-width: 78px">
+                                        <a *ngIf="item.tokenId !== '' && item.external_signer != 1" [routerLink]=""
+                                            (click)="approveExternal(item)" title="OK" data-toggle="tooltip"
+                                            class="tooltp btn btn-success btn-icon rounded-circle">
+                                            <div><i class="fa fa-check"></i></div>
+                                        </a>
+                                        &nbsp;
+                                        <a *ngIf="item.tokenId !== '' && item.external_signer != 1" [routerLink]=""
+                                            (click)="rejectExternal(item)" title="Reject" data-toggle="tooltip"
+                                            class="mr-1 tooltp btn btn-danger btn-icon rounded-circle">
+                                            <div><i class="fa fa-times"></i></div>
+                                        </a>
+                                        <a *ngIf="item.external_signer == 1">
+                                            <div>Accepted</div>
+                                        </a>
+                                    </div>
+
+                                    <div *ngIf="user && user['role'] === 'lender'" style="min-width: 78px">
+                                        <a *ngIf="item.agreement5 !== null && item.lender_approver != 1" [routerLink]="" (click)="approveLender(item)"
+                                            title="Approve" data-toggle="tooltip" class="tooltp btn btn-success btn-icon rounded-circle">
+                                            <div><i class="fa fa-check"></i></div>
+                                        </a>
+                                        <a *ngIf="item.agreement5 !== null && item.lender_approver != 1" [routerLink]="" (click)="rejectLender(item)"
+                                            title="Reject" data-toggle="tooltip" class="mr-1 tooltp btn btn-danger btn-icon rounded-circle">
+                                            <div><i class="fa fa-times"></i></div>
+                                        </a>
+                                        <a *ngIf="item.lender_approver == 1">
+                                            <div>Accepted</div>
+                                        </a>
+                                    </div>
+                                </td>
+
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- table-responsive -->
+            </div>
+            <!-- card -->
+        </div>
+        <!-- col-6 -->
+    </div>
+    <!-- row -->
+</div>
+<!-- container -->
+
+<!-- Modal for add doc -->
+<div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog modal-lg" style="width: 400px" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Uploade Document</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="form">
+                    <div class="form-group">
+                        <label class="form-control-label">Document(s) 5: <span class="tx-danger">*</span></label>
+                        <input class="form-control" formControlName="agreement5" type="file" name="agreement5"
+                            placeholder="Enter credit Agreement" id="document4" />
+                        <app-error-field [errorMsg]="getForm.agreement5"></app-error-field>
+                    </div>
+                    <!-- <div class="form-group">
+                        <label for="">Token Id</label>
+                        <input type="number" class="form-control" name="tokenId" id="tokenId" formControlName="tokenId"
+                            readonly />
+                        <app-error-field [errorMsg]="getForm.tokenId"></app-error-field>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Token Count</label>
+                        <input type="number" class="form-control" name="numberOfToken" id="numberOfToken"
+                            formControlName="numberOfToken" readonly />
+                        <app-error-field [errorMsg]="getForm.numberOfToken"></app-error-field>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Beneficiary Address</label>
+                        <input type="text" class="form-control" name="address" id="address" formControlName="address"
+                            placeholder="Enter Beneficiary Address" />
+                        <app-error-field [errorMsg]="getForm.address"></app-error-field>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Message (Public)</label>
+                        <input type="text" class="form-control" name="data" id="data" formControlName="data"
+                            placeholder="Enter Data" />
+                        <app-error-field [errorMsg]="getForm.data"></app-error-field>
+                    </div> -->
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" (click)="updateDocument()" class="btn btn-primary">
+                    Save
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

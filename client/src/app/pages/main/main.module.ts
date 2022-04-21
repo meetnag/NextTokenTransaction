@@ -21,6 +21,9 @@ import { AcceptPaymentComponent } from "./accept-payment/accept-payment.componen
 import { InvoiceTokenComponent } from './invoice-token/invoice-token.component';
 import { ListInvoiceTokenComponent } from './list-invoice-token/list-invoice-token.component';
 import { TransferTokenComponent } from './transfer-token/transfer-token.component';
+import { TaTokenizationComponent } from './ta-tokenization/ta-tokenization.component';
+import { ListTaTokenizationComponent } from './list-ta-tokenization/list-ta-tokenization.component';
+import { TransferTaTokenizationComponent } from './transfer-ta-tokenization/transfer-ta-tokenization.component';
 @NgModule({
   declarations: [
     MainComponent,
@@ -39,6 +42,9 @@ import { TransferTokenComponent } from './transfer-token/transfer-token.componen
     InvoiceTokenComponent,
     ListInvoiceTokenComponent,
     TransferTokenComponent,
+    TaTokenizationComponent,
+    ListTaTokenizationComponent,
+    TransferTaTokenizationComponent,
   ],
   imports: [
     CommonModule,

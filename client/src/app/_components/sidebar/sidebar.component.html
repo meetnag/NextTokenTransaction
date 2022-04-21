@@ -6,7 +6,7 @@
         </li> -->
 
   <li *ngIf="user && user['role'] != 'vendor'" class="sidebar-nav-item">
-    <a [routerLink]="['/app/invoice-Tokenization']" class="sidebar-nav-link"
+    <a [routerLink]="['/app/ta-Tokenization']" class="sidebar-nav-link"
       ><i class="icon ion-arrow-swap"></i> TA Tokenization</a
     >
   </li>
@@ -17,7 +17,7 @@
   </li>
   <li *ngIf="user && user['role'] != 'vendor2'" class="sidebar-nav-item">
     <a
-      [routerLink]="['/app/list-of-invoice-Tokenization']"
+      [routerLink]="['/app/list-of-ta-Tokenization']"
       routerLinkActive="router-link-active"
       class="sidebar-nav-link"
       ><i class="icon ion-arrow-swap"></i> List of TA Token Documents</a
@@ -83,7 +83,7 @@
     >
   </li> -->
   <li *ngIf="user && user['role'] != 'vendor2'" class="sidebar-nav-item">
-    <a [routerLink]="['/app/transfer-token']" routerLinkActive="router-link-active" class="sidebar-nav-link" 
+    <a [routerLink]="['/app/transfer-ta-token']" routerLinkActive="router-link-active" class="sidebar-nav-link" 
       ><i class="icon ion-arrow-swap"></i> Transfer TA Tokens</a
     >
   </li>

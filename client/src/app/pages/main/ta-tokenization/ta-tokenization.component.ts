@@ -1,0 +1,291 @@
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { UtilityService, TaTokenService } from "../../../_services";
+import { Router } from "@angular/router";
+import { formatDate } from "@angular/common";
+const IpfsHttpClient = require("ipfs-http-client");
+
+const ipfs = new IpfsHttpClient({
+  host: "ipfs.infura.io",
+  port: 5001,
+  protocol: "https",
+});
+
+@Component({
+  selector: "app-ta-tokenization",
+  templateUrl: "./ta-tokenization.component.html",
+  styleUrls: ["./ta-tokenization.component.css"],
+})
+export class TaTokenizationComponent implements OnInit {
+  constructor(
+    private utility: UtilityService,
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private invoiceService: TaTokenService
+  ) {
+    this.utility.updatePageSEO(
+      "TA Tokenization | NFT",
+      "TA Tokenization | NFT"
+    );
+  }
+
+  form: FormGroup;
+  userId = JSON.parse(localStorage.getItem("user"))["id"];
+  startDate = formatDate(
+    new Date(new Date().setDate(new Date().getDate() + 30)),
+    "yyyy-MM-dd",
+    "en"
+  );
+  isChecked = true;
+
+  ngOnInit(): void {
+    this.form = this.formBuilder.group({
+      invoiceNo: [null, Validators.required],
+      tokens: [null, Validators.required],
+      agreement1: [null, Validators.required],
+      agreement2: [null, Validators.required],
+      agreement3: [null, Validators.required],
+      agreement4: [null, Validators.required],
+      agreement5: [null],
+      data: [null, Validators.required],
+    });
+  }
+
+  get getForm() {
+    return this.form.controls;
+  }
+
+  convertDataURIToBinary(dataURI) {
+    var base64Index = dataURI.indexOf(";base64,") + ";base64,".length;
+    var base64 = dataURI.substring(base64Index);
+    var raw = window.atob(base64);
+    var rawLength = raw.length;
+    var array = new Uint8Array(new ArrayBuffer(rawLength));
+
+    for (let i = 0; i < rawLength; i++) {
+      array[i] = raw.charCodeAt(i);
+    }
+    return array;
+  }
+
+  async upload() {
+    const file = (<HTMLInputElement>document.getElementById("document"))
+      .files[0];
+
+    var self = this;
+    // const preview = document.getElementById("preview");
+    const reader = new FileReader();
+    let byteArray;
+
+    var fianalJSON = self.form.value;
+    fianalJSON["agreement1"] = file.name;
+
+    await reader.addEventListener(
+      "loadend",
+      async function () {
+        // convert image file to base64 string
+
+        byteArray = self.convertDataURIToBinary(reader.result);
+        self.utility.startLoader("Uploading document....");
+        var result = await ipfs.add(byteArray);
+        self.utility.startLoader(
+          "Document uploaded sucessfully. Please wait..."
+        );
+        self.utility.startLoader("Data encryption in progress. Please wait...");
+        console.log("=======> agreement1_id <=====", result["path"]);
+
+        fianalJSON["agreement1_id"] = result["path"];
+
+        await self.uploadfile1(fianalJSON);
+      },
+      false
+    );
+
+    if (file) {
+      await reader.readAsDataURL(file);
+    }
+  }
+  async uploadfile1(fianalJSON) {
+    const file1 = (<HTMLInputElement>document.getElementById("document1"))
+      .files[0];
+
+    var self = this;
+    const reader = new FileReader();
+    let byteArray1;
+
+    fianalJSON["agreement2"] = file1.name;
+    await reader.addEventListener(
+      "loadend",
+      async function () {
+        // convert image file to base64 string
+
+        byteArray1 = self.convertDataURIToBinary(reader.result);
+        self.utility.startLoader("Uploading document....1");
+        var result1 = await ipfs.add(byteArray1);
+        self.utility.startLoader(
+          "Document uploaded sucessfully. Please wait..."
+        );
+        self.utility.startLoader("Data encryption in progress. Please wait...");
+        console.log("=======> agreement2_id <=====", result1["path"]);
+        fianalJSON["agreement2_id"] = result1["path"];
+
+        await self.uploadfile2(fianalJSON);
+      },
+      false
+    );
+
+    if (file1) {
+      await reader.readAsDataURL(file1);
+    }
+  }
+
+  async uploadfile2(fianalJSON) {
+    const file2 = (<HTMLInputElement>document.getElementById("document2"))
+      .files[0];
+
+    // console.log("========> file2 <====", file2);
+    // console.log("========> file2 <====", file2.name);
+    var self = this;
+    const reader = new FileReader();
+    let byteArray2;
+
+    fianalJSON["agreement3"] = file2.name;
+    await reader.addEventListener(
+      "loadend",
+      async function () {
+        // convert image file to base64 string
+
+        byteArray2 = self.convertDataURIToBinary(reader.result);
+        self.utility.startLoader("Uploading document....2");
+        var result2 = await ipfs.add(byteArray2);
+        self.utility.startLoader(
+          "Document uploaded sucessfully. Please wait..."
+        );
+        self.utility.startLoader("Data encryption in progress. Please wait...");
+        console.log("=======> agreement3_id <=====", result2["path"]);
+        fianalJSON["agreement3_id"] = result2["path"];
+        await self.uploadfile3(fianalJSON);
+      },
+      false
+    );
+
+    if (file2) {
+      await reader.readAsDataURL(file2);
+    }
+  }
+  async uploadfile3(fianalJSON) {
+    const file3 = (<HTMLInputElement>document.getElementById("document3"))
+      .files[0];
+
+    // console.log("========> file2 <====", file2);
+    // console.log("========> file2 <====", file2.name);
+    var self = this;
+    const reader = new FileReader();
+    let byteArray2;
+
+    fianalJSON["agreement4"] = file3.name;
+    await reader.addEventListener(
+      "loadend",
+      async function () {
+        // convert image file to base64 string
+
+        byteArray2 = self.convertDataURIToBinary(reader.result);
+        self.utility.startLoader("Uploading document....3");
+        var result2 = await ipfs.add(byteArray2);
+        self.utility.startLoader(
+          "Document uploaded sucessfully. Please wait..."
+        );
+        self.utility.startLoader("Data encryption in progress. Please wait...");
+        console.log("=======> agreement4_id <=====", result2["path"]);
+        fianalJSON["agreement4_id"] = result2["path"];
+        await self.uploadfile4(fianalJSON);
+      },
+      false
+    );
+
+    if (file3) {
+      await reader.readAsDataURL(file3);
+    }
+  }
+  async uploadfile4(fianalJSON) {
+    const value = this.form.value.agreement5;
+    if (value) {
+      const file4 = (<HTMLInputElement>document.getElementById("document4"))
+        .files[0];
+
+      // console.log("========> file2 <====", file2);
+      // console.log("========> file2 <====", file2.name);
+      var self = this;
+      const reader = new FileReader();
+      let byteArray2;
+
+      fianalJSON["agreement5"] = file4.name;
+      await reader.addEventListener(
+        "loadend",
+        async function () {
+          // convert image file to base64 string
+
+          byteArray2 = self.convertDataURIToBinary(reader.result);
+          self.utility.startLoader("Uploading document....4");
+          var result2 = await ipfs.add(byteArray2);
+          self.utility.startLoader(
+            "Document uploaded sucessfully. Please wait..."
+          );
+          self.utility.startLoader(
+            "Data encryption in progress. Please wait..."
+          );
+          console.log("=======> agreement5_id <=====", result2["path"]);
+          fianalJSON["agreement5_id"] = result2["path"];
+          await self.createToken(fianalJSON);
+        },
+        false
+      );
+
+      if (file4) {
+        await reader.readAsDataURL(file4);
+      }
+    } else {
+      fianalJSON["agreement5_id"] = "";
+      await this.createToken(fianalJSON);
+    }
+  }
+
+  async createToken(data) {
+    console.log("===============createToken======> data <=====", data);
+    this.utility.startLoader();
+    this.saveToken({
+      user: this.userId,
+      tokenId: "",
+      invoiceNo: data.invoiceNo,
+      tokens: data.tokens,
+      agreement1: data.agreement1,
+      agreement2: data.agreement2,
+      agreement3: data.agreement3,
+      agreement4: data.agreement4,
+      agreement5: data.agreement5,
+      agreement1_id: data.agreement1_id,
+      agreement2_id: data.agreement2_id,
+      agreement3_id: data.agreement3_id,
+      agreement4_id: data.agreement4_id,
+      agreement5_id: data.agreement5_id,
+      description: data.data,
+    });
+  }
+
+  saveToken(data) {
+    this.invoiceService.createTaToken(data).subscribe(
+      (res) => {
+        this.utility.stopLoader();
+        this.utility.showSuccessAlert(
+          "Success",
+          "Invoice Token Request Created Successfully"
+        );
+        this.router.navigate(["/app/list-of-ta-Tokenization"]);
+      },
+      (error) => {
+        this.utility.stopLoader();
+        this.utility.showErrorAlert("Error", error);
+      }
+    );
+  }
+}

@@ -31,8 +31,8 @@ export class InvoiceTokenComponent implements OnInit {
     private mainComponent: MainComponent
   ) {
     this.utility.updatePageSEO(
-      "Invoice Tokenization | NFT",
-      "Invoice Tokenization | NFT"
+      "TA Tokenization | NFT",
+      "TA Tokenization | NFT"
     );
   }
   form: FormGroup;
@@ -51,6 +51,8 @@ export class InvoiceTokenComponent implements OnInit {
       agreement1: [null, Validators.required],
       agreement2: [null, Validators.required],
       agreement3: [null, Validators.required],
+      agreement4: [null, Validators.required],
+      agreement5: [null, Validators.required],
       data: [null, Validators.required],
     });
   }
@@ -206,13 +208,81 @@ export class InvoiceTokenComponent implements OnInit {
         self.utility.startLoader("Data encryption in progress. Please wait...");
         console.log("=======> agreement3_id <=====", result2["path"]);
         fianalJSON["agreement3_id"] = result2["path"];
-        await self.createToken(fianalJSON);
+        await self.uploadfile3(fianalJSON);
       },
       false
     );
 
     if (file2) {
       await reader.readAsDataURL(file2);
+    }
+  }
+  async uploadfile3(fianalJSON) {
+    const file3 = (<HTMLInputElement>document.getElementById("document4"))
+      .files[0];
+
+    // console.log("========> file2 <====", file2);
+    // console.log("========> file2 <====", file2.name);
+    var self = this;
+    const reader = new FileReader();
+    let byteArray2;
+
+    fianalJSON["agreement4"] = file3.name;
+    await reader.addEventListener(
+      "loadend",
+      async function () {
+        // convert image file to base64 string
+
+        byteArray2 = self.convertDataURIToBinary(reader.result);
+        self.utility.startLoader("Uploading document....3");
+        var result2 = await ipfs.add(byteArray2);
+        self.utility.startLoader(
+          "Document uploaded sucessfully. Please wait..."
+        );
+        self.utility.startLoader("Data encryption in progress. Please wait...");
+        console.log("=======> agreement4_id <=====", result2["path"]);
+        fianalJSON["agreement4_id"] = result2["path"];
+        await self.uploadfile4(fianalJSON);
+      },
+      false
+    );
+
+    if (file3) {
+      await reader.readAsDataURL(file3);
+    }
+  }
+  async uploadfile4(fianalJSON) {
+    const file4 = (<HTMLInputElement>document.getElementById("document5"))
+      .files[0];
+
+    // console.log("========> file2 <====", file2);
+    // console.log("========> file2 <====", file2.name);
+    var self = this;
+    const reader = new FileReader();
+    let byteArray2;
+
+    fianalJSON["agreement5"] = file4.name;
+    await reader.addEventListener(
+      "loadend",
+      async function () {
+        // convert image file to base64 string
+
+        byteArray2 = self.convertDataURIToBinary(reader.result);
+        self.utility.startLoader("Uploading document....4");
+        var result2 = await ipfs.add(byteArray2);
+        self.utility.startLoader(
+          "Document uploaded sucessfully. Please wait..."
+        );
+        self.utility.startLoader("Data encryption in progress. Please wait...");
+        console.log("=======> agreement5_id <=====", result2["path"]);
+        fianalJSON["agreement5_id"] = result2["path"];
+        await self.createToken(fianalJSON);
+      },
+      false
+    );
+
+    if (file4) {
+      await reader.readAsDataURL(file4);
     }
   }
 
@@ -224,7 +294,7 @@ export class InvoiceTokenComponent implements OnInit {
     //   const tokenId = await this.connectService.nextTokenId(); // comment this line
     //   const agr = data.agreement1 + data.agreement2 + data.agreement3;
     //   console.log("=====> agr <======",agr);
-      
+
     //   const resp = await this.connectService.createToken(
     //     data.tokens,
     //     agr,
@@ -242,9 +312,13 @@ export class InvoiceTokenComponent implements OnInit {
       agreement1: data.agreement1,
       agreement2: data.agreement2,
       agreement3: data.agreement3,
+      agreement4: data.agreement4,
+      agreement5: data.agreement5,
       agreement1_id: data.agreement1_id,
       agreement2_id: data.agreement2_id,
       agreement3_id: data.agreement3_id,
+      agreement4_id: data.agreement4_id,
+      agreement5_id: data.agreement5_id,
       description: data.data,
     });
     // }

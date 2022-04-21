@@ -16,7 +16,10 @@ import { AcceptPaymentComponent } from "./accept-payment/accept-payment.componen
 import { ListInvoiceTokenComponent } from "./list-invoice-token/list-invoice-token.component";
 import { InvoiceTokenComponent } from "./invoice-token/invoice-token.component";
 import { TransferTokenComponent } from "./transfer-token/transfer-token.component";
-
+import { TaTokenizationComponent } from "./ta-tokenization/ta-tokenization.component";
+import { ListTaTokenizationComponent } from "./list-ta-tokenization/list-ta-tokenization.component";
+import { TransferTaTokenizationComponent } from "./transfer-ta-tokenization/transfer-ta-tokenization.component";
+TransferTaTokenizationComponent;
 const routes: Routes = [
   {
     path: "",
@@ -35,8 +38,17 @@ const routes: Routes = [
       { path: "check-balance", component: BalanceComponent },
       { path: "accept-payment", component: AcceptPaymentComponent },
       { path: "invoice-Tokenization", component: InvoiceTokenComponent },
-      { path: "list-of-invoice-Tokenization", component: ListInvoiceTokenComponent },
+      {
+        path: "list-of-invoice-Tokenization",
+        component: ListInvoiceTokenComponent,
+      },
       { path: "transfer-token", component: TransferTokenComponent },
+      { path: "ta-Tokenization", component: TaTokenizationComponent },
+      {
+        path: "list-of-ta-Tokenization",
+        component: ListTaTokenizationComponent,
+      },
+      { path: "transfer-ta-token", component: TransferTaTokenizationComponent },
     ],
   },
 ];

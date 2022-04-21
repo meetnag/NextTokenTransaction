@@ -6,3 +6,4 @@ export * from "./connect.service";
 export * from "./transfer.service";
 export * from "./coin.service";
 export * from "./invoice.service";
+export * from "./ta-token.service";

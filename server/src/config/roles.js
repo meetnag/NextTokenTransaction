@@ -1,4 +1,4 @@
-const roles = ['admin', 'manager', 'owner', 'external', 'internal', 'vendor'];
+const roles = ['admin', 'manager', 'owner', 'external', 'internal', 'vendor', 'lender', 'invbuyer'];
 
 const roleRights = new Map();
 roleRights.set(roles[0], [
@@ -47,6 +47,24 @@ roleRights.set(roles[4], [
   'getInvoice',
 ]);
 roleRights.set(roles[5], [
+  'getUsers',
+  'manageUsers',
+  'manageTransfers',
+  'getTransfers',
+  'manageCoins',
+  'getCoins',
+  'findTransfers',
+]);
+roleRights.set(roles[6], [
+  'getUsers',
+  'manageUsers',
+  'manageTransfers',
+  'getTransfers',
+  'manageCoins',
+  'getCoins',
+  'findTransfers',
+]);
+roleRights.set(roles[7], [
   'getUsers',
   'manageUsers',
   'manageTransfers',

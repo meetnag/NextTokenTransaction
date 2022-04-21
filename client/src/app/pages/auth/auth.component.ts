@@ -56,14 +56,17 @@ export class AuthComponent implements OnInit {
             console.log("===> res <====", res);
             this.utility.showSuccessAlert("Success!", "Logged in successfully");
             if (res.user.role === "external") {
-              this.router.navigate(["app/list-of-invoice-Tokenization"]);
-            }else if (res.user.role === "internal" || res.user.role === "external") {
+              this.router.navigate(["app/list-of-ta-Tokenization"]);
+            } else if (
+              res.user.role === "internal" ||
+              res.user.role === "external"
+            ) {
               this.router.navigate(["app/list-token"]);
             } else if (res.user.role === "vendor") {
-              this.router.navigate(["app/accept-payment"]);
+              this.router.navigate(["app/list-of-ta-Tokenization"]);
             } else {
               // this.router.navigate(["app/issue-token"]);
-              this.router.navigate(["app/invoice-Tokenization"]);
+              this.router.navigate(["app/ta-Tokenization"]);
             }
           },
           (error) => {
