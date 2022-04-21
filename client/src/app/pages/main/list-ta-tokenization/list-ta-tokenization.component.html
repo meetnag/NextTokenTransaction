@@ -33,6 +33,7 @@
                                 </th>
 
                                 <th class="pd-y-5">Action</th>
+                                <th class="pd-y-5">edit</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -85,9 +86,6 @@
                                 </td>
                                 <td class="tx-12">
                                     
-                                    
-                                    
-                                    
                                     <div *ngIf="user && user['role'] === 'manager'">
                                         <button *ngIf="item.tokenId === ''" [disabled]="item.vendor_signer != 1"
                                             (click)="upload(item)" class="btn btn-primary bd-0">
@@ -95,11 +93,13 @@
                                         </button>
                                     </div>
 
-                                    <div *ngIf="user && user['role'] === 'manager'">
-                                        <button *ngIf="item.tokenId !== '' && item.external_signer === 1 && item.agreement5 === null" (click)="testing(item)" class="btn btn-primary bd-0" title="Transfer" data-toggle="tooltip">
+                                    <!-- <div *ngIf="user && user['role'] === 'manager'">
+                                        <button *ngIf="item.agreement5 === null" (click)="testing(item)" class="btn btn-primary bd-0" title="Transfer"
+                                            data-toggle="tooltip">
                                             uploade document
                                         </button>
-                                    </div>
+                                    </div> -->
+                                   
 
                                     <div *ngIf="user && user['role'] === 'vendor'" style="min-width: 78px">
                                         <a *ngIf="item.vendor_signer != 1" [routerLink]="" (click)="approveVendor(item)" title="OK"
@@ -116,8 +116,8 @@
                                         </a>
                                     </div>
 
-                                    <div *ngIf="user && user['role'] === 'owner' && item.agreement5 !== null" style="min-width: 78px">
-                                        <a *ngIf="item.agreement5 !== null && item.owner_approver != 1" [routerLink]=""
+                                    <div *ngIf="user && user['role'] === 'owner' " style="min-width: 78px">
+                                        <a *ngIf="item.owner_approver != 1" [routerLink]=""
                                             (click)="approvOwner(item)" title="Approve" data-toggle="tooltip"
                                             class="tooltp btn btn-success btn-icon rounded-circle">
                                             <div><i class="fa fa-check"></i></div>
@@ -132,13 +132,13 @@
                                         </a>
                                     </div>
                                     <div *ngIf="user && user['role'] === 'external'" style="min-width: 78px">
-                                        <a *ngIf="item.tokenId !== '' && item.external_signer != 1" [routerLink]=""
+                                        <a *ngIf="item.external_signer != 1" [routerLink]=""
                                             (click)="approveExternal(item)" title="OK" data-toggle="tooltip"
                                             class="tooltp btn btn-success btn-icon rounded-circle">
                                             <div><i class="fa fa-check"></i></div>
                                         </a>
                                         &nbsp;
-                                        <a *ngIf="item.tokenId !== '' && item.external_signer != 1" [routerLink]=""
+                                        <a *ngIf="item.external_signer != 1" [routerLink]=""
                                             (click)="rejectExternal(item)" title="Reject" data-toggle="tooltip"
                                             class="mr-1 tooltp btn btn-danger btn-icon rounded-circle">
                                             <div><i class="fa fa-times"></i></div>
@@ -149,11 +149,11 @@
                                     </div>
 
                                     <div *ngIf="user && user['role'] === 'lender'" style="min-width: 78px">
-                                        <a *ngIf="item.agreement5 !== null && item.lender_approver != 1" [routerLink]="" (click)="approveLender(item)"
+                                        <a *ngIf="item.lender_approver != 1" [routerLink]="" (click)="approveLender(item)"
                                             title="Approve" data-toggle="tooltip" class="tooltp btn btn-success btn-icon rounded-circle">
                                             <div><i class="fa fa-check"></i></div>
                                         </a>
-                                        <a *ngIf="item.agreement5 !== null && item.lender_approver != 1" [routerLink]="" (click)="rejectLender(item)"
+                                        <a *ngIf="item.lender_approver != 1" [routerLink]="" (click)="rejectLender(item)"
                                             title="Reject" data-toggle="tooltip" class="mr-1 tooltp btn btn-danger btn-icon rounded-circle">
                                             <div><i class="fa fa-times"></i></div>
                                         </a>
@@ -162,7 +162,14 @@
                                         </a>
                                     </div>
                                 </td>
-
+                                <td class="tx-12" >
+                                    <div *ngIf="user && user['role'] === 'manager'">
+                                        <button *ngIf="item.agreement5 === null" (click)="testing(item)" class="btn btn-primary bd-0" title="Transfer"
+                                            data-toggle="tooltip">
+                                            uploade document
+                                        </button>
+                                    </div>
+                                </td>
 
                             </tr>
                         </tbody>
