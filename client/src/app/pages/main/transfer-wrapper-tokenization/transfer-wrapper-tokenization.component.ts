@@ -68,9 +68,9 @@ export class TransferWrapperTokenizationComponent implements OnInit {
     );
 
     if (this.mainComponent.userWalletAddress === this.connectService.account) {
-      const respApprove = await this.connectService.setApprovedByManager();
+      // const respApprove = await this.connectService.setApprovedByManager();
       //commented above so that Robo to kars can be executed as well.
-      // const respApprove = true;
+      const respApprove = true;
 
       console.log("===========> 2respApprove <==========", respApprove);
       if (respApprove) {

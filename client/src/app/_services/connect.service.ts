@@ -27,10 +27,16 @@ export class ConnectService {
         );
       }
 
-      console.log("transfer.service :: constructor :: window.ethereum", window.ethereum);
+      console.log(
+        "transfer.service :: constructor :: window.ethereum",
+        window.ethereum
+      );
       window.web3 = new Web3(window.ethereum);
       console.log("transfer.service :: constructor :: this.web3", this.web3);
-      console.log("transfer.service :: constructor :: window.web3", window.web3);
+      console.log(
+        "transfer.service :: constructor :: window.web3",
+        window.web3
+      );
       console.log(this.web3);
       this.enable = this.enableMetaMaskAccount();
       console.log(this.enable);
@@ -223,11 +229,10 @@ export class ConnectService {
       .catch((error) => {
         console.log("error==========", error);
       });
-      console.log("end of setapproverbyowner", "yes");
+    console.log("end of setapproverbyowner", "yes");
 
     return response;
   }
-
 
   public async safeTransferFrom(to, tokenId, tokenAmt, data) {
     await this.connectContract();
@@ -245,6 +250,9 @@ export class ConnectService {
     return response;
   }
   public async safeTransferFromTo(fromAccount, to, tokenId, tokenAmt, data) {
+    console.log("safeTransferFromTo :: this.account :: ", this.account);
+    console.log("safeTransferFromTo :: fromAccount :: ", fromAccount);
+
     await this.connectContract();
     var hexData = await this.convertJSONtoHEX(data);
     var response = await this.contract.methods
