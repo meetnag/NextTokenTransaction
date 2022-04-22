@@ -87,18 +87,26 @@ export class ListWrapperTokenizationComponent implements OnInit {
       "  Reference: " +
       str.substring(str.length - 3, str.length) +
       " | " +
-      iteam.numberOfToken +
+      iteam.tokens +
       " | " +
       this.todayDate;
 
-    console.log("ListTaTokenizationComponent : ar_account :: ", agr);
+    console.log(
+      "ListWrapperTokenizationComponent : ar_account :: agr :: ",
+      agr
+    );
+    console.log(
+      "ListWrapperTokenizationComponent : ar_account :: ",
+      this.connectService.account
+    );
 
     const resp = await this.connectService.recordOnBlockchain(
-      "0x39a1531a8e244c79b71d38cc276d443c63091e0c",
+      // "0x39a1531a8e244c79b71d38cc276d443c63091e0c",
+      this.connectService.account,
       obfuscatedEmail,
       agr
     );
-    console.log("======ListTaTokenizationComponent=====> resp :: ", resp);
+    console.log("======ListWrapperTokenizationComponent=====> resp :: ", resp);
     this.utility.stopLoader();
 
     return resp;
