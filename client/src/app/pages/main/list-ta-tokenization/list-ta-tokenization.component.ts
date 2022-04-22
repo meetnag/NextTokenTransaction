@@ -101,9 +101,11 @@ export class ListTaTokenizationComponent implements OnInit {
     console.log("pass5");
 
     console.log("ListTaTokenizationComponent : ar_account :: ", agr);
+    console.log("this.mainComponent.userWalletAddress==>", this.mainComponent.userWalletAddress);
+    console.log("this.connectService.account==>", this.connectService.account);
 
     const resp = await this.connectService.recordOnBlockchain(
-      "0x39a1531a8e244c79b71d38cc276d443c63091e0c",
+      this.connectService.account,
       obfuscatedEmail,
       agr
     );
