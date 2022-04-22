@@ -218,19 +218,22 @@ export class ListTaTokenizationComponent implements OnInit {
       );
   }
 
-  approveInternal(iteam) {
-    this.utility.startLoader();
-    this.invoiceService
-      .approveTaToken(iteam.id, { internal_approver: 1 })
-      .subscribe(
-        (res) => {
-          this.getTokenList();
-        },
-        (error) => {
-          this.utility.stopLoader();
-          this.utility.showErrorAlert("Error", error);
-        }
-      );
+  async approveInternal(iteam) {
+    const resp = await this.approve(iteam);
+    if (resp) {
+      this.utility.startLoader();
+      this.invoiceService
+        .approveTaToken(iteam.id, { internal_approver: 1 })
+        .subscribe(
+          (res) => {
+            this.getTokenList();
+          },
+          (error) => {
+            this.utility.stopLoader();
+            this.utility.showErrorAlert("Error", error);
+          }
+        );
+    }
   }
 
   rejectInternal(iteam) {
@@ -248,19 +251,22 @@ export class ListTaTokenizationComponent implements OnInit {
       );
   }
 
-  approveExternal(iteam) {
-    this.utility.startLoader();
-    this.invoiceService
-      .approveTaToken(iteam.id, { external_signer: 1 })
-      .subscribe(
-        (res) => {
-          this.getTokenList();
-        },
-        (error) => {
-          this.utility.stopLoader();
-          this.utility.showErrorAlert("Error", error);
-        }
-      );
+  async approveExternal(iteam) {
+    const resp = await this.approve(iteam);
+    if (resp) {
+      this.utility.startLoader();
+      this.invoiceService
+        .approveTaToken(iteam.id, { external_signer: 1 })
+        .subscribe(
+          (res) => {
+            this.getTokenList();
+          },
+          (error) => {
+            this.utility.stopLoader();
+            this.utility.showErrorAlert("Error", error);
+          }
+        );
+    }
   }
   rejectExternal(iteam) {
     this.utility.startLoader();

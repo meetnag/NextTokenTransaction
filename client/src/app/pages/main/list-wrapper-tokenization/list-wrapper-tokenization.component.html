@@ -82,7 +82,25 @@
                                         </a>
                                     </div>
 
-                                    <div *ngIf="user && user['role'] === 'owner' && item.invbuyer_signer == 1"
+                                    <div *ngIf="user && user['role'] === 'owner' " style="min-width: 78px">
+                                        <a *ngIf="item.owner_approver != 1" [routerLink]="" (click)="approvOwner(item)" title="Approve"
+                                            data-toggle="tooltip" class="tooltp btn btn-success btn-icon rounded-circle">
+                                            <div><i class="fa fa-check"></i></div>
+                                        </a>
+                                        &nbsp;
+                                        <a *ngIf="item.owner_approver != 1" [routerLink]="" (click)="rejectOwner(item)" title="Reject" data-toggle="tooltip"
+                                            class="mr-1 tooltp btn btn-danger btn-icon rounded-circle">
+                                            <div><i class="fa fa-times"></i></div>
+                                        </a>
+                                        <a *ngIf="item.owner_approver == 1">
+                                            <div>Accepted</div>
+                                            <button (click)="cashTxnComplete(item)" class="btn btn-primary bd-0">
+                                                Cash TXN Complete
+                                            </button>
+                                        </a>
+                                    </div>
+
+                                    <!-- <div *ngIf="user && user['role'] === 'owner'"
                                         style="min-width: 78px">
                                         <a *ngIf="item.owner_approver != 1" [routerLink]=""
                                             (click)="approvOwner(item)" title="Approve" data-toggle="tooltip"
@@ -102,7 +120,7 @@
                                                 </button>
                                             </div>
                                         </a>
-                                    </div>
+                                    </div> -->
                                 </td>
                             </tr>
                         </tbody>
