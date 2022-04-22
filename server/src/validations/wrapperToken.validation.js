@@ -10,14 +10,8 @@ const createCoin = {
     description: Joi.required(),
     agreement1: Joi.required(),
     agreement2: Joi.required(),
-    agreement3: Joi.required(),
-    agreement4: Joi.required(),
-    agreement5: Joi.required().default('null'),
     agreement1_id: Joi.required(),
     agreement2_id: Joi.required(),
-    agreement3_id: Joi.required(),
-    agreement4_id: Joi.required(),
-    agreement5_id: Joi.required().default('null'),
   }),
 };
 
@@ -48,12 +42,10 @@ const updateCoin = {
     .keys({
       user: Joi.allow('', null).custom(objectId),
       tokenId: Joi.allow('', null),
-      numberOfToken: Joi.allow('', null),
+      tokens: Joi.allow('', null),
       description: Joi.allow('', null),
       uri: Joi.allow('', null),
       address: Joi.allow('', null),
-      agreement5: Joi.allow('', null),
-      agreement5_id: Joi.allow('', null),
       owner_approver: Joi.allow('', null),
       invbuyer_signer: Joi.allow('', null),
     })
@@ -74,8 +66,6 @@ const approveCoin = {
     .keys({
       owner_approver: Joi.allow('', null),
       invbuyer_signer: Joi.allow('', null),
-      agreement5: Joi.allow('', null),
-      agreement5_id: Joi.allow('', null),
     })
     .min(1),
 };

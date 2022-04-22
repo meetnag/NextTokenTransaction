@@ -44,9 +44,6 @@ export class WrapperTokenizationComponent implements OnInit {
       tokens: [null, Validators.required],
       agreement1: [null, Validators.required],
       agreement2: [null, Validators.required],
-      agreement3: [null, Validators.required],
-      agreement4: [null, Validators.required],
-      agreement5: [null, Validators.required],
       data: [null, Validators.required],
     });
   }
@@ -129,124 +126,13 @@ export class WrapperTokenizationComponent implements OnInit {
         console.log("=======> agreement2_id <=====", result1["path"]);
         fianalJSON["agreement2_id"] = result1["path"];
 
-        await self.uploadfile2(fianalJSON);
+        await self.createToken(fianalJSON);
       },
       false
     );
 
     if (file1) {
       await reader.readAsDataURL(file1);
-    }
-  }
-
-  async uploadfile2(fianalJSON) {
-    const file2 = (<HTMLInputElement>document.getElementById("document2"))
-      .files[0];
-
-    // console.log("========> file2 <====", file2);
-    // console.log("========> file2 <====", file2.name);
-    var self = this;
-    const reader = new FileReader();
-    let byteArray2;
-
-    fianalJSON["agreement3"] = file2.name;
-    await reader.addEventListener(
-      "loadend",
-      async function () {
-        // convert image file to base64 string
-
-        byteArray2 = self.convertDataURIToBinary(reader.result);
-        self.utility.startLoader("Uploading document....2");
-        var result2 = await ipfs.add(byteArray2);
-        self.utility.startLoader(
-          "Document uploaded sucessfully. Please wait..."
-        );
-        self.utility.startLoader("Data encryption in progress. Please wait...");
-        console.log("=======> agreement3_id <=====", result2["path"]);
-        fianalJSON["agreement3_id"] = result2["path"];
-        await self.uploadfile3(fianalJSON);
-      },
-      false
-    );
-
-    if (file2) {
-      await reader.readAsDataURL(file2);
-    }
-  }
-  async uploadfile3(fianalJSON) {
-    const file3 = (<HTMLInputElement>document.getElementById("document3"))
-      .files[0];
-
-    // console.log("========> file2 <====", file2);
-    // console.log("========> file2 <====", file2.name);
-    var self = this;
-    const reader = new FileReader();
-    let byteArray2;
-
-    fianalJSON["agreement4"] = file3.name;
-    await reader.addEventListener(
-      "loadend",
-      async function () {
-        // convert image file to base64 string
-
-        byteArray2 = self.convertDataURIToBinary(reader.result);
-        self.utility.startLoader("Uploading document....3");
-        var result2 = await ipfs.add(byteArray2);
-        self.utility.startLoader(
-          "Document uploaded sucessfully. Please wait..."
-        );
-        self.utility.startLoader("Data encryption in progress. Please wait...");
-        console.log("=======> agreement4_id <=====", result2["path"]);
-        fianalJSON["agreement4_id"] = result2["path"];
-        await self.uploadfile4(fianalJSON);
-      },
-      false
-    );
-
-    if (file3) {
-      await reader.readAsDataURL(file3);
-    }
-  }
-  async uploadfile4(fianalJSON) {
-    const value = this.form.value.agreement5;
-    if (value) {
-      const file4 = (<HTMLInputElement>document.getElementById("document4"))
-        .files[0];
-
-      // console.log("========> file2 <====", file2);
-      // console.log("========> file2 <====", file2.name);
-      var self = this;
-      const reader = new FileReader();
-      let byteArray2;
-
-      fianalJSON["agreement5"] = file4.name;
-      await reader.addEventListener(
-        "loadend",
-        async function () {
-          // convert image file to base64 string
-
-          byteArray2 = self.convertDataURIToBinary(reader.result);
-          self.utility.startLoader("Uploading document....4");
-          var result2 = await ipfs.add(byteArray2);
-          self.utility.startLoader(
-            "Document uploaded sucessfully. Please wait..."
-          );
-          self.utility.startLoader(
-            "Data encryption in progress. Please wait..."
-          );
-          console.log("=======> agreement5_id <=====", result2["path"]);
-          fianalJSON["agreement5_id"] = result2["path"];
-          await self.createToken(fianalJSON);
-        },
-        false
-      );
-
-      if (file4) {
-        await reader.readAsDataURL(file4);
-      }
-    } else {
-      fianalJSON["agreement5_id"] = "";
-      await this.createToken(fianalJSON);
     }
   }
 

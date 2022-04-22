@@ -52,14 +52,7 @@
                                         <a href="https://gateway.ipfs.io/ipfs/{{item.agreement1_id}}" target="_blank">
                                             {{ item.agreement1 }}</a> <br />
                                         <a href="https://gateway.ipfs.io/ipfs/{{item.agreement2_id}}" target="_blank">
-                                            {{ item.agreement2 }}</a> <br />
-                                        <a href="https://gateway.ipfs.io/ipfs/{{item.agreement3_id}}" target="_blank">
-                                            {{ item.agreement3 }}</a> <br />
-                                        <a href="https://gateway.ipfs.io/ipfs/{{item.agreement4_id}}" target="_blank">
-                                            {{ item.agreement4 }}</a>
-                                        <a *ngIf="item.agreement5 !== null"
-                                            href="https://gateway.ipfs.io/ipfs/{{item.agreement5_id}}" target="_blank">
-                                            {{ item.agreement5 }}</a>
+                                            {{ item.agreement2 }}</a> 
                                     </div>
                                 </td>
                                 <td class="tx-12">
@@ -70,14 +63,7 @@
                                         </button>
                                     </div>
 
-                                    <!-- <div *ngIf="user && user['role'] === 'manager'">
-                                        <button
-                                            *ngIf="item.tokenId !== '' && item.external_signer === 1 && item.agreement5 === null"
-                                            (click)="testing(item)" class="btn btn-primary bd-0" title="Transfer"
-                                            data-toggle="tooltip">
-                                            uploade document
-                                        </button>
-                                    </div> -->
+                                    
 
                                     <div *ngIf="user && user['role'] === 'invbuyer'" style="min-width: 78px">
                                         <a *ngIf="item.invbuyer_signer != 1" [routerLink]="" (click)="approveInvbuyer(item)"

@@ -48,7 +48,7 @@ const updateCoin = {
     .keys({
       user: Joi.allow('', null).custom(objectId),
       tokenId: Joi.allow('', null),
-      numberOfToken: Joi.allow('', null),
+      tokens: Joi.allow('', null),
       description: Joi.allow('', null),
       uri: Joi.allow('', null),
       address: Joi.allow('', null),
