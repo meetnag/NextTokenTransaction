@@ -81,7 +81,7 @@
                                         <a href="https://gateway.ipfs.io/ipfs/{{item.agreement4_id}}" target="_blank">
                                             {{ item.agreement4 }}</a>
                                         <a *ngIf="item.agreement5 !== null" href="https://gateway.ipfs.io/ipfs/{{item.agreement5_id}}" target="_blank">
-                                            {{ item.agreement5 }}</a>
+                                            <br />{{ item.agreement5 }}</a>
                                     </div>
                                 </td>
                                 <td class="tx-12">
@@ -102,7 +102,7 @@
                                    
 
                                     <div *ngIf="user && user['role'] === 'vendor'" style="min-width: 78px">
-                                        <a *ngIf="item.vendor_signer != 1" [routerLink]="" (click)="approveVendor(item)" title="OK"
+                                        <a *ngIf="item.vendor_signer != 1" [routerLink]="" (click)="approveVendor(item)" title="Approve"
                                             data-toggle="tooltip" class="tooltp btn btn-success btn-icon rounded-circle">
                                             <div><i class="fa fa-check"></i></div>
                                         </a>
@@ -122,6 +122,7 @@
                                             class="tooltp btn btn-success btn-icon rounded-circle">
                                             <div><i class="fa fa-check"></i></div>
                                         </a>
+                                        &nbsp;
                                         <a *ngIf="item.owner_approver != 1" [routerLink]=""
                                             (click)="rejectOwner(item)" title="Reject" data-toggle="tooltip"
                                             class="mr-1 tooltp btn btn-danger btn-icon rounded-circle">
@@ -133,7 +134,7 @@
                                     </div>
                                     <div *ngIf="user && user['role'] === 'external'" style="min-width: 78px">
                                         <a *ngIf="item.external_signer != 1" [routerLink]=""
-                                            (click)="approveExternal(item)" title="OK" data-toggle="tooltip"
+                                            (click)="approveExternal(item)" title="Approve" data-toggle="tooltip"
                                             class="tooltp btn btn-success btn-icon rounded-circle">
                                             <div><i class="fa fa-check"></i></div>
                                         </a>
@@ -153,6 +154,7 @@
                                             title="Approve" data-toggle="tooltip" class="tooltp btn btn-success btn-icon rounded-circle">
                                             <div><i class="fa fa-check"></i></div>
                                         </a>
+                                        &nbsp;
                                         <a *ngIf="item.lender_approver != 1" [routerLink]="" (click)="rejectLender(item)"
                                             title="Reject" data-toggle="tooltip" class="mr-1 tooltp btn btn-danger btn-icon rounded-circle">
                                             <div><i class="fa fa-times"></i></div>
@@ -164,9 +166,9 @@
                                 </td>
                                 <td *ngIf="user && user['role'] === 'manager'" class="tx-12" >
                                     <div >
-                                        <button *ngIf="item.agreement5 === null" (click)="testing(item)" class="btn btn-primary bd-0" title="Transfer"
+                                        <button *ngIf="item.agreement5 === null" (click)="testing(item)" class="btn btn-primary bd-0" title="Upload CA Document"
                                             data-toggle="tooltip">
-                                            uploade document
+                                            Upload Document
                                         </button>
                                     </div>
                                 </td>
@@ -190,7 +192,7 @@
     <div class="modal-dialog modal-lg" style="width: 400px" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Uploade Document</h5>
+                <h5 class="modal-title">Upload Document</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

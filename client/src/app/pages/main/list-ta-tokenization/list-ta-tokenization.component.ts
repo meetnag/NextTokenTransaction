@@ -100,15 +100,17 @@ export class ListTaTokenizationComponent implements OnInit {
       this.todayDate;
     console.log("pass5");
 
-    console.log("ListTaTokenizationComponent : ar_account :: agr :: ", agr);
+    // "0x39a1531a8e244c79b71d38cc276d443c63091e0c",
+
+    console.log("ListTaTokenizationComponent : ar_account :: ", agr);
     console.log(
-      "ListTaTokenizationComponent : ar_account :: ",
-      this.connectService.account
+      "this.mainComponent.userWalletAddress==>",
+      this.mainComponent.userWalletAddress
     );
+    console.log("this.connectService.account==>", this.connectService.account);
 
     const resp = await this.connectService.recordOnBlockchain(
       this.connectService.account,
-      // "0x39a1531a8e244c79b71d38cc276d443c63091e0c",
       obfuscatedEmail,
       agr
     );
