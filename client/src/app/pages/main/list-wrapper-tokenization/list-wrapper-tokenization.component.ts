@@ -72,7 +72,7 @@ export class ListWrapperTokenizationComponent implements OnInit {
 
   async approve(iteam) {
     this.utility.startLoader();
-    console.log("===========> this =", this);
+    console.log("========ListWrapperTokenizationComponent===> this =");
     var str = iteam.invoiceNo;
     // var index = this.useremail.indexOf( "@");
     var i = this.useremail.indexOf("@");
@@ -98,6 +98,10 @@ export class ListWrapperTokenizationComponent implements OnInit {
     console.log(
       "ListWrapperTokenizationComponent : ar_account :: ",
       this.connectService.account
+    );
+    console.log(
+      "ListWrapperTokenizationComponent : this.mainComponent.userWalletAddress :: ",
+      this.mainComponent.userWalletAddress
     );
 
     const resp = await this.connectService.recordOnBlockchain(
@@ -226,10 +230,18 @@ export class ListWrapperTokenizationComponent implements OnInit {
     }
   }
 
-  cashTxnComplete() {
-    this.utility.showSuccessAlert(
-      "Success",
-      "I hereby Consent to the Completion of the Cash Transaction."
-    );
+  async cashTxnComplete(iteam) {
+    const resp = await this.approve(iteam);
+    if (resp) {
+      this.utility.showSuccessAlert(
+        "Success",
+        "I here by Consent to the Completion of the Cash Transaction."
+      );
+    } else {
+      this.utility.showErrorAlert(
+        "Error",
+        "I here by can't Consent to the Completion of the Cash Transaction."
+      );
+    }
   }
 }

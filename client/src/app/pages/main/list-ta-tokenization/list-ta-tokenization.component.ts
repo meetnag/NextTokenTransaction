@@ -72,7 +72,7 @@ export class ListTaTokenizationComponent implements OnInit {
 
   async approve(iteam) {
     this.utility.startLoader();
-    console.log("===========> this =", this);
+    console.log("===========> this =");
     console.log("===========> iteam =", iteam);
     var str = iteam.invoiceNo;
     console.log("pass");
@@ -103,10 +103,13 @@ export class ListTaTokenizationComponent implements OnInit {
     console.log("ListTaTokenizationComponent : ar_account :: agr :: ", agr);
 
     console.log(
-      "this.mainComponent.userWalletAddress==>",
+      "ListTaTokenizationComponent : this.mainComponent.userWalletAddress==>",
       this.mainComponent.userWalletAddress
     );
-    console.log("this.connectService.account==>", this.connectService.account);
+    console.log(
+      "ListTaTokenizationComponent : this.connectService.account==>",
+      this.connectService.account
+    );
 
     const resp = await this.connectService.recordOnBlockchain(
       this.connectService.account,
