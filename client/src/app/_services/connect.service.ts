@@ -222,8 +222,8 @@ export class ConnectService {
     await this.connectContract();
     var response = await this.contract.methods
       .setApprovedByowner()
-      // .send({ from: this.account })
-      .send({ from: '0x47Bd9304B78863140787e2A6057e1212A6979F7F' })
+      .send({ from: this.account })
+      //.send({ from: '0x47Bd9304B78863140787e2A6057e1212A6979F7F' })
       .once("receipt", (receipt) => {
         console.log("receipt==========", receipt);
       })

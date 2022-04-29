@@ -5,8 +5,9 @@
 export const environment = {
   production: false,
   API_BASE_URL: 'http://localhost:3001/v1/',
-  CONTRACT_ADDRESS: '0xA358C859cFccA8d8c8f3e90FC70fCb27110a9C1e',
+  CONTRACT_ADDRESS: '0xA3D3f6dbD457465bBa6a49d04877730a1149C365',
 };
+
 
 /*
  * For easier debugging in development mode, you can import the following file

@@ -19,8 +19,8 @@ export class TransferWrapperTokenizationComponent implements OnInit {
     private mainComponent: MainComponent
   ) {
     this.utility.updatePageSEO(
-      "Transfer Wrapper Token | NFT",
-      "Transfer Wrapper Token | NFT"
+      "Transfer Wrapper Tokens | NFT",
+      "Transfer Wrapper Tokens | NFT"
     );
   }
   form: FormGroup;
@@ -93,7 +93,7 @@ export class TransferWrapperTokenizationComponent implements OnInit {
 
           this.utility.showSuccessAlert(
             "Success",
-            "Wrapper Token Transfer Successfully"
+            "Wrapper Tokens Transferred Successfully"
           );
         }
       } else {

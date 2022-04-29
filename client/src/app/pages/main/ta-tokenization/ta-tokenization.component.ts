@@ -278,7 +278,7 @@ export class TaTokenizationComponent implements OnInit {
         this.utility.stopLoader();
         this.utility.showSuccessAlert(
           "Success",
-          "Ta Token Request Created Successfully"
+          "TA Tokens Request Created Successfully"
         );
         this.router.navigate(["/app/list-of-ta-Tokenization"]);
       },
