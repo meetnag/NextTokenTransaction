@@ -148,7 +148,7 @@ export class TransferTokenComponent implements OnInit {
 
         this.utility.showSuccessAlert(
           "Success",
-          "Token Transfer Successfully"
+          "Tokens Transferred Successfully"
         );
       }
     } else {

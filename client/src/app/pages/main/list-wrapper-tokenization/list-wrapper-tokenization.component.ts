@@ -235,12 +235,12 @@ export class ListWrapperTokenizationComponent implements OnInit {
     if (resp) {
       this.utility.showSuccessAlert(
         "Success",
-        "I here by Consent to the Completion of the Cash Transaction."
+        "I consent to the completion of the cash transaction by signing this document."
       );
     } else {
       this.utility.showErrorAlert(
         "Error",
-        "I here by can't Consent to the Completion of the Cash Transaction."
+        "I cannot consent to the completion of the Cash Transaction."
       );
     }
   }
