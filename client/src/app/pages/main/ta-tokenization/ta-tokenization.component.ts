@@ -280,11 +280,12 @@ export class TaTokenizationComponent implements OnInit {
         data.agreement2 +
         "   " +
         data.agreement3 +
-        "  ";
+        "  " + 
+        data.agreement4;
       const resp = await this.connectService.createToken(
         data.tokens, //numberOfToken,
         agr,
-        data.description
+        data.data
       );
       // const resp = true;
       // const tokenId = 5241;
