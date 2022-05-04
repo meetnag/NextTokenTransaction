@@ -1,6 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { UtilityService, TaTokenService } from "../../../_services";
+import {
+  UtilityService,
+  TaTokenService,
+  ConnectService,
+} from "../../../_services";
+import { MainComponent } from "../main.component";
 import { Router } from "@angular/router";
 import { formatDate } from "@angular/common";
 const IpfsHttpClient = require("ipfs-http-client");
@@ -21,6 +26,8 @@ export class TaTokenizationComponent implements OnInit {
     private utility: UtilityService,
     private formBuilder: FormBuilder,
     private router: Router,
+    private mainComponent: MainComponent,
+    private connectService: ConnectService,
     private invoiceService: TaTokenService
   ) {
     this.utility.updatePageSEO(
@@ -253,23 +260,71 @@ export class TaTokenizationComponent implements OnInit {
   async createToken(data) {
     console.log("===============createToken======> data <=====", data);
     this.utility.startLoader();
-    this.saveToken({
-      user: this.userId,
-      tokenId: "",
-      invoiceNo: data.invoiceNo,
-      tokens: data.tokens,
-      agreement1: data.agreement1,
-      agreement2: data.agreement2,
-      agreement3: data.agreement3,
-      agreement4: data.agreement4,
-      agreement5: data.agreement5,
-      agreement1_id: data.agreement1_id,
-      agreement2_id: data.agreement2_id,
-      agreement3_id: data.agreement3_id,
-      agreement4_id: data.agreement4_id,
-      agreement5_id: data.agreement5_id,
-      description: data.data,
-    });
+
+    console.log("======> upload iteam <==22222222222=", data);
+    console.log(
+      "======> upload this.mainComponent.userWalletAddress <===",
+      this.mainComponent.userWalletAddress
+    );
+    console.log(
+      "======> upload this.connectService.account <===",
+      this.connectService.account
+    );
+    if (this.mainComponent.userWalletAddress === this.connectService.account) {
+      this.utility.startLoader();
+      const tokenId = await this.connectService.nextTokenId();
+      console.log("========> token id <=====", tokenId);
+      const agr =
+        data.agreement1 +
+        "   " +
+        data.agreement2 +
+        "   " +
+        data.agreement3 +
+        "  ";
+      const resp = await this.connectService.createToken(
+        data.tokens, //numberOfToken,
+        agr,
+        data.description
+      );
+      // const resp = true;
+      // const tokenId = 5241;
+      console.log("======upload===> resp <===========", resp);
+      if (resp) {
+        this.saveToken({
+          user: this.userId,
+          tokenId: tokenId,
+          invoiceNo: data.invoiceNo,
+          tokens: data.tokens,
+          agreement1: data.agreement1,
+          agreement2: data.agreement2,
+          agreement3: data.agreement3,
+          agreement4: data.agreement4,
+          agreement5: data.agreement5,
+          agreement1_id: data.agreement1_id,
+          agreement2_id: data.agreement2_id,
+          agreement3_id: data.agreement3_id,
+          agreement4_id: data.agreement4_id,
+          agreement5_id: data.agreement5_id,
+          description: data.data,
+        });
+        // this.invoiceService
+        //   .updateTaToken(iteam.id, { tokenId: tokenId })
+        //   .subscribe(
+        //     (res) => {
+        //       this.getTokenList();
+        //     },
+        //     (error) => {
+        //       this.utility.stopLoader();
+        //       this.utility.showErrorAlert("Error", error);
+        //     }
+        //   );
+      }
+    } else {
+      this.utility.showErrorAlert(
+        "Error",
+        "Please choose authorized metamask account in order to approve this request"
+      );
+    }
   }
 
   saveToken(data) {
