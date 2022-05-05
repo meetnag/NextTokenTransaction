@@ -332,7 +332,14 @@ export class ListTaTokenizationComponent implements OnInit {
     }
   }
 
-  testing(item) {
+  openModelformanager(item) {
+    this.form.patchValue({
+      id: item.id,
+    });
+    $("#modelIdForManager").modal("show");
+  }
+
+  openModel(item) {
     this.form.patchValue({
       id: item.id,
     });
@@ -352,7 +359,7 @@ export class ListTaTokenizationComponent implements OnInit {
     return array;
   }
 
-  async updateDocument() {
+  async updateDocumentForManager() {
     console.log("===> updateDocument <====", this.form.value);
 
     const file = (<HTMLInputElement>document.getElementById("document4"))
@@ -391,11 +398,65 @@ export class ListTaTokenizationComponent implements OnInit {
       await reader.readAsDataURL(file);
     }
   }
+  async updateDocument() {
+    console.log("===> updateDocument 1 <====", this.form.value);
+
+    const file = (<HTMLInputElement>document.getElementById("document5"))
+      .files[0];
+
+    var self = this;
+    // const preview = document.getElementById("preview");
+    const reader = new FileReader();
+    let byteArray;
+
+    var fianalJSON = {};
+    fianalJSON["agreement6"] = file.name;
+
+    await reader.addEventListener(
+      "loadend",
+      async function () {
+        // convert image file to base64 string
+
+        byteArray = self.convertDataURIToBinary(reader.result);
+        self.utility.startLoader("Uploading document....");
+        var result = await ipfs.add(byteArray);
+        self.utility.startLoader(
+          "Document uploaded sucessfully. Please wait..."
+        );
+        self.utility.startLoader("Data encryption in progress. Please wait...");
+        console.log("=======> agreement5_id <=====", result["path"]);
+
+        fianalJSON["agreement6_id"] = result["path"];
+
+        await self.uploadfile2(fianalJSON);
+      },
+      false
+    );
+
+    if (file) {
+      await reader.readAsDataURL(file);
+    }
+  }
+
+  uploadfile2(fianalJSON) {
+    this.invoiceService
+      .updateTaTokenDocument(this.form.value.id, fianalJSON)
+      .subscribe(
+        (res) => {
+          $("#modelId").modal("hide");
+          this.getTokenList();
+        },
+        (error) => {
+          this.utility.stopLoader();
+          this.utility.showErrorAlert("Error", error);
+        }
+      );
+  }
 
   uploadfile1(fianalJSON) {
     this.invoiceService.updateTaToken(this.form.value.id, fianalJSON).subscribe(
       (res) => {
-        $("#modelId").modal("hide");
+        $("#modelIdForManager").modal("hide");
         this.getTokenList();
       },
       (error) => {

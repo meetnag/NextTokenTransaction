@@ -51,6 +51,15 @@ export class WrapperTokenService {
         })
       );
   }
+  updateTaTokenDocument(coinId: String, userBody: Object) {
+    return this.http
+      .patch(`${this.apiUrl}wrapperToken/updateDocument/${coinId}`, userBody)
+      .pipe(
+        map((response: Response) => {
+          return response;
+        })
+      );
+  }
 
   // Delete WrapperToken Request
   deleteWrapperTokenRequest(coinId: String) {

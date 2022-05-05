@@ -1,6 +1,20 @@
 const mongoose = require('mongoose');
 const { toJSON } = require('./plugins');
 
+const agreement = mongoose.Schema(
+  {
+    id: {
+      type: String,
+      required: true,
+    },
+    name: {
+      type: String,
+      required: true,
+    },
+  },
+  { _id: false }
+);
+
 const coinSchema = mongoose.Schema(
   {
     user: {
@@ -41,6 +55,10 @@ const coinSchema = mongoose.Schema(
     },
     agreement5: {
       type: String,
+    },
+    agreement: {
+      type: [agreement],
+      default: [],
     },
     agreement1_id: {
       type: String,

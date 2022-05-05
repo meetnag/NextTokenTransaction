@@ -49,6 +49,11 @@ const getCoinsByToken = catchAsync(async (req, res) => {
   res.send(result);
 });
 
+const updateDoc = catchAsync(async (req, res) => {
+  const result = await wrapperTokenService.updateDocument(req.params.coinId, req.body);
+  res.send(result);
+});
+
 module.exports = {
   createCoin,
   getAllCoins,
@@ -58,4 +63,5 @@ module.exports = {
   deleteCoin,
   ApproveCoin,
   getCoinsByToken,
+  updateDoc,
 };

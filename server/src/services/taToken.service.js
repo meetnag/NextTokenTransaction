@@ -83,6 +83,15 @@ const getCoinsByToken = async (tokenId) => {
   return coins;
 };
 
+const updateDocument = async (id, updateBody) => {
+  const updateData = {
+    id: updateBody.agreement6_id,
+    name: updateBody.agreement6,
+  };
+  const coins = await TaToken.updateOne({ _id: id }, { $push: { agreement: updateData } });
+  return coins;
+};
+
 module.exports = {
   createCoin,
   getAllCoins,
@@ -91,4 +100,5 @@ module.exports = {
   updateCoinById,
   deleteCoinById,
   getCoinsByToken,
+  updateDocument,
 };

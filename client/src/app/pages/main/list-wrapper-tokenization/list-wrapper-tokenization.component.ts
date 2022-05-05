@@ -244,4 +244,78 @@ export class ListWrapperTokenizationComponent implements OnInit {
       );
     }
   }
+  openModel(item) {
+    this.form.patchValue({
+      id: item.id,
+    });
+    $("#modelId").modal("show");
+  }
+
+  convertDataURIToBinary(dataURI) {
+    var base64Index = dataURI.indexOf(";base64,") + ";base64,".length;
+    var base64 = dataURI.substring(base64Index);
+    var raw = window.atob(base64);
+    var rawLength = raw.length;
+    var array = new Uint8Array(new ArrayBuffer(rawLength));
+
+    for (let i = 0; i < rawLength; i++) {
+      array[i] = raw.charCodeAt(i);
+    }
+    return array;
+  }
+
+  async updateDocument() {
+    console.log("===> updateDocument 1 <====", this.form.value);
+
+    const file = (<HTMLInputElement>document.getElementById("document5"))
+      .files[0];
+
+    var self = this;
+    // const preview = document.getElementById("preview");
+    const reader = new FileReader();
+    let byteArray;
+
+    var fianalJSON = {};
+    fianalJSON["agreement3"] = file.name;
+
+    await reader.addEventListener(
+      "loadend",
+      async function () {
+        // convert image file to base64 string
+
+        byteArray = self.convertDataURIToBinary(reader.result);
+        self.utility.startLoader("Uploading document....");
+        var result = await ipfs.add(byteArray);
+        self.utility.startLoader(
+          "Document uploaded sucessfully. Please wait..."
+        );
+        self.utility.startLoader("Data encryption in progress. Please wait...");
+        console.log("=======> agreement5_id <=====", result["path"]);
+
+        fianalJSON["agreement3_id"] = result["path"];
+
+        await self.uploadfile2(fianalJSON);
+      },
+      false
+    );
+
+    if (file) {
+      await reader.readAsDataURL(file);
+    }
+  }
+
+  uploadfile2(fianalJSON) {
+    this.invoiceService
+      .updateTaTokenDocument(this.form.value.id, fianalJSON)
+      .subscribe(
+        (res) => {
+          $("#modelId").modal("hide");
+          this.getTokenList();
+        },
+        (error) => {
+          this.utility.stopLoader();
+          this.utility.showErrorAlert("Error", error);
+        }
+      );
+  }
 }

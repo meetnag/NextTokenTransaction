@@ -74,6 +74,15 @@ const getCoinByTokenId = {
     tokenId: Joi.string(),
   }),
 };
+const updateDocument = {
+  params: Joi.object().keys({
+    coinId: Joi.required().custom(objectId),
+  }),
+  body: Joi.object().keys({
+    agreement3: Joi.string().required(),
+    agreement3_id: Joi.string().required(),
+  }),
+};
 module.exports = {
   createCoin,
   getAllCoins,
@@ -83,4 +92,5 @@ module.exports = {
   deleteCoin,
   approveCoin,
   getCoinByTokenId,
+  updateDocument,
 };

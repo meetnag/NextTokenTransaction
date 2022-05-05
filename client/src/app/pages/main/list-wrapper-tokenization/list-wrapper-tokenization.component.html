@@ -33,6 +33,7 @@
                                 </th>
 
                                 <th class="pd-y-5">Action</th>
+                                <th *ngIf="user && (user['role'] === 'invbuyer' || user['role'] === 'owner') " class="pd-y-5">edit</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -52,7 +53,11 @@
                                         <a href="https://gateway.ipfs.io/ipfs/{{item.agreement1_id}}" target="_blank">
                                             {{ item.agreement1 }}</a> <br />
                                         <a href="https://gateway.ipfs.io/ipfs/{{item.agreement2_id}}" target="_blank">
-                                            {{ item.agreement2 }}</a> 
+                                            {{ item.agreement2 }}</a>
+                                            <div *ngFor="let document of item.agreement">
+                                                <a href="https://gateway.ipfs.io/ipfs/{{document.id}}" target="_blank">
+                                                    {{ document.name }}</a>
+                                            </div>
                                     </div>
                                 </td>
                                 <td class="tx-12">
@@ -99,7 +104,7 @@
                                             </button>
                                         </a>
                                     </div>
-
+                                    
                                     <!-- <div *ngIf="user && user['role'] === 'owner'"
                                         style="min-width: 78px">
                                         <a *ngIf="item.owner_approver != 1" [routerLink]=""
@@ -122,6 +127,14 @@
                                         </a>
                                     </div> -->
                                 </td>
+                                <td *ngIf="user && (user['role'] === 'owner' || user['role'] === 'invbuyer' ) " class="tx-12">
+                                    <div>
+                                        <button (click)="openModel(item)" class="btn btn-primary bd-0"
+                                            title="Upload CA Document" data-toggle="tooltip">
+                                            Upload Document
+                                        </button>
+                                    </div>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -136,3 +149,32 @@
 </div>
 <!-- container -->
 
+<!-- Modal for add doc -->
+<div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog modal-lg" style="width: 400px" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Upload Document</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="form">
+                    <div class="form-group">
+                        <label class="form-control-label">Document(s) 5: <span class="tx-danger">*</span></label>
+                        <input class="form-control" formControlName="agreement5" type="file" name="agreement5"
+                            placeholder="Enter credit Agreement" id="document5" />
+                        <app-error-field [errorMsg]="getForm.agreement5"></app-error-field>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" (click)="updateDocument()" class="btn btn-primary">
+                    Save
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

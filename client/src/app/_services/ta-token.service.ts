@@ -50,6 +50,16 @@ export class TaTokenService {
     );
   }
 
+  updateTaTokenDocument(coinId: String, userBody: Object) {
+    return this.http
+      .patch(`${this.apiUrl}taToken/updateDocument/${coinId}`, userBody)
+      .pipe(
+        map((response: Response) => {
+          return response;
+        })
+      );
+  }
+
   // Delete TaToken Request
   deleteTaTokenRequest(coinId: String) {
     return this.http.delete(`${this.apiUrl}taToken/${coinId}`).pipe(

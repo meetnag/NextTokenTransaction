@@ -26,4 +26,8 @@ router
 router
   .route('/getTaToken/:tokenId')
   .get(auth('getCoins'), validate(coinValidation.getCoinByTokenId), coinController.getCoinsByToken);
+
+router
+  .route('/updateDocument/:coinId')
+  .patch(auth('uploadeDocument'), validate(coinValidation.updateDocument), coinController.updateDoc);
 module.exports = router;

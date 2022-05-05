@@ -27,6 +27,7 @@ roleRights.set(roles[2], [
   'manageCoins',
   'getCoins',
   'getInvoice',
+  'uploadeDocument',
 ]);
 roleRights.set(roles[3], [
   'getUsers',
@@ -72,6 +73,7 @@ roleRights.set(roles[7], [
   'manageCoins',
   'getCoins',
   'findTransfers',
+  'uploadeDocument',
 ]);
 
 module.exports = {
