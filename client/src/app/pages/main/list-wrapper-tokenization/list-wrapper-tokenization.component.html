@@ -100,7 +100,7 @@
                                         <a *ngIf="item.owner_approver == 1">
                                             <div>Accepted</div>
                                             <button (click)="cashTxnComplete(item)" class="btn btn-primary bd-0">
-                                                Cash TXN Complete
+                                                Cash Transaction Complete
                                             </button>
                                         </a>
                                     </div>
@@ -162,7 +162,7 @@
             <div class="modal-body">
                 <form [formGroup]="form">
                     <div class="form-group">
-                        <label class="form-control-label">Document(s) 5: <span class="tx-danger">*</span></label>
+                        <label class="form-control-label">Document: <span class="tx-danger">*</span></label>
                         <input class="form-control" formControlName="agreement5" type="file" name="agreement5"
                             placeholder="Enter credit Agreement" id="document5" />
                         <app-error-field [errorMsg]="getForm.agreement5"></app-error-field>

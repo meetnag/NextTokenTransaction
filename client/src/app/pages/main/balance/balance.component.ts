@@ -39,12 +39,20 @@ export class BalanceComponent implements OnInit {
         this.form.value.tokenId,
       );
 
- 
-      Swal.fire({
-        icon: 'success',
-        title: '',
-        text: 'You have total ' + resp + ' tokens',
-      });
+      if (resp > 1){  
+        Swal.fire({
+          icon: 'success',
+          title: '',
+          text: 'You have total ' + resp + ' tokens',
+        });
+      }
+      else {
+        Swal.fire({
+          icon: 'success',
+          title: '',
+          text: 'You have total ' + resp + ' token',
+        });
+      }
       this.form.reset();
       this.utility.stopLoader();
       
