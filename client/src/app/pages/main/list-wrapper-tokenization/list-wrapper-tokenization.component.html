@@ -99,9 +99,11 @@
                                         </a>
                                         <a *ngIf="item.owner_approver == 1">
                                             <div>Accepted</div>
-                                            <button (click)="cashTxnComplete(item)" class="btn btn-primary bd-0">
+                                            
+                                            <button *ngIf="item.cashTxn == 2"  (click)="cashTxnComplete(item)" class="btn btn-primary bd-0">
                                                 Cash TXN Complete
                                             </button>
+                                            <div *ngIf="item.cashTxn == 1" ><i class="fa fa-check"></i></div>
                                         </a>
                                     </div>
                                     

@@ -231,12 +231,24 @@ export class ListWrapperTokenizationComponent implements OnInit {
   }
 
   async cashTxnComplete(iteam) {
-    const resp = await this.approve(iteam);
+    // const resp = await this.approve(iteam);
+    const resp = true;
     if (resp) {
-      this.utility.showSuccessAlert(
-        "Success",
-        "I consent to the completion of the cash transaction by signing this document."
-      );
+      this.invoiceService
+        .approveWrapperToken(iteam.id, { cashTxn: 1 })
+        .subscribe(
+          (res) => {
+            this.getTokenList();
+            this.utility.showSuccessAlert(
+              "Success",
+              "I consent to the completion of the cash transaction by signing this document."
+            );
+          },
+          (error) => {
+            this.utility.stopLoader();
+            this.utility.showErrorAlert("Error", error);
+          }
+        );
     } else {
       this.utility.showErrorAlert(
         "Error",
