@@ -247,7 +247,9 @@ export class ListWrapperTokenizationComponent implements OnInit {
   openModel(item) {
     this.form.patchValue({
       id: item.id,
+      agreement5: null,
     });
+
     $("#modelId").modal("show");
   }
 
