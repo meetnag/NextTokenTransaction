@@ -65,6 +65,10 @@ const coinSchema = mongoose.Schema(
       type: Number,
       default: 2,
     },
+    cashTxn: {
+      type: Number,
+      default: 2,
+    },
   },
   {
     timestamps: true,

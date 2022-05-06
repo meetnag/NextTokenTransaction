@@ -101,7 +101,11 @@
                                             <div>Accepted</div>
                                             <button (click)="cashTxnComplete(item)" class="btn btn-primary bd-0">
                                                 Cash Transaction Complete
+                                            
+                                            <button *ngIf="item.cashTxn == 2"  (click)="cashTxnComplete(item)" class="btn btn-primary bd-0">
+                                                Cash TXN Complete
                                             </button>
+                                            <div *ngIf="item.cashTxn == 1" ><i class="fa fa-check"></i></div>
                                         </a>
                                     </div>
                                     
