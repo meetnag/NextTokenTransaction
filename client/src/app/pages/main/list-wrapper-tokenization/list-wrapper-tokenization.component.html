@@ -99,15 +99,14 @@
                                         </a>
                                         <a *ngIf="item.owner_approver == 1">
                                             <div>Accepted</div>
-                                            <button (click)="cashTxnComplete(item)" class="btn btn-primary bd-0">
-                                                Cash Transaction Complete
                                             
                                             <button *ngIf="item.cashTxn == 2"  (click)="cashTxnComplete(item)" class="btn btn-primary bd-0">
-                                                Cash TXN Complete
+                                                Cash Transaction Complete
                                             </button>
-                                            <div *ngIf="item.cashTxn == 1" ><i class="fa fa-check"></i></div>
+                                            <div *ngIf="item.cashTxn == 1" ><!--<i class="fa fa-check"></i>--><div>&nbsp;</div>Cash Transaction Completed</div>
                                         </a>
                                     </div>
+                                    
                                     
                                     <!-- <div *ngIf="user && user['role'] === 'owner'"
                                         style="min-width: 78px">
