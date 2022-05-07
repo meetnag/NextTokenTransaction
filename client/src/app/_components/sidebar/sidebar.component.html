@@ -10,11 +10,12 @@
       ><i class="icon ion-arrow-swap"></i> TA Tokenization</a
     >
   </li>
+  <!---
   <li *ngIf="user && user['role'] != 'vendor'" class="sidebar-nav-item">
     <a [routerLink]="['/app/wrapper-Tokenization']" class="sidebar-nav-link"
       ><i class="icon ion-arrow-swap"></i> Wrapper Tokenization</a
     >
-  </li>
+  </li>-->
   <li *ngIf="user && user['role'] != 'vendor2'" class="sidebar-nav-item">
     <a
       [routerLink]="['/app/list-of-ta-Tokenization']"
@@ -23,6 +24,7 @@
       ><i class="icon ion-arrow-swap"></i> List of TA Token Documents</a
     >
   </li>
+  <!--
   <li *ngIf="user && user['role'] != 'vendor'" class="sidebar-nav-item">
     <a
       [routerLink]="['/app/list-of-wrapper-Tokenization']"
@@ -30,7 +32,7 @@
       class="sidebar-nav-link"
       ><i class="icon ion-arrow-swap"></i> List of Wrapper Token Documents</a
     >
-  </li>
+  </li>-->
   <!--- <li *ngIf="user && user['role'] != 'vendor'" class="sidebar-nav-item">
     <a [routerLink]="['/app/issue-token']" routerLinkActive="router-link-active" class="sidebar-nav-link" 
       ><i class="icon ion-arrow-swap"></i> Issue Tokens</a
@@ -87,9 +89,10 @@
       ><i class="icon ion-arrow-swap"></i> Transfer TA Tokens</a
     >
   </li>
+  <!--
   <li *ngIf="user && user['role'] != 'vendor'" class="sidebar-nav-item">
     <a [routerLink]="['/app/transfer-wrapper-token']" routerLinkActive="router-link-active" class="sidebar-nav-link" 
       ><i class="icon ion-arrow-swap"></i> Transfer Wrapper Tokens</a
     >
-  </li>
+  </li>-->
 </ul>
