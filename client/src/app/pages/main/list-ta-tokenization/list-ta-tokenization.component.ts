@@ -47,6 +47,7 @@ export class ListTaTokenizationComponent implements OnInit {
     this.form = this.formBuilder.group({
       id: [null, Validators.required],
       agreement5: [null, Validators.required],
+      flag: [null],
     });
     this.getTokenList();
   }
@@ -372,8 +373,16 @@ export class ListTaTokenizationComponent implements OnInit {
     const reader = new FileReader();
     let byteArray;
 
-    var fianalJSON = {};
-    fianalJSON["agreement5"] = file.name;
+    let fianalJSON = {
+      id:'',
+      name:'',
+      flag:0
+    }
+    if (this.form.value.flag) {
+      fianalJSON["flag"] = 1;
+    }
+    // var fianalJSON = {};
+    fianalJSON["name"] = file.name;
 
     await reader.addEventListener(
       "loadend",
@@ -389,7 +398,7 @@ export class ListTaTokenizationComponent implements OnInit {
         self.utility.startLoader("Data encryption in progress. Please wait...");
         console.log("=======> agreement5_id <=====", result["path"]);
 
-        fianalJSON["agreement5_id"] = result["path"];
+        fianalJSON["id"] = result["path"];
 
         await self.uploadfile1(fianalJSON);
       },
@@ -411,8 +420,16 @@ export class ListTaTokenizationComponent implements OnInit {
     const reader = new FileReader();
     let byteArray;
 
-    var fianalJSON = {};
-    fianalJSON["agreement6"] = file.name;
+    let fianalJSON = {
+      id:'',
+      name:'',
+      flag:0
+    }
+    if (this.form.value.flag) {
+      fianalJSON["flag"] = 1;
+    }
+    // var fianalJSON = {};
+    fianalJSON["name"] = file.name;
 
     await reader.addEventListener(
       "loadend",
@@ -428,7 +445,7 @@ export class ListTaTokenizationComponent implements OnInit {
         self.utility.startLoader("Data encryption in progress. Please wait...");
         console.log("=======> agreement5_id <=====", result["path"]);
 
-        fianalJSON["agreement6_id"] = result["path"];
+        fianalJSON["id"] = result["path"];
 
         await self.uploadfile2(fianalJSON);
       },
@@ -456,7 +473,7 @@ export class ListTaTokenizationComponent implements OnInit {
   }
 
   uploadfile1(fianalJSON) {
-    this.invoiceService.updateTaToken(this.form.value.id, fianalJSON).subscribe(
+    this.invoiceService.updateTaTokenDocument(this.form.value.id, fianalJSON).subscribe(
       (res) => {
         $("#modelIdForManager").modal("hide");
         this.getTokenList();

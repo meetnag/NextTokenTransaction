@@ -8,16 +8,7 @@ const createCoin = {
     tokenId: Joi.allow('', null),
     tokens: Joi.required(),
     description: Joi.required(),
-    agreement1: Joi.required(),
-    agreement2: Joi.required(),
-    agreement3: Joi.required(),
-    agreement4: Joi.required(),
-    agreement5: Joi.required().default('null'),
-    agreement1_id: Joi.required(),
-    agreement2_id: Joi.required(),
-    agreement3_id: Joi.required(),
-    agreement4_id: Joi.required(),
-    agreement5_id: Joi.required().default('null'),
+    agreement: Joi.required(),
   }),
 };
 
@@ -52,8 +43,7 @@ const updateCoin = {
       description: Joi.allow('', null),
       uri: Joi.allow('', null),
       address: Joi.allow('', null),
-      agreement5: Joi.allow('', null),
-      agreement5_id: Joi.allow('', null),
+      agreement: Joi.allow('', null),
       external_signer: Joi.allow('', null),
       vendor_signer: Joi.allow('', null),
       owner_approver: Joi.allow('', null),
@@ -78,8 +68,7 @@ const approveCoin = {
       vendor_signer: Joi.allow('', null),
       owner_approver: Joi.allow('', null),
       lender_approver: Joi.allow('', null),
-      agreement5: Joi.allow('', null),
-      agreement5_id: Joi.allow('', null),
+      agreement: Joi.allow('', null),
     })
     .min(1),
 };
@@ -94,8 +83,9 @@ const updateDocument = {
     coinId: Joi.required().custom(objectId),
   }),
   body: Joi.object().keys({
-    agreement6: Joi.string().required(),
-    agreement6_id: Joi.string().required(),
+    id: Joi.string().required(),
+    name: Joi.string().required(),
+    flag: Joi.allow('', null),
   }),
 };
 module.exports = {

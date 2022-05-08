@@ -84,11 +84,7 @@ const getCoinsByToken = async (tokenId) => {
 };
 
 const updateDocument = async (id, updateBody) => {
-  const updateData = {
-    id: updateBody.agreement6_id,
-    name: updateBody.agreement6,
-  };
-  const coins = await TaToken.updateOne({ _id: id }, { $push: { agreement: updateData } });
+  const coins = await TaToken.updateOne({ _id: id }, { $push: { agreement: updateBody } });
   return coins;
 };
 

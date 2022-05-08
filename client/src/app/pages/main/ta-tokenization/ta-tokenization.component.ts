@@ -48,7 +48,7 @@ export class TaTokenizationComponent implements OnInit {
   ngOnInit(): void {
     this.form = this.formBuilder.group({
       invoiceNo: [null, Validators.required],
-      tokens: [null, Validators.required],
+      tokens: [1, Validators.required],
       agreement1: [null, Validators.required],
       agreement2: [null, Validators.required],
       agreement3: [null, Validators.required],
@@ -84,8 +84,19 @@ export class TaTokenizationComponent implements OnInit {
     const reader = new FileReader();
     let byteArray;
 
-    var fianalJSON = self.form.value;
-    fianalJSON["agreement1"] = file.name;
+    let fianalJSON = {
+      invoiceNo: self.form.value.invoiceNo,
+      tokens: self.form.value.tokens,
+      agreement: [],
+      data: self.form.value.data,
+    }
+    let fileObject = {
+      id:'',
+      name:'',
+      flag:0
+    }
+    // var fianalJSON = self.form.value;
+    fileObject["name"] = file.name;
 
     await reader.addEventListener(
       "loadend",
@@ -101,8 +112,8 @@ export class TaTokenizationComponent implements OnInit {
         self.utility.startLoader("Data encryption in progress. Please wait...");
         console.log("=======> agreement1_id <=====", result["path"]);
 
-        fianalJSON["agreement1_id"] = result["path"];
-
+        fileObject["id"] = result["path"];
+        fianalJSON["agreement"].push(fileObject);
         await self.uploadfile1(fianalJSON);
       },
       false
@@ -116,11 +127,18 @@ export class TaTokenizationComponent implements OnInit {
     const file1 = (<HTMLInputElement>document.getElementById("document1"))
       .files[0];
 
+      console.log("========> file1 <====", file1);
+    console.log("========> file1 <====", file1.name);
     var self = this;
     const reader = new FileReader();
     let byteArray1;
 
-    fianalJSON["agreement2"] = file1.name;
+    let fileObject = {
+      id:'',
+      name:'',
+      flag:0
+    }
+    fileObject["name"] = file1.name;
     await reader.addEventListener(
       "loadend",
       async function () {
@@ -134,8 +152,8 @@ export class TaTokenizationComponent implements OnInit {
         );
         self.utility.startLoader("Data encryption in progress. Please wait...");
         console.log("=======> agreement2_id <=====", result1["path"]);
-        fianalJSON["agreement2_id"] = result1["path"];
-
+        fianalJSON["id"] = result1["path"];
+        fianalJSON["agreement"].push(fileObject);
         await self.uploadfile2(fianalJSON);
       },
       false
@@ -155,8 +173,13 @@ export class TaTokenizationComponent implements OnInit {
     var self = this;
     const reader = new FileReader();
     let byteArray2;
+    let fileObject = {
+      id:'',
+      name:'',
+      flag:0
+    }
 
-    fianalJSON["agreement3"] = file2.name;
+    fileObject["name"] = file2.name;
     await reader.addEventListener(
       "loadend",
       async function () {
@@ -170,7 +193,8 @@ export class TaTokenizationComponent implements OnInit {
         );
         self.utility.startLoader("Data encryption in progress. Please wait...");
         console.log("=======> agreement3_id <=====", result2["path"]);
-        fianalJSON["agreement3_id"] = result2["path"];
+        fileObject["id"] = result2["path"];
+        fianalJSON["agreement"].push(fileObject);
         await self.uploadfile3(fianalJSON);
       },
       false
@@ -189,8 +213,13 @@ export class TaTokenizationComponent implements OnInit {
     var self = this;
     const reader = new FileReader();
     let byteArray2;
+    let fileObject = {
+      id:'',
+      name:'',
+      flag:0
+    }
 
-    fianalJSON["agreement4"] = file3.name;
+    fileObject["name"] = file3.name;
     await reader.addEventListener(
       "loadend",
       async function () {
@@ -204,7 +233,8 @@ export class TaTokenizationComponent implements OnInit {
         );
         self.utility.startLoader("Data encryption in progress. Please wait...");
         console.log("=======> agreement4_id <=====", result2["path"]);
-        fianalJSON["agreement4_id"] = result2["path"];
+        fileObject["id"] = result2["path"];
+        fianalJSON["agreement"].push(fileObject);
         await self.uploadfile4(fianalJSON);
       },
       false
@@ -225,8 +255,13 @@ export class TaTokenizationComponent implements OnInit {
       var self = this;
       const reader = new FileReader();
       let byteArray2;
+      let fileObject = {
+        id:'',
+        name:'',
+        flag:0
+      }
 
-      fianalJSON["agreement5"] = file4.name;
+      fileObject["name"] = file4.name;
       await reader.addEventListener(
         "loadend",
         async function () {
@@ -242,7 +277,8 @@ export class TaTokenizationComponent implements OnInit {
             "Data encryption in progress. Please wait..."
           );
           console.log("=======> agreement5_id <=====", result2["path"]);
-          fianalJSON["agreement5_id"] = result2["path"];
+          fileObject["id"] = result2["path"];
+          fianalJSON["agreement"].push(fileObject);
           await self.createToken(fianalJSON);
         },
         false
@@ -270,25 +306,31 @@ export class TaTokenizationComponent implements OnInit {
       "======> upload this.connectService.account <===",
       this.connectService.account
     );
-    if (this.mainComponent.userWalletAddress === this.connectService.account) {
+    // if (this.mainComponent.userWalletAddress === this.connectService.account) {
       this.utility.startLoader();
-      const tokenId = await this.connectService.nextTokenId();
-      console.log("========> token id <=====", tokenId);
-      const agr =
-        data.agreement1 +
-        "   " +
-        data.agreement2 +
-        "   " +
-        data.agreement3 +
-        "  " + 
-        data.agreement4;
-      const resp = await this.connectService.createToken(
-        data.tokens, //numberOfToken,
-        agr,
-        data.data
-      );
-      // const resp = true;
-      // const tokenId = 5241;
+      // const tokenId = await this.connectService.nextTokenId();
+      // console.log("========> token id <=====", tokenId);
+      let agr = "";
+      for (let i = 0; i < data.agreement.length; i++) {
+        const element = data.agreement[i].name;
+        agr += `${element}  `
+      }
+      console.log("======upload===> agr <===========", agr);
+      // const agr =
+      //   data.agreement1 +
+      //   "   " +
+      //   data.agreement2 +
+      //   "   " +
+      //   data.agreement3 +
+      //   "  " + 
+      //   data.agreement4;
+      // const resp = await this.connectService.createToken(
+      //   data.tokens, //numberOfToken,
+      //   agr,
+      //   data.data
+      // );
+      const resp = true;
+      const tokenId = 5241;
       console.log("======upload===> resp <===========", resp);
       if (resp) {
         this.saveToken({
@@ -296,36 +338,17 @@ export class TaTokenizationComponent implements OnInit {
           tokenId: tokenId,
           invoiceNo: data.invoiceNo,
           tokens: data.tokens,
-          agreement1: data.agreement1,
-          agreement2: data.agreement2,
-          agreement3: data.agreement3,
-          agreement4: data.agreement4,
-          agreement5: data.agreement5,
-          agreement1_id: data.agreement1_id,
-          agreement2_id: data.agreement2_id,
-          agreement3_id: data.agreement3_id,
-          agreement4_id: data.agreement4_id,
-          agreement5_id: data.agreement5_id,
+          agreement1: data.agreement,
           description: data.data,
         });
-        // this.invoiceService
-        //   .updateTaToken(iteam.id, { tokenId: tokenId })
-        //   .subscribe(
-        //     (res) => {
-        //       this.getTokenList();
-        //     },
-        //     (error) => {
-        //       this.utility.stopLoader();
-        //       this.utility.showErrorAlert("Error", error);
-        //     }
-        //   );
+       
       }
-    } else {
-      this.utility.showErrorAlert(
-        "Error",
-        "Please choose authorized metamask account in order to approve this request"
-      );
-    }
+    // } else {
+    //   this.utility.showErrorAlert(
+    //     "Error",
+    //     "Please choose authorized metamask account in order to approve this request"
+    //   );
+    // }
   }
 
   saveToken(data) {

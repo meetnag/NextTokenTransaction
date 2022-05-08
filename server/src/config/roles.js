@@ -9,6 +9,7 @@ roleRights.set(roles[0], [
   'manageCoins',
   'getCoins',
   'getInvoice',
+  'uploadeDocument',
 ]);
 roleRights.set(roles[1], [
   'getUsers',
@@ -18,6 +19,7 @@ roleRights.set(roles[1], [
   'manageCoins',
   'getCoins',
   'getInvoice',
+  'uploadeDocument',
 ]);
 roleRights.set(roles[2], [
   'getUsers',
@@ -37,6 +39,7 @@ roleRights.set(roles[3], [
   'manageCoins',
   'getCoins',
   'getInvoice',
+  'uploadeDocument',
 ]);
 roleRights.set(roles[4], [
   'getUsers',
@@ -46,6 +49,7 @@ roleRights.set(roles[4], [
   'manageCoins',
   'getCoins',
   'getInvoice',
+  'uploadeDocument',
 ]);
 roleRights.set(roles[5], [
   'getUsers',
@@ -55,6 +59,7 @@ roleRights.set(roles[5], [
   'manageCoins',
   'getCoins',
   'findTransfers',
+  'uploadeDocument',
 ]);
 roleRights.set(roles[6], [
   'getUsers',
@@ -64,6 +69,7 @@ roleRights.set(roles[6], [
   'manageCoins',
   'getCoins',
   'findTransfers',
+  'uploadeDocument',
 ]);
 roleRights.set(roles[7], [
   'getUsers',

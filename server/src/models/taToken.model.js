@@ -11,6 +11,10 @@ const agreement = mongoose.Schema(
       type: String,
       required: true,
     },
+    flag: {
+      type: Number,
+      default: 0,
+    },
   },
   { _id: false }
 );
@@ -37,47 +41,9 @@ const coinSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    agreement1: {
-      type: String,
-      required: true,
-    },
-    agreement2: {
-      type: String,
-      required: true,
-    },
-    agreement3: {
-      type: String,
-      required: true,
-    },
-    agreement4: {
-      type: String,
-      required: true,
-    },
-    agreement5: {
-      type: String,
-    },
     agreement: {
       type: [agreement],
       default: [],
-    },
-    agreement1_id: {
-      type: String,
-      required: true,
-    },
-    agreement2_id: {
-      type: String,
-      required: true,
-    },
-    agreement3_id: {
-      type: String,
-      required: true,
-    },
-    agreement4_id: {
-      type: String,
-      required: true,
-    },
-    agreement5_id: {
-      type: String,
     },
     external_signer: {
       type: Number,

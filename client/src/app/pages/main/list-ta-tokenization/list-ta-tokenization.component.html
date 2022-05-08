@@ -15,10 +15,10 @@
                     <table id="datatable" class="table mg-b-0 tx-13">
                         <thead>
                             <tr class="tx-10">
-                                <th class="pd-y-5">Token Id</th>
-                                <th class="pd-y-5">Invoice No</th>
+                                <th class="pd-y-5" style="width: 70px;">Token Id</th>
+                                <th class="pd-y-5" style="width: 70px;">Invoice No</th>
 
-                                <th class="pd-y-5"> NO. Of Tokens </th>
+                                <th class="pd-y-5" style="width: 70px;"> NO. Of Tokens </th>
                                 <!-- <th class="pd-y-5">Date of Expiration</th>
                                 <th class="pd-y-5">Renewal on Maturity</th> -->
                                 <!-- <th class="pd-y-5">Document Name</th> -->
@@ -32,9 +32,10 @@
                                     Documents
                                 </th>
 
-                                <th class="pd-y-5">Action</th>
-                                <th *ngIf="user && (user['role'] === 'manager' || user['role'] === 'invbuyer') " class="pd-y-5">edit</th>
-                                
+                                <th class="pd-y-5" style="width: 150px;">Action</th>
+                                <th *ngIf="user && (user['role'] === 'manager' || user['role'] === 'invbuyer') "
+                                    class="pd-y-5" style="width: 130px;">edit</th>
+
                             </tr>
                         </thead>
                         <tbody>
@@ -72,8 +73,8 @@
                                     <ng-template #elseBlock> No </ng-template>
                                 </td>-->
                                 <td class="tx-12">
-                                    <div>
-                                        <a href="https://gateway.ipfs.io/ipfs/{{item.agreement1_id}}" target="_blank">
+                                    <div *ngFor="let document of item.agreement">
+                                        <!-- <a href="https://gateway.ipfs.io/ipfs/{{item.agreement1_id}}" target="_blank">
                                             {{ item.agreement1 }}</a> <br />
                                         <a href="https://gateway.ipfs.io/ipfs/{{item.agreement2_id}}" target="_blank">
                                             {{ item.agreement2 }}</a> <br />
@@ -82,15 +83,25 @@
                                         <a href="https://gateway.ipfs.io/ipfs/{{item.agreement4_id}}" target="_blank">
                                             {{ item.agreement4 }}</a>
                                         <a *ngIf="item.agreement5 !== null" href="https://gateway.ipfs.io/ipfs/{{item.agreement5_id}}" target="_blank">
-                                            <br />{{ item.agreement5 }}</a>
-                                            <div *ngFor="let document of item.agreement">
-                                                <a href="https://gateway.ipfs.io/ipfs/{{document.id}}" target="_blank">
-                                                    {{ document.name }}</a>
-                                            </div>
+                                            <br />{{ item.agreement5 }}</a> -->
+                                        <!-- <div *ngFor="let document of item.agreement"> -->
+                                        <div *ngIf="user && user['role'] === 'vendor'; else elseBlock">
+                                            <a *ngIf="document.flag === 0"
+                                                href="https://gateway.ipfs.io/ipfs/{{document.id}}" target="_blank">
+                                                {{ document.name }}</a> <br />
+                                        </div>
+                                        <ng-template #elseBlock>
+                                            <a href="https://gateway.ipfs.io/ipfs/{{document.id}}" target="_blank">
+                                                {{ document.name }}</a> <br />
+                                        </ng-template>
+
+                                        <!-- <a *ngIf="user && user['role'] === 'vendor' && document.flag === 0" href="https://gateway.ipfs.io/ipfs/{{document.id}}" target="_blank">
+                                                    {{ document.name }}</a> <br /> -->
+                                        <!-- </div> -->
                                     </div>
                                 </td>
                                 <td class="tx-12">
-                                    
+
                                     <!-- <div *ngIf="user && user['role'] === 'manager'">
                                         <button *ngIf="item.tokenId === ''" [disabled]="item.vendor_signer != 1"
                                             (click)="upload(item)" class="btn btn-primary bd-0">
@@ -104,16 +115,18 @@
                                             uploade document
                                         </button>
                                     </div> -->
-                                   
+
 
                                     <div *ngIf="user && user['role'] === 'vendor'" style="min-width: 78px">
-                                        <a *ngIf="item.vendor_signer != 1" [routerLink]="" (click)="approveVendor(item)" title="Approve"
-                                            data-toggle="tooltip" class="tooltp btn btn-success btn-icon rounded-circle">
+                                        <a *ngIf="item.vendor_signer != 1" [routerLink]="" (click)="approveVendor(item)"
+                                            title="Approve" data-toggle="tooltip"
+                                            class="tooltp btn btn-success btn-icon rounded-circle">
                                             <div><i class="fa fa-check"></i></div>
                                         </a>
                                         &nbsp;
-                                        <a *ngIf="item.vendor_signer != 1" [routerLink]="" (click)="rejectVendor(item)" title="Reject"
-                                            data-toggle="tooltip" class="mr-1 tooltp btn btn-danger btn-icon rounded-circle">
+                                        <a *ngIf="item.vendor_signer != 1" [routerLink]="" (click)="rejectVendor(item)"
+                                            title="Reject" data-toggle="tooltip"
+                                            class="mr-1 tooltp btn btn-danger btn-icon rounded-circle">
                                             <div><i class="fa fa-times"></i></div>
                                         </a>
                                         <a *ngIf="item.vendor_signer == 1">
@@ -122,14 +135,14 @@
                                     </div>
 
                                     <div *ngIf="user && user['role'] === 'owner' " style="min-width: 78px">
-                                        <a *ngIf="item.owner_approver != 1" [routerLink]=""
-                                            (click)="approvOwner(item)" title="Approve" data-toggle="tooltip"
+                                        <a *ngIf="item.owner_approver != 1" [routerLink]="" (click)="approvOwner(item)"
+                                            title="Approve" data-toggle="tooltip"
                                             class="tooltp btn btn-success btn-icon rounded-circle">
                                             <div><i class="fa fa-check"></i></div>
                                         </a>
                                         &nbsp;
-                                        <a *ngIf="item.owner_approver != 1" [routerLink]=""
-                                            (click)="rejectOwner(item)" title="Reject" data-toggle="tooltip"
+                                        <a *ngIf="item.owner_approver != 1" [routerLink]="" (click)="rejectOwner(item)"
+                                            title="Reject" data-toggle="tooltip"
                                             class="mr-1 tooltp btn btn-danger btn-icon rounded-circle">
                                             <div><i class="fa fa-times"></i></div>
                                         </a>
@@ -155,13 +168,15 @@
                                     </div>
 
                                     <div *ngIf="user && user['role'] === 'lender'" style="min-width: 78px">
-                                        <a *ngIf="item.lender_approver != 1" [routerLink]="" (click)="approveLender(item)"
-                                            title="Approve" data-toggle="tooltip" class="tooltp btn btn-success btn-icon rounded-circle">
+                                        <a *ngIf="item.lender_approver != 1" [routerLink]=""
+                                            (click)="approveLender(item)" title="Approve" data-toggle="tooltip"
+                                            class="tooltp btn btn-success btn-icon rounded-circle">
                                             <div><i class="fa fa-check"></i></div>
                                         </a>
                                         &nbsp;
-                                        <a *ngIf="item.lender_approver != 1" [routerLink]="" (click)="rejectLender(item)"
-                                            title="Reject" data-toggle="tooltip" class="mr-1 tooltp btn btn-danger btn-icon rounded-circle">
+                                        <a *ngIf="item.lender_approver != 1" [routerLink]=""
+                                            (click)="rejectLender(item)" title="Reject" data-toggle="tooltip"
+                                            class="mr-1 tooltp btn btn-danger btn-icon rounded-circle">
                                             <div><i class="fa fa-times"></i></div>
                                         </a>
                                         <a *ngIf="item.lender_approver == 1">
@@ -169,17 +184,18 @@
                                         </a>
                                     </div>
                                 </td>
-                                <td *ngIf="user && user['role'] === 'manager'" class="tx-12" >
-                                    <div >
-                                        <button *ngIf="item.agreement5 === null" (click)="openModelformanager(item)" class="btn btn-primary bd-0" title="Upload CA Document"
+                                <td *ngIf="user && user['role'] === 'manager'" class="tx-12">
+                                    <div>
+                                        <button *ngIf="item.agreement5 === null" (click)="openModelformanager(item)"
+                                            class="btn btn-primary bd-0" title="Upload CA Document"
                                             data-toggle="tooltip">
                                             Upload Document
                                         </button>
                                     </div>
                                 </td>
-                                <td *ngIf="user &&  user['role'] === 'invbuyer' " class="tx-12">
+                                <td *ngIf="user &&  (user['role'] === 'invbuyer' || user['role'] === 'owner') " class="tx-12">
                                     <div>
-                                        <button  (click)="openModel(item)" class="btn btn-primary bd-0"
+                                        <button (click)="openModel(item)" class="btn btn-primary bd-0"
                                             title="Upload CA Document" data-toggle="tooltip">
                                             Upload Document
                                         </button>
@@ -201,8 +217,9 @@
 <!-- container -->
 
 <!-- Modal for manager to add doc -->
-<div class="modal fade" id="modelIdForManager" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-    <div class="modal-dialog modal-lg" style="width: 400px" role="document">
+<div class="modal fade" id="modelIdForManager" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" style="width: 500px;" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Upload Document</h5>
@@ -218,7 +235,11 @@
                             placeholder="Enter credit Agreement" id="document4" />
                         <app-error-field [errorMsg]="getForm.agreement5"></app-error-field>
                     </div>
-                   
+                    <div class="form-group">
+                        <label class="form-control-label">Internal: </label>
+                        <input class="form-control" formControlName="flag" type="checkbox" name="flag" id="flag" />
+                        <app-error-field [errorMsg]="getForm.flag"></app-error-field>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">
@@ -232,7 +253,7 @@
 
 <!-- Modal for add doc -->
 <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-    <div class="modal-dialog modal-lg" style="width: 400px" role="document">
+    <div class="modal-dialog modal-lg" style="width: 500px !important" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Upload Document</h5>
@@ -247,6 +268,11 @@
                         <input class="form-control" formControlName="agreement5" type="file" name="agreement5"
                             placeholder="Enter credit Agreement" id="document5" />
                         <app-error-field [errorMsg]="getForm.agreement5"></app-error-field>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label">Internal: </label>
+                        <input class="form-control" formControlName="flag" type="checkbox" name="flag" id="flag" />
+                        <app-error-field [errorMsg]="getForm.flag"></app-error-field>
                     </div>
 
                 </form>
