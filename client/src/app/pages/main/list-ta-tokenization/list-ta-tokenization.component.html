@@ -33,7 +33,7 @@
                                 </th>
 
                                 <th class="pd-y-5" style="width: 150px;">Action</th>
-                                <th *ngIf="user && (user['role'] === 'manager' || user['role'] === 'invbuyer') "
+                                <th *ngIf="user && (user['role'] === 'manager' || user['role'] === 'invbuyer' || user['role'] === 'owner') "
                                     class="pd-y-5" style="width: 130px;">edit</th>
 
                             </tr>
@@ -49,23 +49,7 @@
                                 <td>
                                     {{ item.tokens }}
                                 </td>
-                                <!-- <td class="tx-12">
-                                    {{ item.date_of_Expiration }}
-                                </td>
-                                <td class="tx-12">
-                                    {{ item.renewal }}
-                                </td> -->
-                                <!-- <td class="tx-12 word_width">
-                  {{ item.agreement }} <br />
-                  {{ item.credit_Enhancement }} <br />
-                  {{ item.guarantee }}
-                </td> -->
-                                <!-- <td *ngIf="user && user['role'] === 'manager'" class="tx-12">
-                                    <div *ngIf="item.internal_approver === 1; else elseBlock">
-                                        Yes
-                                    </div>
-                                    <ng-template #elseBlock> No </ng-template>
-                                </td> -->
+                                
                                 <!--<td *ngIf="user && user['role'] === 'manager'" class="tx-12">
                                     <div *ngIf="item.external_signer === 1; else elseBlock">
                                         Yes
