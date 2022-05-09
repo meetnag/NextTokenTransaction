@@ -475,18 +475,22 @@ export class ListTaTokenizationComponent implements OnInit {
       .subscribe(
         (res) => {
           this.invoiceService
-          .approveTaToken(this.form.value.id, { external_signer: 2,vendor_signer: 2,lender_approver:2, invbuyer_signer: 2 })
-          .subscribe(
-            (res) => {
-              $("#modelIdForManager").modal("hide");
-              this.getTokenList();
-            },
-            (error) => {
-              this.utility.stopLoader();
-              this.utility.showErrorAlert("Error", error);
-            }
-          );
-          
+            .approveTaToken(this.form.value.id, {
+              external_signer: 2,
+              vendor_signer: 2,
+              lender_approver: 2,
+              invbuyer_signer: 2,
+            })
+            .subscribe(
+              (res) => {
+                $("#modelIdForManager").modal("hide");
+                this.getTokenList();
+              },
+              (error) => {
+                this.utility.stopLoader();
+                this.utility.showErrorAlert("Error", error);
+              }
+            );
         },
         (error) => {
           this.utility.stopLoader();
@@ -548,8 +552,18 @@ export class ListTaTokenizationComponent implements OnInit {
       .updateTaTokenDocument(this.form.value.id, fianalJSON)
       .subscribe(
         (res) => {
-          $("#modelId").modal("hide");
-          this.getTokenList();
+          this.invoiceService
+            .approveTaToken(this.form.value.id, { invbuyer_signer: 2 })
+            .subscribe(
+              (res) => {
+                $("#modelId").modal("hide");
+                this.getTokenList();
+              },
+              (error) => {
+                this.utility.stopLoader();
+                this.utility.showErrorAlert("Error", error);
+              }
+            );
         },
         (error) => {
           this.utility.stopLoader();
@@ -557,6 +571,4 @@ export class ListTaTokenizationComponent implements OnInit {
         }
       );
   }
-
- 
 }
