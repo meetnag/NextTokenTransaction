@@ -394,7 +394,7 @@ export class ListTaTokenizationComponent implements OnInit {
     this.form.patchValue({
       id: item.id,
       agreement5: null,
-      flag: true,
+      flag: null,
     });
     $("#modelIdForManager").modal("show");
   }
@@ -403,7 +403,7 @@ export class ListTaTokenizationComponent implements OnInit {
     this.form.patchValue({
       id: item.id,
       agreement5: null,
-      flag: true,
+      flag: null,
     });
     $("#modelId").modal("show");
   }
@@ -468,6 +468,33 @@ export class ListTaTokenizationComponent implements OnInit {
       await reader.readAsDataURL(file);
     }
   }
+
+  uploadfile1(fianalJSON) {
+    this.invoiceService
+      .updateTaTokenDocument(this.form.value.id, fianalJSON)
+      .subscribe(
+        (res) => {
+          this.invoiceService
+          .approveTaToken(this.form.value.id, { external_signer: 2,vendor_signer: 2,lender_approver:2, invbuyer_signer: 2 })
+          .subscribe(
+            (res) => {
+              $("#modelIdForManager").modal("hide");
+              this.getTokenList();
+            },
+            (error) => {
+              this.utility.stopLoader();
+              this.utility.showErrorAlert("Error", error);
+            }
+          );
+          
+        },
+        (error) => {
+          this.utility.stopLoader();
+          this.utility.showErrorAlert("Error", error);
+        }
+      );
+  }
+
   async updateDocument() {
     console.log("===> updateDocument 1 <====", this.form.value);
 
@@ -531,18 +558,5 @@ export class ListTaTokenizationComponent implements OnInit {
       );
   }
 
-  uploadfile1(fianalJSON) {
-    this.invoiceService
-      .updateTaTokenDocument(this.form.value.id, fianalJSON)
-      .subscribe(
-        (res) => {
-          $("#modelIdForManager").modal("hide");
-          this.getTokenList();
-        },
-        (error) => {
-          this.utility.stopLoader();
-          this.utility.showErrorAlert("Error", error);
-        }
-      );
-  }
+ 
 }

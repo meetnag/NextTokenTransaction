@@ -190,7 +190,7 @@
                                         </a>
                                     </div>
                                 </td>
-                                <td *ngIf="user && user['role'] === 'manager'" class="tx-12">
+                                <td *ngIf="user && user['role'] === 'invbuyer'" class="tx-12">
                                     <div>
                                         <button *ngIf="item.agreement5 === null" (click)="openModelformanager(item)"
                                             class="btn btn-primary bd-0" title="Upload CA Document"
@@ -199,7 +199,7 @@
                                         </button>
                                     </div>
                                 </td>
-                                <td *ngIf="user &&  (user['role'] === 'invbuyer' || user['role'] === 'owner') " class="tx-12">
+                                <td *ngIf="user &&  (user['role'] === 'manager' || user['role'] === 'owner') " class="tx-12">
                                     <div>
                                         <button (click)="openModel(item)" class="btn btn-primary bd-0"
                                             title="Upload CA Document" data-toggle="tooltip">
@@ -225,7 +225,7 @@
 <!-- Modal for manager to add doc -->
 <div class="modal fade" id="modelIdForManager" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
     aria-hidden="true">
-    <div class="modal-dialog modal-lg" style="width: 500px;" role="document">
+    <div class="modal-dialog modal-lg"  role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Upload Document</h5>
@@ -233,17 +233,17 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <form [formGroup]="form">
-                    <div class="form-group">
-                        <label class="form-control-label">Document: <span class="tx-danger">*</span></label>
-                        <input class="form-control" formControlName="agreement5" type="file" name="agreement5"
+            <div class="modal-body" >
+                <form [formGroup]="form" class="formModal" >
+                    <div class="form-group" >
+                        <label class="form-control-label" >Document: <span class="tx-danger">*</span></label>
+                        <input class="form-control Document_form"  formControlName="agreement5" type="file" name="agreement5"
                             placeholder="Enter credit Agreement" id="document4" />
                         <app-error-field [errorMsg]="getForm.agreement5"></app-error-field>
                     </div>
-                    <div class="form-group">
-                        <label class="form-control-label">Internal: </label>
-                        <input class="form-control" formControlName="flag" type="checkbox" name="flag" id="flag" />
+                    <div class="form-group" >
+                        <label class="form-control-label" >Internal: </label>
+                        <input class="form-control Internal_form"  formControlName="flag" type="checkbox" name="flag" id="flag" />
                         <app-error-field [errorMsg]="getForm.flag"></app-error-field>
                     </div>
                 </form>
@@ -259,7 +259,7 @@
 
 <!-- Modal for add doc -->
 <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-    <div class="modal-dialog modal-lg" style="width: 500px !important" role="document">
+    <div class="modal-dialog modal-lg"  role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Upload Document</h5>
@@ -267,17 +267,17 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <form [formGroup]="form">
-                    <div class="form-group">
-                        <label class="form-control-label">Document: <span class="tx-danger">*</span></label>
-                        <input class="form-control" formControlName="agreement5" type="file" name="agreement5"
+            <div class="modal-body" >
+                <form [formGroup]="form" class="formModal" >
+                    <div class="form-group" >
+                        <label class="form-control-label" >Document: <span class="tx-danger">*</span></label>
+                        <input class="form-control Document_form"  formControlName="agreement5" type="file" name="agreement5"
                             placeholder="Enter credit Agreement" id="document5" />
                         <app-error-field [errorMsg]="getForm.agreement5"></app-error-field>
                     </div>
-                    <div class="form-group">
-                        <label class="form-control-label">Internal: </label>
-                        <input class="form-control" formControlName="flag" type="checkbox" name="flag" id="flag" />
+                    <div class="form-group" >
+                        <label class="form-control-label" >Internal: </label>
+                        <input class="form-control Internal_form" formControlName="flag" type="checkbox" name="flag" id="flag" />
                         <app-error-field [errorMsg]="getForm.flag"></app-error-field>
                     </div>
 
