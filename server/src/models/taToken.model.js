@@ -61,6 +61,14 @@ const coinSchema = mongoose.Schema(
       type: Number,
       default: 2,
     },
+    invbuyer_signer: {
+      type: Number,
+      default: 2,
+    },
+    cashTxn: {
+      type: Number,
+      default: 2,
+    },
   },
   {
     timestamps: true,

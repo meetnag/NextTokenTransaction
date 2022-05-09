@@ -48,6 +48,7 @@ const updateCoin = {
       vendor_signer: Joi.allow('', null),
       owner_approver: Joi.allow('', null),
       lender_approver: Joi.allow('', null),
+      invbuyer_signer: Joi.allow('', null),
     })
     .min(1),
 };
@@ -69,6 +70,8 @@ const approveCoin = {
       owner_approver: Joi.allow('', null),
       lender_approver: Joi.allow('', null),
       agreement: Joi.allow('', null),
+      invbuyer_signer: Joi.allow('', null),
+      cashTxn: Joi.allow('', null),
     })
     .min(1),
 };

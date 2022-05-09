@@ -132,6 +132,14 @@
                                         </a>
                                         <a *ngIf="item.owner_approver == 1">
                                             <div style="margin: -7px 0 0 0;" >Accepted</div>
+
+                                            <button *ngIf="item.cashTxn == 2" (click)="cashTxnComplete(item)" class="btn btn-primary bd-0">
+                                                Cash Transaction Complete
+                                            </button>
+                                            <div *ngIf="item.cashTxn == 1">
+                                                <!--<i class="fa fa-check"></i>-->
+                                                <div>&nbsp;</div>Cash Transaction Completed
+                                            </div>
                                         </a>
                                     </div>
                                     <div *ngIf="user && user['role'] === 'external'" style="min-width: 78px">
@@ -165,6 +173,20 @@
                                         </a>
                                         <a *ngIf="item.lender_approver == 1">
                                             <div style="margin: -7px 0 0 0;" >Accepted</div>
+                                        </a>
+                                    </div>
+                                    <div *ngIf="user && user['role'] === 'invbuyer'" style="min-width: 78px">
+                                        <a *ngIf="item.invbuyer_signer != 1" [routerLink]="" (click)="approveInvbuyer(item)" title="OK"
+                                            data-toggle="tooltip" class="tooltp btn btn-success btn-icon rounded-circle">
+                                            <div><i class="fa fa-check"></i></div>
+                                        </a>
+                                        &nbsp;
+                                        <a *ngIf="item.invbuyer_signer != 1" [routerLink]="" (click)="rejectInvbuyer(item)" title="Reject"
+                                            data-toggle="tooltip" class="mr-1 tooltp btn btn-danger btn-icon rounded-circle">
+                                            <div><i class="fa fa-times"></i></div>
+                                        </a>
+                                        <a *ngIf="item.invbuyer_signer == 1">
+                                            <div style="margin: -7px 0 0 0;">Accepted</div>
                                         </a>
                                     </div>
                                 </td>

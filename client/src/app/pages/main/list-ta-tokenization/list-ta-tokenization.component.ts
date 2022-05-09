@@ -283,6 +283,63 @@ export class ListTaTokenizationComponent implements OnInit {
         }
       );
   }
+  async approveInvbuyer(iteam) {
+    const resp = await this.approve(iteam);
+    if (resp) {
+      this.utility.startLoader();
+      this.invoiceService
+        .approveTaToken(iteam.id, { invbuyer_signer: 1 })
+        .subscribe(
+          (res) => {
+            this.getTokenList();
+          },
+          (error) => {
+            this.utility.stopLoader();
+            this.utility.showErrorAlert("Error", error);
+          }
+        );
+    }
+  }
+  rejectInvbuyer(iteam) {
+    this.utility.startLoader();
+    this.invoiceService
+      .approveTaToken(iteam.id, { invbuyer_signer: 0 })
+      .subscribe(
+        (res) => {
+          this.getTokenList();
+        },
+        (error) => {
+          this.utility.stopLoader();
+          this.utility.showErrorAlert("Error", error);
+        }
+      );
+  }
+
+  async cashTxnComplete(iteam) {
+    // const resp = await this.approve(iteam);
+    const resp = true;
+    if (resp) {
+      this.invoiceService.approveTaToken(iteam.id, { cashTxn: 1 }).subscribe(
+        (res) => {
+          this.getTokenList();
+          this.utility.showSuccessAlert(
+            "Success",
+            "I consent to the completion of the cash transaction by signing this document."
+          );
+        },
+        (error) => {
+          this.utility.stopLoader();
+          this.utility.showErrorAlert("Error", error);
+        }
+      );
+    } else {
+      this.utility.showErrorAlert(
+        "Error",
+        "I cannot consent to the completion of the Cash Transaction."
+      );
+    }
+  }
+
   async upload(iteam) {
     console.log("======> upload iteam <==22222222222=", iteam);
     console.log(
@@ -337,6 +394,7 @@ export class ListTaTokenizationComponent implements OnInit {
     this.form.patchValue({
       id: item.id,
       agreement5: null,
+      flag: null,
     });
     $("#modelIdForManager").modal("show");
   }
@@ -344,7 +402,7 @@ export class ListTaTokenizationComponent implements OnInit {
   openModel(item) {
     this.form.patchValue({
       id: item.id,
-      agreement5: null,
+      flag: null,
     });
     $("#modelId").modal("show");
   }
@@ -374,10 +432,10 @@ export class ListTaTokenizationComponent implements OnInit {
     let byteArray;
 
     let fianalJSON = {
-      id:'',
-      name:'',
-      flag:0
-    }
+      id: "",
+      name: "",
+      flag: 0,
+    };
     if (this.form.value.flag) {
       fianalJSON["flag"] = 1;
     }
@@ -421,10 +479,10 @@ export class ListTaTokenizationComponent implements OnInit {
     let byteArray;
 
     let fianalJSON = {
-      id:'',
-      name:'',
-      flag:0
-    }
+      id: "",
+      name: "",
+      flag: 0,
+    };
     if (this.form.value.flag) {
       fianalJSON["flag"] = 1;
     }
@@ -473,15 +531,17 @@ export class ListTaTokenizationComponent implements OnInit {
   }
 
   uploadfile1(fianalJSON) {
-    this.invoiceService.updateTaTokenDocument(this.form.value.id, fianalJSON).subscribe(
-      (res) => {
-        $("#modelIdForManager").modal("hide");
-        this.getTokenList();
-      },
-      (error) => {
-        this.utility.stopLoader();
-        this.utility.showErrorAlert("Error", error);
-      }
-    );
+    this.invoiceService
+      .updateTaTokenDocument(this.form.value.id, fianalJSON)
+      .subscribe(
+        (res) => {
+          $("#modelIdForManager").modal("hide");
+          this.getTokenList();
+        },
+        (error) => {
+          this.utility.stopLoader();
+          this.utility.showErrorAlert("Error", error);
+        }
+      );
   }
 }
