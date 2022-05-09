@@ -93,7 +93,7 @@ export class TransferTaTokenizationComponent implements OnInit {
 
           this.utility.showSuccessAlert(
             "Success",
-            "TA Tokens Transferred Successfully"
+            "TA Token Transferred Successfully"
           );
         }
       } else {

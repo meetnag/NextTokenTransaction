@@ -56,7 +56,7 @@ export class AuthComponent implements OnInit {
             console.log("===> res <====", res);
             this.utility.showSuccessAlert("Success!", "Logged in successfully");
             if (res.user.role === "invbuyer") {
-              this.router.navigate(["app/list-of-wrapper-Tokenization"]);
+              this.router.navigate(["app/list-of-ta-Tokenization"]);
             } else if (
               res.user.role === "internal" ||
               res.user.role === "external" ||

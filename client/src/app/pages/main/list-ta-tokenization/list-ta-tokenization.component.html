@@ -72,11 +72,11 @@
                                         <div *ngIf="user && user['role'] === 'vendor'; else elseBlock">
                                             <a *ngIf="document.flag === 0"
                                                 href="https://gateway.ipfs.io/ipfs/{{document.id}}" target="_blank">
-                                                {{ document.name }}</a> <br />
+                                                {{ document.name }}<br /></a> 
                                         </div>
                                         <ng-template #elseBlock>
                                             <a href="https://gateway.ipfs.io/ipfs/{{document.id}}" target="_blank">
-                                                {{ document.name }}</a> <br />
+                                                {{ document.name }}<br /></a> 
                                         </ng-template>
 
                                         <!-- <a *ngIf="user && user['role'] === 'vendor' && document.flag === 0" href="https://gateway.ipfs.io/ipfs/{{document.id}}" target="_blank">
