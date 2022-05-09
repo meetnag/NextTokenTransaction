@@ -394,7 +394,7 @@ export class ListTaTokenizationComponent implements OnInit {
     this.form.patchValue({
       id: item.id,
       agreement5: null,
-      flag: null,
+      flag: true,
     });
     $("#modelIdForManager").modal("show");
   }
@@ -402,7 +402,8 @@ export class ListTaTokenizationComponent implements OnInit {
   openModel(item) {
     this.form.patchValue({
       id: item.id,
-      flag: null,
+      agreement5: null,
+      flag: true,
     });
     $("#modelId").modal("show");
   }
