@@ -83,7 +83,7 @@
                                             <div><i class="fa fa-times"></i></div>
                                         </a>
                                         <a *ngIf="item.invbuyer_signer == 1">
-                                            <div>Accepted</div>
+                                            <div style="margin: -7px 0 0 0;">Accepted</div>
                                         </a>
                                     </div>
 
@@ -98,7 +98,7 @@
                                             <div><i class="fa fa-times"></i></div>
                                         </a>
                                         <a *ngIf="item.owner_approver == 1">
-                                            <div>Accepted</div>
+                                            <div style="margin: -7px 0 0 0;" >Accepted</div>
                                             
                                             <button *ngIf="item.cashTxn == 2"  (click)="cashTxnComplete(item)" class="btn btn-primary bd-0">
                                                 Cash Transaction Complete

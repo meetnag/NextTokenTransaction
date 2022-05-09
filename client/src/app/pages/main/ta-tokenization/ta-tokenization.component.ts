@@ -152,7 +152,7 @@ export class TaTokenizationComponent implements OnInit {
         );
         self.utility.startLoader("Data encryption in progress. Please wait...");
         console.log("=======> agreement2_id <=====", result1["path"]);
-        fianalJSON["id"] = result1["path"];
+        fileObject["id"] = result1["path"];
         fianalJSON["agreement"].push(fileObject);
         await self.uploadfile2(fianalJSON);
       },
@@ -288,7 +288,6 @@ export class TaTokenizationComponent implements OnInit {
         await reader.readAsDataURL(file4);
       }
     } else {
-      fianalJSON["agreement5_id"] = "";
       await this.createToken(fianalJSON);
     }
   }
