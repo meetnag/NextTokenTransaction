@@ -192,7 +192,7 @@
                                 </td>
                                 <td *ngIf="user && user['role'] === 'invbuyer'" class="tx-12">
                                     <div>
-                                        <button *ngIf="item.agreement5 === null" (click)="openModelformanager(item)"
+                                        <button (click)="openModelformanager(item)"
                                             class="btn btn-primary bd-0" title="Upload CA Document"
                                             data-toggle="tooltip">
                                             Upload Document
