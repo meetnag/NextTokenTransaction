@@ -553,7 +553,7 @@ export class ListTaTokenizationComponent implements OnInit {
       .subscribe(
         (res) => {
           this.invoiceService
-            .approveTaToken(this.form.value.id, { owner_approver: 2 })
+            .approveTaToken(this.form.value.id, { owner_approver: 2, cashTxn: 2 })
             .subscribe(
               (res) => {
                 $("#modelId").modal("hide");
