@@ -37,7 +37,7 @@ export class TransferTaTokenizationComponent implements OnInit {
       from_account: [null, Validators.required],
       tokenId: [null, Validators.required],
       to_account: [null, Validators.required],
-      numberOfToken: [null, Validators.required],
+      numberOfToken: [1, Validators.required],
       notes: [null, Validators.required],
     });
   }

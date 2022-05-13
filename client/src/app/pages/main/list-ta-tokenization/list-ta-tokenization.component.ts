@@ -316,8 +316,8 @@ export class ListTaTokenizationComponent implements OnInit {
   }
 
   async cashTxnComplete(iteam) {
-    // const resp = await this.approve(iteam);
-    const resp = true;
+    const resp = await this.approve(iteam);
+    // const resp = true;
     if (resp) {
       this.invoiceService.approveTaToken(iteam.id, { cashTxn: 1 }).subscribe(
         (res) => {
@@ -479,7 +479,7 @@ export class ListTaTokenizationComponent implements OnInit {
               external_signer: 2,
               vendor_signer: 2,
               lender_approver: 2,
-              invbuyer_signer: 2,
+              owner_approver: 2,
             })
             .subscribe(
               (res) => {
@@ -553,7 +553,7 @@ export class ListTaTokenizationComponent implements OnInit {
       .subscribe(
         (res) => {
           this.invoiceService
-            .approveTaToken(this.form.value.id, { invbuyer_signer: 2 })
+            .approveTaToken(this.form.value.id, { owner_approver: 2 })
             .subscribe(
               (res) => {
                 $("#modelId").modal("hide");
