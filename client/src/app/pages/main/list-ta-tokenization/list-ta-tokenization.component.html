@@ -133,7 +133,8 @@
                                         <a *ngIf="item.owner_approver == 1">
                                             <div style="margin: -7px 0 0 0;" >Accepted</div>
                                         </a>
-                                        <button *ngIf="item.cashTxn == 2 && item.invbuyer_signer == 1" (click)="cashTxnComplete(item)" class="btn btn-primary bd-0">
+                                        
+                                        <button *ngIf="item.cashTxn == 2 && item.invbuyer_signer == 1" (click)="cashTxnComplete(item)" class="btn btn-primary bd-0" style="margin-top: 10px;">
                                             Cash Transaction Complete
                                         </button>
                                         <div *ngIf="item.cashTxn == 1">
