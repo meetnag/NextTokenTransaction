@@ -132,15 +132,14 @@
                                         </a>
                                         <a *ngIf="item.owner_approver == 1">
                                             <div style="margin: -7px 0 0 0;" >Accepted</div>
-
-                                            <button *ngIf="item.cashTxn == 2" (click)="cashTxnComplete(item)" class="btn btn-primary bd-0">
-                                                Cash Transaction Complete
-                                            </button>
-                                            <div *ngIf="item.cashTxn == 1">
-                                                <!--<i class="fa fa-check"></i>-->
-                                                <div>&nbsp;</div>Cash Transaction Completed
-                                            </div>
                                         </a>
+                                        <button *ngIf="item.cashTxn == 2 && item.invbuyer_signer == 1" (click)="cashTxnComplete(item)" class="btn btn-primary bd-0">
+                                            Cash Transaction Complete
+                                        </button>
+                                        <div *ngIf="item.cashTxn == 1">
+                                            <!--<i class="fa fa-check"></i>-->
+                                            <div>&nbsp;</div>Cash Transaction Completed
+                                        </div>
                                     </div>
                                     <div *ngIf="user && user['role'] === 'external'" style="min-width: 78px">
                                         <a *ngIf="item.external_signer != 1" [routerLink]=""

@@ -257,7 +257,7 @@ export class ListTaTokenizationComponent implements OnInit {
     if (resp) {
       this.utility.startLoader();
       this.invoiceService
-        .approveTaToken(iteam.id, { external_signer: 1 })
+        .approveTaToken(iteam.id, { external_signer: 1, owner_approver: 2 })
         .subscribe(
           (res) => {
             this.getTokenList();
@@ -552,18 +552,18 @@ export class ListTaTokenizationComponent implements OnInit {
       .updateTaTokenDocument(this.form.value.id, fianalJSON)
       .subscribe(
         (res) => {
-          this.invoiceService
-            .approveTaToken(this.form.value.id, { owner_approver: 2, cashTxn: 2 })
-            .subscribe(
-              (res) => {
+          // this.invoiceService
+          //   .approveTaToken(this.form.value.id, { owner_approver: 2 })
+          //   .subscribe(
+          //     (res) => {
                 $("#modelId").modal("hide");
                 this.getTokenList();
-              },
-              (error) => {
-                this.utility.stopLoader();
-                this.utility.showErrorAlert("Error", error);
-              }
-            );
+            //   },
+            //   (error) => {
+            //     this.utility.stopLoader();
+            //     this.utility.showErrorAlert("Error", error);
+            //   }
+            // );
         },
         (error) => {
           this.utility.stopLoader();
