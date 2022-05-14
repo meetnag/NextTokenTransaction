@@ -50,9 +50,9 @@ export class TaTokenizationComponent implements OnInit {
       invoiceNo: [null, Validators.required],
       tokens: [1, Validators.required],
       agreement1: [null, Validators.required],
-      agreement2: [null, Validators.required],
-      agreement3: [null, Validators.required],
-      agreement4: [null, Validators.required],
+      agreement2: [null],
+      agreement3: [null],
+      agreement4: [null],
       agreement5: [null],
       data: [null, Validators.required],
     });
@@ -124,6 +124,8 @@ export class TaTokenizationComponent implements OnInit {
     }
   }
   async uploadfile1(fianalJSON) {
+    const value = this.form.value.agreement2;
+    if (value) {
     const file1 = (<HTMLInputElement>document.getElementById("document1"))
       .files[0];
 
@@ -162,9 +164,13 @@ export class TaTokenizationComponent implements OnInit {
     if (file1) {
       await reader.readAsDataURL(file1);
     }
+  }else{
+    await this.createToken(fianalJSON);
+  }
   }
 
   async uploadfile2(fianalJSON) {
+    
     const file2 = (<HTMLInputElement>document.getElementById("document2"))
       .files[0];
 
@@ -305,31 +311,31 @@ export class TaTokenizationComponent implements OnInit {
       "======> upload this.connectService.account <===",
       this.connectService.account
     );
-    if (this.mainComponent.userWalletAddress === this.connectService.account) {
-      this.utility.startLoader();
-      const tokenId = await this.connectService.nextTokenId();
-      console.log("========> token id <=====", tokenId);
-      let agr = "";
-      for (let i = 0; i < data.agreement.length; i++) {
-        const element = data.agreement[i].name;
-        agr += `${element}  `;
-      }
-      console.log("======upload===> agr <===========", agr);
-      // const agr =
-      //   data.agreement1 +
-      //   "   " +
-      //   data.agreement2 +
-      //   "   " +
-      //   data.agreement3 +
-      //   "  " +
-      //   data.agreement4;
-      const resp = await this.connectService.createToken(
-        data.tokens, //numberOfToken,
-        agr,
-        data.data
-      );
-      // const resp = true;
-      // const tokenId = 5241;
+    // if (this.mainComponent.userWalletAddress === this.connectService.account) {
+    //   this.utility.startLoader();
+    //   const tokenId = await this.connectService.nextTokenId();
+    //   console.log("========> token id <=====", tokenId);
+    //   let agr = "";
+    //   for (let i = 0; i < data.agreement.length; i++) {
+    //     const element = data.agreement[i].name;
+    //     agr += `${element}  `;
+    //   }
+    //   console.log("======upload===> agr <===========", agr);
+    //   // const agr =
+    //   //   data.agreement1 +
+    //   //   "   " +
+    //   //   data.agreement2 +
+    //   //   "   " +
+    //   //   data.agreement3 +
+    //   //   "  " +
+    //   //   data.agreement4;
+    //   const resp = await this.connectService.createToken(
+    //     data.tokens, //numberOfToken,
+    //     agr,
+    //     data.data
+    //   );
+      const resp = true;
+      const tokenId = 5241;
       console.log("======upload===> resp <===========", resp);
       if (resp) {
         this.saveToken({
@@ -341,12 +347,12 @@ export class TaTokenizationComponent implements OnInit {
           description: data.data,
         });
       }
-    } else {
-      this.utility.showErrorAlert(
-        "Error",
-        "Please choose authorized metamask account in order to approve this request"
-      );
-    }
+    // } else {
+    //   this.utility.showErrorAlert(
+    //     "Error",
+    //     "Please choose authorized metamask account in order to approve this request"
+    //   );
+    // }
   }
 
   saveToken(data) {

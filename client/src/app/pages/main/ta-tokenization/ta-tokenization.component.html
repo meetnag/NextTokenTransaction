@@ -28,7 +28,7 @@
                             <app-error-field [errorMsg]="getForm.tokens"></app-error-field>
                         </div>
                     </div>
-                    <!-- col-4 -->
+                    
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label class="form-control-label">Document(s) 1: <span class="tx-danger">*</span></label>
@@ -37,75 +37,34 @@
                             <app-error-field [errorMsg]="getForm.agreement1"></app-error-field>
                         </div>
                     </div>
-                    <!-- col-4 -->
+                    
                     <!-- <div class="col-lg-6">
-                        <div class="form-group">
-                            <label class="form-control-label">Token maturity: <span class="tx-danger">*</span></label>
-                            <input class="form-control" type="number" placeholder="Enter Token Maturity" name="days"
-                                formControlName="days" />
-                            <app-error-field [errorMsg]="getForm.days"></app-error-field>
-                        </div>
-                    </div> -->
-                    <div class="col-lg-6">
                         <div class="form-group">
                             <label class="form-control-label">Document(s) 2: <span class="tx-danger">*</span></label>
                             <input class="form-control" formControlName="agreement2" type="file" name="agreement2"
                                 placeholder="Enter credit Agreement" id="document1" />
                             <app-error-field [errorMsg]="getForm.agreement2"></app-error-field>
                         </div>
-                    </div>
-                    <!-- <div class="col-lg-6">
-                        <div class="form-group">
-                            <label class="form-control-label">Renewal on Maturity : <span class="tx-danger">*
-                                </span></label>
-                            <div class="radioset">
-                                <div class="col-lg-3">
-                                    <input type="radio" id="Renewal" name="renewal" formControlName="renewal"
-                                        [value]="'Yes'" />
-                                    <label class="form-control-label radiolable" for="Renewal">Yes</label>
-                                </div>
-                                <div class="col-lg-3">
-                                    <input type="radio" id="Renewal1" name="renewal" formControlName="renewal"
-                                        [value]="'No'" />
-                                    <label class="form-control-label radiolable" for="Renewal1">No</label>
-                                </div>
-                            </div>
-                            <app-error-field [errorMsg]="getForm.renewal"></app-error-field>
-                        </div>
                     </div> -->
-                    <div class="col-lg-6">
+                    
+                    <!-- <div class="col-lg-6">
                         <div class="form-group">
                             <label class="form-control-label">Document(s) 3: <span class="tx-danger">*</span></label>
                             <input class="form-control" formControlName="agreement3" type="file" name="agreement3"
                                 placeholder="Enter Agreement" id="document2" />
                             <app-error-field [errorMsg]="getForm.agreement3"></app-error-field>
                         </div>
-                    </div>
-                    <!-- <div class="col-lg-6">
-                        <div class="form-group">
-                            <label class="form-control-label">Date of Expiration: <span
-                                    class="tx-danger">*</span></label>
-                            <input class="form-control" type="date" formControlName="date_of_Expiration"
-                                name="date_of_Expiration" value="{{ startDate | date: 'MM-dd-yyyy' }}" />
-                            <app-error-field [errorMsg]="getForm.date_of_Expiration"></app-error-field>
-                        </div>
                     </div> -->
-                    <div class="col-lg-6">
+                   
+                    <!-- <div class="col-lg-6">
                         <div class="form-group">
                             <label class="form-control-label">Document(s) 4: <span class="tx-danger">*</span></label>
                             <input class="form-control" formControlName="agreement4" type="file" name="agreement4"
                                 placeholder="Enter agreement" id="document3" />
                             <app-error-field [errorMsg]="getForm.agreement4"></app-error-field>
                         </div>
-                    </div>
-                    <!--<div class="col-lg-6">
-                        <div class="form-group">
-                             <label class="form-control-label">Document(s) 5: </label> 
-                            <input class="form-control" formControlName="agreement5" type="file" name="agreement5"
-                                placeholder="Enter agreement" id="document4" />
-                            <app-error-field [errorMsg]="getForm.agreement5"></app-error-field>
-                        </div>
-                    </div>-->
+                    </div> -->
+                    
                     <div class="col-lg-12">
                         <div class="form-group">
                             <label class="form-control-label">Message - (Public) <span
@@ -115,9 +74,9 @@
                             <app-error-field [errorMsg]="getForm.data"></app-error-field>
                         </div>
                     </div>
-                    <!-- col-4 -->
+                   
                 </div>
-                <!-- row -->
+                
                 <div class="form-layout-footer">
                     <button [disabled]="!form.valid" (click)="upload()" class="btn btn-primary bd-0">
                         <!---Start TA Tokenizing--->
