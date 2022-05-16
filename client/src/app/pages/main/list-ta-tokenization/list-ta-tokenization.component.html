@@ -32,7 +32,7 @@
                                     Documents
                                 </th>
 
-                                <th class="pd-y-5" style="width: 150px;">Action</th>
+                                <th class="pd-y-5" style="width: 180px;">Action</th>
                                 <th *ngIf="user && (user['role'] === 'manager' || user['role'] === 'invbuyer' || user['role'] === 'owner') "
                                     class="pd-y-5" style="width: 130px;">edit</th>
 
@@ -101,7 +101,7 @@
                                     </div> -->
 
 
-                                    <div *ngIf="user && user['role'] === 'vendor'" style="min-width: 78px">
+                                    <div *ngIf="user && user['role'] === 'vendor'" style="min-width: 87px">
                                         <a *ngIf="item.vendor_signer != 1" [routerLink]="" (click)="approveVendor(item)"
                                             title="Approve" data-toggle="tooltip"
                                             class="tooltp btn btn-success btn-icon rounded-circle">
@@ -118,7 +118,7 @@
                                         </a>
                                     </div>
 
-                                    <div *ngIf="user && user['role'] === 'owner' " style="min-width: 78px">
+                                    <div *ngIf="user && user['role'] === 'owner' " style="min-width: 87px">
                                         <a *ngIf="item.owner_approver != 1" [routerLink]="" (click)="approvOwner(item)"
                                             title="Approve" data-toggle="tooltip"
                                             class="tooltp btn btn-success btn-icon rounded-circle">
@@ -142,7 +142,7 @@
                                             <div>&nbsp;</div>Cash Transaction Completed
                                         </div>
                                     </div>
-                                    <div *ngIf="user && user['role'] === 'external'" style="min-width: 78px">
+                                    <div *ngIf="user && user['role'] === 'external'" style="min-width: 87px">
                                         <a *ngIf="item.external_signer != 1" [routerLink]=""
                                             (click)="approveExternal(item)" title="Approve" data-toggle="tooltip"
                                             class="tooltp btn btn-success btn-icon rounded-circle">
@@ -159,7 +159,7 @@
                                         </a>
                                     </div>
 
-                                    <div *ngIf="user && user['role'] === 'lender'" style="min-width: 78px">
+                                    <div *ngIf="user && user['role'] === 'lender'" style="min-width: 87px">
                                         <a *ngIf="item.lender_approver != 1" [routerLink]=""
                                             (click)="approveLender(item)" title="Approve" data-toggle="tooltip"
                                             class="tooltp btn btn-success btn-icon rounded-circle">
@@ -175,7 +175,7 @@
                                             <div style="margin: -7px 0 0 0;" >Accepted</div>
                                         </a>
                                     </div>
-                                    <div *ngIf="user && user['role'] === 'invbuyer'" style="min-width: 78px">
+                                    <div *ngIf="user && user['role'] === 'invbuyer'" style="min-width: 87px">
                                         <a *ngIf="item.invbuyer_signer != 1" [routerLink]="" (click)="approveInvbuyer(item)" title="OK"
                                             data-toggle="tooltip" class="tooltp btn btn-success btn-icon rounded-circle">
                                             <div><i class="fa fa-check"></i></div>
