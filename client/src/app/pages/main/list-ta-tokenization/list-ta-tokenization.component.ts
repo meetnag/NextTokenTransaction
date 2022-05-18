@@ -75,6 +75,7 @@ export class ListTaTokenizationComponent implements OnInit {
     this.utility.startLoader();
     console.log("===========> this =");
     console.log("===========> iteam =", iteam);
+    
     var str = iteam.invoiceNo;
     console.log("pass");
 
@@ -91,14 +92,25 @@ export class ListTaTokenizationComponent implements OnInit {
       this.useremail.slice(endIndex);
     console.log("pass4");
     console.log("===> v <==", str);
+    //console.log("===> obfuscatedEmail <==", obfuscatedEmail);
+    //console.log("===> useremail <==", this.useremail);
+    var message = "test";
+    if (iteam.cashTxn == 2 && iteam.invbuyer_signer == 1) {
+        message = "I consent to the completion of the cash transaction by signing this document."
+    } else {
+      message = "I am signing the TAToken contract after reviewing the documents attached.";  
+    }
 
     const agr =
-      "  Reference: " +
+      "  Reference: ****" +
       str.substring(str.length - 3, str.length) +
       " | " +
       iteam.tokens +
       " | " +
-      this.todayDate;
+      this.todayDate +
+      " | " +
+      message;
+      
     console.log("pass5");
 
     console.log("ListTaTokenizationComponent : ar_account :: agr :: ", agr);
