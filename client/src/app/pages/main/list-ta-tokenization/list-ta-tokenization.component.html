@@ -119,17 +119,24 @@
                                     </div>
 
                                     <div *ngIf="user && user['role'] === 'owner' " style="min-width: 87px">
-                                        <a *ngIf="item.owner_approver != 1" [routerLink]="" (click)="approvOwner(item)"
+                                        <!--<a *ngIf="item.owner_approver != 1" [routerLink]="" (click)="approvOwner(item)"
                                             title="Approve" data-toggle="tooltip"
                                             class="tooltp btn btn-success btn-icon rounded-circle">
                                             <div><i class="fa fa-check"></i></div>
-                                        </a>
+                                        </a>-->
+                                        <button *ngIf="item.owner_approver != 1" [routerLink]="" (click)="approvOwner(item)" class="btn btn-primary bd-0">
+                                            I agree
+                                        </button>
+                                        
                                         &nbsp;
-                                        <a *ngIf="item.owner_approver != 1" [routerLink]="" (click)="rejectOwner(item)"
+                                        <!--<a *ngIf="item.owner_approver != 1" [routerLink]="" (click)="rejectOwner(item)"
                                             title="Reject" data-toggle="tooltip"
                                             class="mr-1 tooltp btn btn-danger btn-icon rounded-circle">
                                             <div><i class="fa fa-times"></i></div>
-                                        </a>
+                                        </a>-->
+                                        <button *ngIf="item.owner_approver != 1" [routerLink]="" (click)="rejectOwner(item)" class="btn btn-primary bd-0">
+                                            I disagree
+                                        </button>
                                         <a *ngIf="item.owner_approver == 1">
                                             <div style="margin: -7px 0 0 0;" >Accepted</div>
                                         </a>
